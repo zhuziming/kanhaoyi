@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.UserDao">
+    <select id="selectById" parameterType="int" resultType="com.kanhaoyi.www.model.UserModel">
+    	select * from user where id=#{id}
+    </select>
+    <select id="selectAccountCount" parameterType="string" resultType="int">
+    	select count(*) from user where account=#{account}
+    </select>
+    <!-- 是进行登录认证使用的，根据身份信息进行密码认证 -->
+    <select id="selectOneByAccount" parameterType="String" resultType="com.kanhaoyi.www.model.UserModel">
+    	SELECT account,password,nickname FROM user WHERE account=#{account}
+    </select>
+    <!-- shiro 跟据用户名查询出所有角色  不要用中文 -->
+    <select id="findAllRoleByAccount" parameterType="String" resultType="String">
+   		SELECT flag FROM user u 
+			INNER JOIN user_role ur ON u.id=ur.uid 
+			INNER JOIN role r ON ur.rid=r.id
+			WHERE account=#{account}
+    </select>
+    <!-- shiro 查询一个用户对应所有的权限数据 -->
+    <select id="findAllActionByAccount" parameterType="String" resultType="String">
+    	SELECT a.method FROM user u 
+			INNER JOIN user_role ur ON u.id=ur.uid 
+			INNER JOIN role r ON ur.rid=r.id
+			INNER JOIN role_action ra ON ra.rid=r.id 
+			INNER JOIN action a ON ra.aid=a.id
+			WHERE account=#{account}
+    </select>
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.UserModel" useGeneratedKeys="true">
+    	INSERT INTO user
+    		(id,account,nickname,password,phone,email,sex,time)
+		VALUE(
+			#{id},#{account},#{nickname},#{password},
+			#{phone},#{email},#{sex},#{time,jdbcType=TIMESTAMP}
+		)
+    </insert>
+    
+    
+</mapper>

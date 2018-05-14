@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>看好医</title>
+	    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<link rel="stylesheet" href="http://192.168.1.175:8080/webWork/css/boots/bootstrap.min.css">
+		<link href="http://192.168.1.175:8080/webWork/css/form-validation.css" rel="stylesheet">
+		<link rel="stylesheet" href="http://192.168.1.175:8080/webWork/css/boots/blog.css">
+	</head>
+	<body>
+	
+		<header style="padding-bottom:15px;">
+	      <div style="background-position:top center;height:170px; background-image:url('http://192.168.1.175:8080/webWork/image/0ac04c23af3b3297bf02dca163474326898d211d.png');" class="bg-dark collapse show img-fluid" id="navbarHeader" >
+	        <nav style="height:42px; background-color: hsla(0,0%,100%,.4);box-shadow: 0 1px 2px rgba(0,0,0,.1);" class="navbar navbar-expand-md navbar-dark absolute-top">
+	        	<div class="container" >
+		            <div class="btn-group" role="group" aria-label="Basic example">
+					  <a style="color: black;" class="btn btn-link">www.kanhaoyi.com，看好医</a>
+					  <a style="color: black;" class="btn btn-link">首页</a>
+					</div>
+					<div class="btn-group" role="group" aria-label="Basic example">
+					  <a href="http://192.168.1.175:8080/webWork/personal-center-index.html" style="color: black;" class="btn btn-link">
+					  	少年还未登录
+					  </a>
+					</div>
+	        	</div>
+		    </nav>
+	      </div>
+	    </header>
+	
+		<div class="container">
+			<div class="jumbotron">
+			  <h1 class="display-4">注册成功</h1>
+			  <p class="lead">杰克先生 感谢您对我们的支持</p>
+			  <hr class="my-4">
+			  <p>如果使用中您有想看的内容是我们没有的，请在kanhaoyi@sina.cn 或 留言板块给我们留言</p>
+			  <p class="lead">
+			    <a class="btn btn-primary btn-lg" href="http://192.168.1.175:8080/webWork" role="button">去首页</a>
+			  </p>
+			</div>
+		</div>
+		
+		
+		
+		<footer class="blog-footer">
+	      <p>看好医www.kanhaoyi.com专注于各种病情的讲解，提高全民医疗常识，如有不足的地方请在以下邮箱留言kanhaoyi@sina.cn</p>
+	      <p>
+	        <a href="#">返回顶部</a>
+	      </p>
+	    </footer>
+	</body>
+</html>
+
+<script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
