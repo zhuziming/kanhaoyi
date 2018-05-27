@@ -25,11 +25,11 @@ public class CustomerFormAuthenticationFilter extends FormAuthenticationFilter {
 		// 2、取得用户提交表单过来的验证码数据
 		String code = request.getParameter("code") ;
 		if (sessionCode == null || code == null || "".equals(sessionCode) || "".equals(code)) {
-			request.setAttribute("code", "验证码不允许为空！");
+			request.setAttribute("bugMsg", "验证码不允许为空！");
 			return true ;	// 拒绝访问，不再进行用户名或密码的检测
 		} else {
 			if (!code.equalsIgnoreCase(sessionCode)) {	// 验证码输入错误
-				request.setAttribute("code", "验证码输入错误！");
+				request.setAttribute("bugMsg", "验证码输入错误！");
 				return true ;
 			}
 		}

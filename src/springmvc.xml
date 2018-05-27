@@ -26,31 +26,25 @@
 		<property name="securityManager" ref="securityManager"/>
 	</bean>
 	
-	<!-- 启用注解 -->
-	<mvc:annotation-driven />
+
 	<!-- 用默认的servlet处理请求 -->
 	<mvc:default-servlet-handler />
 	<!-- 扫描包 -->
 	<context:component-scan base-package="com.kanhaoyi.www" />
+	<!-- SpringMVC注解驱动  -->  
+	<mvc:annotation-driven>  
+	    <mvc:message-converters>  
+	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+	            <property name="supportedMediaTypes">  
+	                <list>
+	                    <value>text/plain;charset=utf-8</value>  
+	                    <value>text/html;charset=UTF-8</value>  
+	                </list>  
+	            </property>  
+	        </bean>  
+	    </mvc:message-converters>  
+	</mvc:annotation-driven>  
 	
-	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
-	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
-	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="mappingJacksonHttpMessageConverter" />	<!-- JSON转换器 -->
-			</list>
-		</property>
-	</bean>
 	
 <!-- 静态访问权限控制 
 	<mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/> 

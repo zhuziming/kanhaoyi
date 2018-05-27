@@ -6,14 +6,14 @@
 	    <title>看好医</title>
 	    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<link rel="stylesheet" href="http://192.168.1.175:8080/webWork/css/boots/bootstrap.min.css">
-		<link href="http://192.168.1.175:8080/webWork/css/form-validation.css" rel="stylesheet">
-		<link rel="stylesheet" href="http://192.168.1.175:8080/webWork/css/boots/blog.css">
+		<link rel="stylesheet" href="http://www.kanhaoyi.com:8080/kanhaoyi/css/boots/bootstrap.min.css">
+		<link href="http://www.kanhaoyi.com:8080/kanhaoyi/css/form-validation.css" rel="stylesheet">
+		<link rel="stylesheet" href="http://www.kanhaoyi.com:8080/kanhaoyi/css/boots/blog.css">
 	</head>
 	<body>
 		<div class="container">
 	      <div class="py-5 text-center">
-	        <img class="d-block mx-auto mb-4" src="http://192.168.1.175:8080/webWork/image/logo.png" alt="" width="150">
+	        <img class="d-block mx-auto mb-4" src="http://www.kanhaoyi.com:8080/kanhaoyi/image/logo.png" alt="" width="150">
 	        <h2>看好医欢迎您</h2>
 	        <p class="lead">
 	        	以下信息为基本信息，请尽量填写完整，注册成功后，可以前往个人中心完善个人信息
@@ -22,7 +22,7 @@
 	    <div class="row">
 		    <div class="col-md-12 order-md-1">
 		    	<iframe name="ajaxIframe" hidden></iframe>
-		    	<form id="formOne" target="ajaxIframe" action="http://192.168.1.175:8080/webWork/signUp.action" class="needs-validation" novalidate>
+		    	<form id="formOne" target="ajaxIframe" action="http://www.kanhaoyi.com:8080/kanhaoyi/signUp.action" class="needs-validation" novalidate>
 		    		<div class="mb-3">
 		              <label for="user">账号</label>
 		              <input type="text" class="form-control" name="account" id="account" placeholder="建议使用手机号" required>
@@ -84,7 +84,7 @@
 				               	请输入验证码
 				            </div>
 						  </div>
-						  <img onclick="this.src='http://192.168.1.175:8080/webWork/getCode.action?'+new Date().getTime()" class="ml-3" src="http://192.168.1.175:8080/webWork/getCode.action" alt="Generic placeholder image">
+						  <img onclick="this.src='http://www.kanhaoyi.com:8080/kanhaoyi/getCode.action?'+new Date().getTime()" class="ml-3" src="http://www.kanhaoyi.com:8080/kanhaoyi/getCode.action" alt="Generic placeholder image">
 					 </div>
 		            <button class="btn btn-primary btn-lg btn-block"  type="submit">注册</button>
 		     	</form>       
@@ -127,7 +127,7 @@
       function submitTar(msg){
     	  var jo = eval("("+decodeURIComponent(msg)+")");
     	  if(jo.success==1){
-    		  window.location.href='http://192.168.1.175:8080/webWork/sign-up-success.html';
+    		  window.location.href='http://www.kanhaoyi.com:8080/kanhaoyi/sign-up-success.html';
     	  }else if(jo.success==2){
     		  alert(jo.msg);
     	  }else if(jo.success==3){

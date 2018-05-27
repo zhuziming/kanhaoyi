@@ -14,43 +14,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.kanhaoyi.www.model.UserModel;
+import com.kanhaoyi.www.model.User;
 import com.kanhaoyi.www.service.UserService;
 import com.kanhaoyi.www.util.CodeUtil;
+import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
+import com.kanhaoyi.www.util.MyPasswordEncrypt;
 
 import org.springframework.util.StringUtils;
 
 /**
- * @discription 登录注册页面
+ * @discription 注册页面
  * @author zhuziming
  * @time 2018年4月17日上午9:58:01
  */
 @Controller
-public class SignInController {
+public class SignUpController {
 	
 	@Resource
 	UserService userService;
 	
 	/**
-	 * @desctiption 登录
+	 * @desctiption 注册页
 	 * @author zhuziming
 	 * @time 2018年4月18日上午11:39:43
 	 */
-	@RequestMapping(value="/signIn.action")
-	@ResponseBody
-	public String signIn(HttpServletRequest request){
-		String sessionCode = String.valueOf(request.getSession().getAttribute("code"));
-		String securityCode= request.getParameter("securityCode"); 
-		if(sessionCode.equalsIgnoreCase(securityCode)){
-			
-		}
-		return "";
+	@RequestMapping(value="/signUpPage.action")
+	public String signInPage(HttpServletRequest request,Model model){
+		
+		
+		InitUtil.iniSystem(model);
+		return "front/sign_up";
 	}
 	
 	
@@ -61,19 +65,38 @@ public class SignInController {
 	 * @time 2018年4月18日上午11:42:04
 	 */
 	@RequestMapping(value="/signUp.action")
-	@ResponseBody
-	public String register(UserModel userModel) throws IOException{
-		String account = userModel.getAccount();
+	public String register(User user, Model model, HttpServletRequest request) throws IOException{
+		InitUtil.iniSystem(model);
+		model.addAttribute("userModel",user);
+		String reqCode = request.getParameter("code");
+		String sesCode = request.getSession().getAttribute("code").toString();
+		if(!reqCode.equalsIgnoreCase(sesCode)){
+			model.addAttribute("bugMsg","验证码错误");
+			return "front/sign_up";
+		}
+		
+		String account = user.getAccount();
 		if(StringUtils.isEmpty(account)){
-			return "<script type='text/javascript'>window.top.submitTar('"+URLEncoder.encode(JSONUtil.returnJson("2", "账号不能为空"),"UTF-8")+"')</script>";
+			model.addAttribute("bugMsg","账号不能为空");
+			return "front/sign_up";
 		}
 		if(userService.selectUserIsExist(account)){
-			return "<script type='text/javascript'>window.top.submitTar('"+URLEncoder.encode(JSONUtil.returnJson("2", "已存在的账号"),"UTF-8")+"')</script>";
+			model.addAttribute("bugMsg","已存在的账号");
+			return "front/sign_up";
 		}
-		userModel.setTime(new Timestamp(System.currentTimeMillis()));
-		userService.insert(userModel);
-		
-		return "<script type='text/javascript'>window.top.submitTar('"+URLEncoder.encode(JSONUtil.returnJson("1", null),"UTF-8")+"')</script>";
+		String password = user.getPassword();
+		if(StringUtils.isEmpty(password)){
+			model.addAttribute("bugMsg","密码不能为空");
+			return "front/sign_up";
+		}
+		user.setPassword(MyPasswordEncrypt.encryptPassword(user.getPassword()));
+		user.setTime(new Timestamp(System.currentTimeMillis()));
+		userService.insert(user);
+		// 注册完成后，直接登录
+		Subject subject = SecurityUtils.getSubject();
+		UsernamePasswordToken token = new UsernamePasswordToken(account,password);
+		subject.login(token);
+		return "front/sign_up_success";
 	}
 	
 	/**

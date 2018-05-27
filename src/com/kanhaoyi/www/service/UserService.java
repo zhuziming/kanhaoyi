@@ -4,15 +4,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.kanhaoyi.www.model.UserModel;
+import com.kanhaoyi.www.model.User;
 
 
 
 public interface UserService {
 	
-	public UserModel selectById(int id);
+	public User selectById(int id);
 	
-	public int insert(UserModel userModel);
+	public int insert(User userModel);
 	
 
 	/**
@@ -29,7 +29,7 @@ public interface UserService {
 	 * @author zhuziming
 	 * @time 2018年4月24日下午2:34:27
 	 */
-	public UserModel getUserByAccount(String account) throws Exception;
+	public User getUserByAccount(String account) throws Exception;
 	
 	/**
 	 * @desctiption 此方法是留给realm进行授权处理的，返回所有的角色与权限
@@ -46,5 +46,12 @@ public interface UserService {
 	 * @time 2018年4月28日下午3:59:01
 	 */
 	public String getSessionNickname(HttpSession session);
+	
+	/**
+	 * @description 从session中取消息数
+	 * @author zhuziming
+	 * @time2018年5月27日 下午6:04:43
+	 */
+	public String getSessionInfoNum(HttpSession session);
 
 }

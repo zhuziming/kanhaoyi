@@ -2,7 +2,7 @@ package com.kanhaoyi.www.model;
 
 import java.sql.Timestamp;
 
-public class UserModel {
+public class User {
 	
 	private int id;
 	private String account; //  账号 长度20

@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -17,16 +20,16 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Component;
 
-import com.kanhaoyi.www.model.UserModel;
+import com.kanhaoyi.www.model.User;
 import com.kanhaoyi.www.service.UserService;
 import com.kanhaoyi.www.util.MyPasswordEncrypt;
 
-// @Component
+
 public class UserRealm extends AuthorizingRealm {
 	
 	@Resource
 	UserService userService;
-
+	
 	/**
 	 * 授权
 	 */
@@ -60,7 +63,7 @@ public class UserRealm extends AuthorizingRealm {
 		// 登录认证 得到用户名
 		String account = (String) token.getPrincipal();  
 		// 取得用户完整信息 自定义业务实现
-		UserModel um = null;
+		User um = null;
 		try {
 			um = this.userService.getUserByAccount(account);
 		} catch (Exception e) {
@@ -68,6 +71,7 @@ public class UserRealm extends AuthorizingRealm {
 			e.printStackTrace();
 		}
 		if(um==null){
+			
 			throw new UnknownAccountException("该用户不存在");
 		}else{
 			// 得到密码
@@ -78,6 +82,7 @@ public class UserRealm extends AuthorizingRealm {
 				AuthenticationInfo auth = new SimpleAuthenticationInfo(account,password,"member");
 				return auth;
 			}else{
+				
 				throw new IncorrectCredentialsException("密码错误");
 			}
 		}

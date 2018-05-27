@@ -30,6 +30,14 @@
 	          <input type="checkbox" name="rememberMe" value="true">下次免登录
 	        </label>
 	      </div>
+	      <#if bugMsg??>
+	      	<div class="alert alert-danger" role="alert">
+			  ${bugMsg!''}
+		  	</div>
+		  <#else>
+	      
+	      </#if>
+	      
 	      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
 	      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 	    </form>	
