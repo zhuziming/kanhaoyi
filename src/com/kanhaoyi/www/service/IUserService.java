@@ -8,7 +8,7 @@ import com.kanhaoyi.www.model.User;
 
 
 
-public interface UserService {
+public interface IUserService {
 	
 	public User selectById(int id);
 	
@@ -29,7 +29,7 @@ public interface UserService {
 	 * @author zhuziming
 	 * @time 2018年4月24日下午2:34:27
 	 */
-	public User getUserByAccount(String account) throws Exception;
+	public User getUserByAccount(String account);
 	
 	/**
 	 * @desctiption 此方法是留给realm进行授权处理的，返回所有的角色与权限
@@ -54,4 +54,11 @@ public interface UserService {
 	 */
 	public String getSessionInfoNum(HttpSession session);
 
+	/**
+	 * @description 在session中取user
+	 * @author zhuziming
+	 * @time 2018年6月3日 下午4:27:22
+	 */
+	public User getSessionUser(HttpSession session);
+	
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kanhaoyi.www.dao.EssayDao">
+<mapper namespace="com.kanhaoyi.www.dao.IEssayDao">
     <select id="getOneRandom" resultType="com.kanhaoyi.www.model.Essay">
     	SELECT * FROM essay
 		WHERE id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM essay)))

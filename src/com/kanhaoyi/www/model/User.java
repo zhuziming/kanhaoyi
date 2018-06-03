@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class User {
 	
-	private int id;
+	private Integer id;
 	private String account; //  账号 长度20
 	private String nickname; // 昵称 长度20
 	private String password; // 密码 长度40
@@ -12,15 +12,14 @@ public class User {
 	private String email;  //email 长度255
 	private String picture;//   照片 长度255
 	private String sex;		//  性别 长度1
-	private int infoNum;    // 消息数量
+	private Integer infoNum;    // 消息数量
 	private Timestamp time; //  时间
 	
 	
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getAccount() {
@@ -65,11 +64,10 @@ public class User {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	
-	public int getInfoNum() {
+	public Integer getInfoNum() {
 		return infoNum;
 	}
-	public void setInfoNum(int infoNum) {
+	public void setInfoNum(Integer infoNum) {
 		this.infoNum = infoNum;
 	}
 	public Timestamp getTime() {

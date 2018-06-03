@@ -21,14 +21,14 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Component;
 
 import com.kanhaoyi.www.model.User;
-import com.kanhaoyi.www.service.UserService;
+import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.util.MyPasswordEncrypt;
 
 
 public class UserRealm extends AuthorizingRealm {
 	
 	@Resource
-	UserService userService;
+	IUserService userService;
 	
 	/**
 	 * 授权

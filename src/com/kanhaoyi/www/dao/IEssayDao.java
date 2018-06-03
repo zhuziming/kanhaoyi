@@ -2,7 +2,7 @@ package com.kanhaoyi.www.dao;
 
 import com.kanhaoyi.www.model.Essay;
 
-public interface EssayDao {
+public interface IEssayDao {
 	/**
 	 * @desctiption 
 	 * @author zhuziming

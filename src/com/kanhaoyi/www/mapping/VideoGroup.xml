@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.IVideoGroupDao">
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.VideoGroup" keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO 
+    		video_group(group_name,user_id) 
+    	VALUES(
+    		#{groupName,jdbcType=VARCHAR},#{userID,jdbcType=INTEGER}
+    	)
+    </insert>
+    
+    <delete id="deleteByID" parameterType="int">
+    	DELETE FROM video_group WHERE id=#{id}
+    </delete>
+    
+    <select id="selectListByUserID" parameterType="int" resultType="com.kanhaoyi.www.model.VideoGroup">
+    	SELECT id,group_name AS groupName, user_id AS userID FROM video_group WHERE user_id=#{user_id}
+    </select>
+    
+    <select id="selectList" parameterType="com.kanhaoyi.www.model.VideoGroup" resultType="com.kanhaoyi.www.model.VideoGroup">
+    	SELECT id,group_name AS groupName, user_id AS userID FROM video_group 
+    	WHERE 1=1 
+    		<if test="id!=null and id!=''">AND id=#{id,jdbcType=INTEGER}</if>
+    		<if test="groupName!=null and groupName!=''">AND group_name=#{groupName,jdbcType=VARCHAR}</if>
+    		<if test="userID!=null and userID!=''">AND user_id=#{userID,jdbcType=INTEGER}</if>
+    </select>
+    
+</mapper>

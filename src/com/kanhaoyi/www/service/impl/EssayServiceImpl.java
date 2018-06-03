@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.kanhaoyi.www.dao.EssayDao;
+import com.kanhaoyi.www.dao.IEssayDao;
 import com.kanhaoyi.www.model.Essay;
 import com.kanhaoyi.www.service.IEssayService;
 
@@ -12,7 +12,7 @@ import com.kanhaoyi.www.service.IEssayService;
 public class EssayServiceImpl implements IEssayService {
 
 	@Resource
-	private EssayDao essayDao;
+	private IEssayDao essayDao;
 	
 	@Override
 	public Essay getRandom() {

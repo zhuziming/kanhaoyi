@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.kanhaoyi.www.service.UserService;
+import com.kanhaoyi.www.model.User;
+import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.util.JSONUtil;
 import com.kanhaoyi.www.util.PropertiesUtil;
 
@@ -21,7 +22,7 @@ import com.kanhaoyi.www.util.PropertiesUtil;
 public class ShiroLoginAction {
 	
 	@Resource
-	private UserService userService;
+	private IUserService userService;
 	
 	/**
 	 * @desctiption 登录页
@@ -70,8 +71,10 @@ public class ShiroLoginAction {
 	 */
 	@RequestMapping("/successUrl")
 	public String successUrl(Model model, HttpSession session){
-		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
+		System.out.println("登录成功跳转页");
+		userService.getSessionUser(session);
 		
+		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
 		model.addAttribute("indexpath",indexpath);
 		return "redirect:index.html";
 	}

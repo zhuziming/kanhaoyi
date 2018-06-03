@@ -7,14 +7,13 @@ package com.kanhaoyi.www.model;
  */
 public class CourseType {
 
-	private int id;
+	private Integer id;
 	private String name; // 课程类型 
 	
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {

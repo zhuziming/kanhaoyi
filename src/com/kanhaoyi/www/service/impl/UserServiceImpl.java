@@ -9,16 +9,16 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
 
-import com.kanhaoyi.www.dao.UserDao;
+import com.kanhaoyi.www.dao.IUserDao;
 import com.kanhaoyi.www.model.User;
-import com.kanhaoyi.www.service.UserService;
+import com.kanhaoyi.www.service.IUserService;
 
 
 @Service("userServiceImpl")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
 	@Resource
-	private UserDao userDao;
+	private IUserDao userDao;
 	
 	@Override
 	public User selectById(int id) {
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserByAccount(String account) throws Exception {
+	public User getUserByAccount(String account){
 		return userDao.selectOneByAccount(account);
 	}
 
@@ -54,47 +54,53 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String getSessionNickname(HttpSession session) {
-		// 1 session中是否有值
-		if(session.getAttribute("nickname")==null){
-			Object user = SecurityUtils.getSubject().getPrincipal();
-			try {
-				// 2 如果用户登录，则去查昵称
-				if(user!=null){
-					User um = userDao.selectOneByAccount(user.toString());
-					session.setAttribute("nickname", um.getNickname()==null?"未知":um.getNickname());
-					session.setAttribute("infoNum", um.getInfoNum());
-				}else{
-					// 3 如果未登录，设昵称为未登录
-					session.setAttribute("nickname", "未登录");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		User user = (User) session.getAttribute("user"); // 在session中取user对象
+		if(user==null){ // 如果为空，则去数据库中查
+			Object account = SecurityUtils.getSubject().getPrincipal();
+			if(account!=null){
+				User um = userDao.selectOneByAccount(account.toString());
+				session.setAttribute("user", um);
+			}else{
+				return "未登录";
 			}
 		}
-		// 4 返回昵称
-		System.out.println(session.getAttribute("nickname"));
-		return String.valueOf(session.getAttribute("nickname"));
+		User user_1 = (User) session.getAttribute("user");
+		String nickname = user_1.getNickname();
+		return String.valueOf(nickname);
 	}
+	
 
 	@Override
 	public String getSessionInfoNum(HttpSession session) {
-		if(session.getAttribute("infoNum")==null){
-			Object user = SecurityUtils.getSubject().getPrincipal();
-			try {
-				// 2 如果用户登录，则去查消息数
-				if(user!=null){
-					User um = userDao.selectOneByAccount(user.toString());
-					session.setAttribute("infoNum", um.getInfoNum());
-				}else{
-					return "0";
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		User user = (User) session.getAttribute("user"); // 在session中取user对象
+		if(user==null){ // 如果为空，则去数据库中查
+			Object account = SecurityUtils.getSubject().getPrincipal();
+			if(account!=null){
+				User um = userDao.selectOneByAccount(account.toString());
+				session.setAttribute("user", um);
+			}else{
+				return "0";
 			}
 		}
-		return String.valueOf(session.getAttribute("infoNum"));
+		User user_1 = (User) session.getAttribute("user");
+		Integer num = user_1.getInfoNum();
+		return String.valueOf(num);
 	}
+
+	@Override
+	public User getSessionUser(HttpSession session) {
+		User user = (User) session.getAttribute("user"); // 在session中取user对象
+		if(user==null){ // 如果为空，则去数据库中查
+			Object account = SecurityUtils.getSubject().getPrincipal();
+			if(account!=null){
+				User um = userDao.selectOneByAccount(account.toString());
+				session.setAttribute("user", um);
+			}else{
+				return null;
+			}
+		}
+		return (User) session.getAttribute("user");
+	}
+
 
 }

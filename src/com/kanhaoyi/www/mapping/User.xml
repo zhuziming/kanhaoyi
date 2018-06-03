@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kanhaoyi.www.dao.UserDao">
+<mapper namespace="com.kanhaoyi.www.dao.IUserDao">
     <select id="selectById" parameterType="int" resultType="com.kanhaoyi.www.model.User">
     	select * from user where id=#{id}
     </select>
@@ -10,7 +10,7 @@
     </select>
     <!-- 是进行登录认证使用的，根据身份信息进行密码认证 -->
     <select id="selectOneByAccount" parameterType="String" resultType="com.kanhaoyi.www.model.User">
-    	SELECT account,password,nickname FROM user WHERE account=#{account}
+    	SELECT * FROM user WHERE account=#{account}
     </select>
     <!-- shiro 跟据用户名查询出所有角色  不要用中文 -->
     <select id="findAllRoleByAccount" parameterType="String" resultType="String">

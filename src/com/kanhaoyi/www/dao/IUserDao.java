@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.kanhaoyi.www.model.User;
 
-public interface UserDao {
+public interface IUserDao {
 
 	public User selectById(int id);
 	

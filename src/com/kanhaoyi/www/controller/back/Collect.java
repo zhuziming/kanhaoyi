@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kanhaoyi.www.model.User;
-import com.kanhaoyi.www.service.UserService;
+import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.PropertiesUtil;
 
@@ -23,7 +23,7 @@ import com.kanhaoyi.www.util.PropertiesUtil;
 public class Collect {
 	
 	@Resource
-	private UserService userService;
+	private IUserService userService;
 
 	@RequestMapping("/collect.action")
 	public String collect(Model model,HttpSession session){

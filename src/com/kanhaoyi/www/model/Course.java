@@ -9,23 +9,22 @@ import java.sql.Timestamp;
  */
 public class Course {
 
-	private int id;
+	private Integer id;
 	private String courseName; // 课程名字
-	private int courseTypeID; // 课程类型id
+	private Integer courseTypeID; // 课程类型id
 	private String courseType; // 课程类型
-	private int userID;  // 作者id
+	private Integer userID;  // 作者id
 	private String userNickname; // 作者名称
 	private Timestamp time; // 创建时间
-	private int clickVolume; // 点击量
+	private Integer clickVolume; // 点击量
 	private String picturePath; // 封面地址
 	private String coursePath; // 课程页面地址，记录课程详情里，第一个课程的地址
-	private int quantity; // 数量，有几集
+	private Integer quantity; // 数量，有几集
 	
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getCourseName() {
@@ -34,10 +33,10 @@ public class Course {
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	public int getCourseTypeID() {
+	public Integer getCourseTypeID() {
 		return courseTypeID;
 	}
-	public void setCourseTypeID(int courseTypeID) {
+	public void setCourseTypeID(Integer courseTypeID) {
 		this.courseTypeID = courseTypeID;
 	}
 	public String getCourseType() {
@@ -46,10 +45,10 @@ public class Course {
 	public void setCourseType(String courseType) {
 		this.courseType = courseType;
 	}
-	public int getUserID() {
+	public Integer getUserID() {
 		return userID;
 	}
-	public void setUserID(int userID) {
+	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
 	public String getUserNickname() {
@@ -64,10 +63,10 @@ public class Course {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
-	public int getClickVolume() {
+	public Integer getClickVolume() {
 		return clickVolume;
 	}
-	public void setClickVolume(int clickVolume) {
+	public void setClickVolume(Integer clickVolume) {
 		this.clickVolume = clickVolume;
 	}
 	public String getPicturePath() {
@@ -82,11 +81,10 @@ public class Course {
 	public void setCoursePath(String coursePath) {
 		this.coursePath = coursePath;
 	}
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-
 }

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.User;
-import com.kanhaoyi.www.service.UserService;
+import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.util.CodeUtil;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
 public class SignUpController {
 	
 	@Resource
-	UserService userService;
+	IUserService userService;
 	
 	/**
 	 * @desctiption 注册页

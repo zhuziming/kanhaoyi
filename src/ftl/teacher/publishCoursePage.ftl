@@ -55,7 +55,7 @@
     <div class="container mt-3">
     	<nav aria-label="breadcrumb">
 		  	<ol class="breadcrumb">
-		    	<li class="breadcrumb-item"><a href="#">个人中心</a></li>
+		    	<li class="breadcrumb-item"><a href="${indexpath}/back/index.action">个人中心</a></li>
 		    	<li class="breadcrumb-item active" aria-current="page">发布课程</li>
 		  	</ol>
 		</nav>

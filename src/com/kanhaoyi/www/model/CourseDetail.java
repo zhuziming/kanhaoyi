@@ -8,26 +8,24 @@ package com.kanhaoyi.www.model;
  */
 public class CourseDetail {
 
-	private int id;
-	private int courseID; // 课程id
+	private Integer id;
+	private Integer courseID; // 课程id
 	private String courseName; // 课程名字
 	private String coursePath; // 页面地址
 	private String videoPath; // mp4文件地址
-	private int sequence; // 课程展示顺序
-	private int clickVolume; // 点击量
+	private Integer sequence; // 课程展示顺序
+	private Integer clickVolume; // 点击量
 	
-	
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public int getCourseID() {
+	public Integer getCourseID() {
 		return courseID;
 	}
-	public void setCourseID(int courseID) {
+	public void setCourseID(Integer courseID) {
 		this.courseID = courseID;
 	}
 	public String getCourseName() {
@@ -48,16 +46,17 @@ public class CourseDetail {
 	public void setVideoPath(String videoPath) {
 		this.videoPath = videoPath;
 	}
-	public int getSequence() {
+	public Integer getSequence() {
 		return sequence;
 	}
-	public void setSequence(int sequence) {
+	public void setSequence(Integer sequence) {
 		this.sequence = sequence;
 	}
-	public int getClickVolume() {
+	public Integer getClickVolume() {
 		return clickVolume;
 	}
-	public void setClickVolume(int clickVolume) {
+	public void setClickVolume(Integer clickVolume) {
 		this.clickVolume = clickVolume;
 	}
+
 }

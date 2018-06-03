@@ -13,6 +13,7 @@ function getusernmae(){
 				$("#people").attr("href","/kanhaoyi/back/index.action"); /* 更换后台链接 */
 				$("#infoNum").html(date.infoNum); /* 放入消息数 */
 				$("#signUp").hide();
+				$("#logout").show();
 			}
 		}
 	});

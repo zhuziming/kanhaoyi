@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kanhaoyi.www.model.Essay;
 import com.kanhaoyi.www.model.User;
 import com.kanhaoyi.www.service.IEssayService;
-import com.kanhaoyi.www.service.UserService;
+import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.PropertiesUtil;
 
@@ -26,7 +26,7 @@ import com.kanhaoyi.www.util.PropertiesUtil;
 public class PersonalIndex {
 	
 	@Resource
-	private UserService userService;
+	private IUserService userService;
 	
 	@Resource
 	private IEssayService essayService;
