@@ -2,3 +2,4 @@
 .k-col-black{ color: #212529; }
 .k-nav-back{ height:42px; background-color: hsla(0,0%,100%,.4); box-shadow: 0 1px 2px rgba(0,0,0,.1); }
 .k-ma-nav-back{ height:42px; box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+.k-hid{ display: none; width:40px; }

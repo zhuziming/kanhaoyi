@@ -1,14 +1,22 @@
 package com.kanhaoyi.www.controller.teacher;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.URLEncoder;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +25,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.User;
+import com.kanhaoyi.www.model.Video;
 import com.kanhaoyi.www.model.VideoGroup;
 import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.service.IVideoGroupService;
+import com.kanhaoyi.www.service.IVideoService;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
+import com.kanhaoyi.www.util.PagingUtil;
+import com.kanhaoyi.www.util.PropertiesUtil;
 
 /**
  * @discription 老师操作类
@@ -34,10 +47,14 @@ import com.kanhaoyi.www.util.JSONUtil;
 @RequestMapping("/teacher")
 public class TeacherController {
 	
+	Logger logger = Logger.getLogger(TeacherController.class);
+	
 	@Resource
 	private IUserService userService;
 	@Resource
 	private IVideoGroupService videoGroupService;
+	@Resource
+	private IVideoService videoService;
 	
 	/**
 	 * @description 上传视频页面
@@ -49,7 +66,7 @@ public class TeacherController {
 		User user = userService.getSessionUser(session);
 		List<VideoGroup> videoGroupList = videoGroupService.selectListByUserID(user.getId());
 		model.addAttribute("videoGroupList",videoGroupList); // 视频组的名称
-		model.addAttribute("user",user);  // 昵称
+		model.addAttribute("user",user);  
 		InitUtil.iniSystem(model);
 		return "teacher/uploadVideoPage";
 	}
@@ -87,23 +104,9 @@ public class TeacherController {
 	 */
 	@RequestMapping("/myCoursePage.action")
 	public String myCoursePage(Model model,HttpSession session){
-		String account = SecurityUtils.getSubject().getPrincipal().toString();
-		String picture =null;
-		try {
-			User user = userService.getUserByAccount(account);
-			picture = user.getPicture(); // 照片
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(picture==null){
-			picture="default.jpg";
-		}
-		model.addAttribute("picture",picture);
-		model.addAttribute("account",account); // 账户
-		model.addAttribute("nickname",userService.getSessionNickname(session));  // 昵称
+		User user = userService.getSessionUser(session);
+		model.addAttribute("user",user);  
 		InitUtil.iniSystem(model);
-		
 		return "teacher/myCoursePage";
 	}
 	
@@ -132,40 +135,165 @@ public class TeacherController {
 	}
 	
 	/**
-	 * @description 视频文件上传
+	 * 
+	 * @description 上传视频文件，一次只能上传5个，并且为mp4格式
 	 * @author zhuziming
-	 * @time 2018年6月3日 下午6:27:32
+	 * @time 2018年6月10日 上午10:13:06
+	 * @param videoFile0 第0个上传文件
+	 * @param videoName0 第0个上传文件名
+	 * @param videoFile1 第1个上传文件
+	 * @param videoName1 第1个上传文件名
+	 * @param videoFile2 第2个上传文件
+	 * @param videoName2 第2个上传文件名
+	 * @param videoFile3 第3个上传文件
+	 * @param videoName3 第3个上传文件名
+	 * @param videoFile4 第4个上传文件
+	 * @param videoName4 第4个上传文件名
+	 * @param request
+	 * @param videoGroupID 视频组id
+	 * @return
 	 */
 	@RequestMapping("/videoFileUpload.action")
 	@ResponseBody
-	public String videoFileUpload(@RequestParam("file") CommonsMultipartFile[] files,HttpServletRequest request){
-		for(int i = 0;i<files.length;i++){  
-            if(!files[i].isEmpty()){  
-                int pre = (int) System.currentTimeMillis();  
-                try {  
-                    //拿到输出流，同时重命名上传的文件  
-                    FileOutputStream os = new FileOutputStream("d:/" + new Date().getTime() + files[i].getOriginalFilename());  
-                    //拿到上传文件的输入流  
-                    FileInputStream in = (FileInputStream) files[i].getInputStream();  
-                    //以写字节的方式写文件  
-                    int b = 0;  
-                    while((b=in.read()) != -1){  
-                        os.write(b);  
-                    }  
-                    os.flush();  
-                    os.close();  
-                    in.close();  
-                    int finaltime = (int) System.currentTimeMillis();  
-                    System.out.println(finaltime - pre);  
-                      
-                } catch (Exception e) {  
-                    e.printStackTrace();  
-                    System.out.println("上传出错");  
-                }  
-            }  
-        }  
-		
-		return "<script>window.parent.ajaxFileUpload(5)</script>";
+	public String videoFileUpload(
+			@RequestParam(value="videoFile0",required=false) CommonsMultipartFile videoFile0,
+			@RequestParam(value="videoName0",required=false) String videoName0,
+			@RequestParam(value="videoFile1",required=false) CommonsMultipartFile videoFile1,
+			@RequestParam(value="videoName1",required=false) String videoName1,
+			@RequestParam(value="videoFile2",required=false) CommonsMultipartFile videoFile2,
+			@RequestParam(value="videoName2",required=false) String videoName2,
+			@RequestParam(value="videoFile3",required=false) CommonsMultipartFile videoFile3,
+			@RequestParam(value="videoName3",required=false) String videoName3,
+			@RequestParam(value="videoFile4",required=false) CommonsMultipartFile videoFile4,
+			@RequestParam(value="videoName4",required=false) String videoName4,
+			HttpServletRequest request,Integer videoGroupID)
+	{
+		try{
+			// 把得到的值放入list，方便循环
+			List<Map<String, Object>> list  = new ArrayList<Map<String, Object>>();
+			if(videoFile0!=null && !StringUtils.isEmpty(videoName0)){
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("videoName", videoName0);
+				map.put("videoFile", videoFile0);
+				list.add(map);
+			}
+			if(videoFile1!=null && !StringUtils.isEmpty(videoName1)){
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("videoName", videoName1);
+				map.put("videoFile", videoFile1);
+				list.add(map);
+			}
+			if(videoFile2!=null && !StringUtils.isEmpty(videoName2)){
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("videoName", videoName2);
+				map.put("videoFile", videoFile2);
+				list.add(map);
+			}
+			if(videoFile3!=null && !StringUtils.isEmpty(videoName3)){
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("videoName", videoName3);
+				map.put("videoFile", videoFile3);
+				list.add(map);
+			}
+			if(videoFile4!=null && !StringUtils.isEmpty(videoName4)){
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("videoName", videoName4);
+				map.put("videoFile", videoFile4);
+				list.add(map);
+			}
+			// 视频格式验证，只能上传mp4格式
+			for(int i = 0;i<list.size();i++){
+				CommonsMultipartFile file = (CommonsMultipartFile)list.get(i).get("videoFile"); 
+				String format = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+				if(!".mp4".equalsIgnoreCase(format)){
+					String msg = URLEncoder.encode("请上传mp4格式的文件", "UTF-8");
+					return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+				}
+			}
+
+			if(list.size()>0){
+				// 文件的保存路径
+				String savePath = PropertiesUtil.getValue("system.properties", "courseMp4");
+				for(int i = 0;i<list.size();i++){  
+					// 视频的名称
+					String videoName = list.get(i).get("videoName").toString(); 
+					// 视频文件
+					CommonsMultipartFile file = (CommonsMultipartFile)list.get(i).get("videoFile"); 
+					// 文件后缀
+					String format = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+					// 重新生成文件名
+					String dataName = UUID.randomUUID().toString();
+					User user = (User) request.getSession().getAttribute("user");
+					// 如果目录不存在，创建
+					String deskpath = savePath+"/"+user.getId()+"/";
+					File deskFile =new File(deskpath);    
+					if(!deskFile .exists()  && !deskFile .isDirectory()){
+						deskFile.mkdir();
+					}
+					
+	                //拿到输出流，同时重命名上传的文件  
+	                FileOutputStream os = new FileOutputStream( deskpath+dataName+format);  
+	                //拿到上传文件的输入流  
+	                FileInputStream in = (FileInputStream) file.getInputStream();  
+	                //以写字节的方式写文件  
+	                int b = 0;  
+	                while((b=in.read()) != -1){  
+	                    os.write(b);  
+	                }  
+	                os.flush();  
+	                os.close();  
+	                in.close(); 
+	                // 上传成功后，插入视频
+	                
+	                Video video = new Video();
+	                video.setAccountID(user.getId());
+	                video.setCreateTime(new Timestamp(new Date().getTime()));
+	                video.setGroupID(videoGroupID);
+	                video.setLetterName(dataName+format);
+	                video.setName(videoName);
+	                video.setRemove("0");
+	                videoService.insert(video);
+		        }
+				// 正常传输结束
+				String msg = URLEncoder.encode("上传完毕", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
+			}else{ // 文件为空
+				String msg = URLEncoder.encode("上传文件不能为空", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("3", null)+"')</script>";
+		}
 	}
+	
+	/**
+	 * @description 我的视频页面
+	 * @author zhuziming
+	 * @time 2018年6月10日 下午5:58:37
+	 * @return
+	 */
+	@RequestMapping("/myVideoPage.action")
+	public String myVideoPage(Model model,HttpSession session,Integer pageIndex,Integer pageCount){
+		// 如果没有传页数，默认第0页
+		if(pageIndex==null){
+			pageIndex=0;
+		}
+		// 如果没有传页条数，默认一页10条
+		if(pageCount==null){
+			pageCount=10;
+		}
+		User user = userService.getSessionUser(session);
+		List<Video> videoList = videoService.getListByAccountId(user.getId(), pageCount, pageIndex);
+		// 数据总条数
+		Integer dataCount = videoService.getListCountByAccountId(user.getId());
+		
+		model.addAttribute("paging",PagingUtil.beginPaging(pageIndex, pageCount, dataCount));
+		model.addAttribute("user",user);  
+		model.addAttribute("videoList",videoList);
+		InitUtil.iniSystem(model);
+		return "teacher/myVideoPage";
+	}
+	
 	
 }

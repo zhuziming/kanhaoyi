@@ -76,6 +76,7 @@
 		
 		<div class="container mt-2 mb-2">
 			<a class="btn btn-success" href="${indexpath}/teacher/uploadVideoPage.action" role="button">上传视频</a>
+			<a class="btn btn-success" href="${indexpath}/teacher/myVideoPage.action" role="button">我的视频</a>
 			<a class="btn btn-success" href="${indexpath}/teacher/publishCoursePage.action" role="button">发布课程</a>
 			<a class="btn btn-success" href="${indexpath}/teacher/myCoursePage.action" role="button">我的课程</a>
 		</div>

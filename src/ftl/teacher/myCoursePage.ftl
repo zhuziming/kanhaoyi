@@ -24,7 +24,7 @@
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				  <a id="people" href="${indexpath}/back/index.action" class="btn btn-link text-white">
-				  	${nickname}
+				  	${(user.nickname)!''}
 				  </a>
 				</div>
         	</div>
@@ -35,10 +35,10 @@
 	  		<div class="row pt-5">
 	  			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 		 			<div class="media">
-					  <img width="150px;" src="${imgpath}/${picture}" class="figure-img img-fluid rounded-circle mr-3">
+					  <img width="150px;" src="${imgpath}/${(user.picture)!''}" class="figure-img img-fluid rounded-circle mr-3">
 					  <div class="media-body">
-					    <h5 class="mt-0">${account}</h5>
-					   	<span> ${nickname}</span>
+					    <h5 class="mt-0">${(user.account)!''}</h5>
+					   	<span> ${(user.nickname)!''}</span>
 					  </div>
 					</div>
 				</div>
