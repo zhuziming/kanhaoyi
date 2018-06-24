@@ -69,32 +69,46 @@
 		      <th scope="col">创建时间</th>
 		    </tr>
 		  </thead>
-		  <tbody>
+		  <tbody id="contentList">
 			<#list videoList as video>
 				<tr>
 					<td>${video.name}</td>
 				    <td>${video.createTime}</td>
 				</tr>
 		  	</#list>
-		   
 		  </tbody>
-		  
 		</table>
 		
-		<nav aria-label="Page navigation example">
-		  <ul class="pagination justify-content-end">
-		    <li class="page-item"><a class="page-link" href="#">第一页</a></li>
-		    <li class="page-item"><a class="page-link" href="#">1</a></li>
-		    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-		    <li class="page-item"><a class="page-link" href="#">3</a></li>
-		    <li class="page-item"><a class="page-link" href="#">4</a></li>
-		    <li class="page-item"><a class="page-link" href="#">5</a></li>
-		    <li class="page-item"><a class="page-link" href="#">最后一页</a></li>
-		    <li class="page-item"><a class="page-link" href="#">2/10，55</a></li>
-		  </ul>
-		</nav>
+		<div id="padingHTML">
+			${padingHTML}
+		</div>
+
     </div>
     <#include "../footer.ftl">
   </body>
 </html>
-    
+<script>
+	function ajaxPaging(pageIndex){
+		console.log(pageIndex);
+		
+		$.ajax({
+		   	type: "POST",
+		   	url: "${indexpath}/teacher/ajaxGetVideoList.action",
+		   	data: {"pageIndex":pageIndex},
+		   	success: function(msg){
+		   		var data = eval("("+msg+")");
+		   		if(data.success==1){
+		   			var result = eval("("+data.msg+")");
+		   			$("#contentList").html(result.dataList);
+		   			$("#padingHTML").html(result.padingHTML);
+		   		}else if(data.success==2){
+		   			alert(data.msg);
+		   		}else{
+		   			alert("网络异常，请稍后在试");
+		   		}
+		   	}
+		});
+		
+	}
+
+</script>

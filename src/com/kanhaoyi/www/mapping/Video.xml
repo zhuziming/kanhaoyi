@@ -27,7 +27,7 @@
     	FROM video 
     		WHERE account_id=#{accountID} 
     	LIMIT 
-    		${pageIndex*pageCount},${pageIndex*pageCount+pageCount}
+    		${pageIndex*pageCount},${pageCount}
     </select>
     
     <select id="getListCountByAccountId" parameterType="int" resultType="int">

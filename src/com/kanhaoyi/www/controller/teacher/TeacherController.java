@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,6 +34,7 @@ import com.kanhaoyi.www.model.VideoGroup;
 import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.service.IVideoGroupService;
 import com.kanhaoyi.www.service.IVideoService;
+import com.kanhaoyi.www.util.DateUtil;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
 import com.kanhaoyi.www.util.PagingUtil;
@@ -287,13 +289,71 @@ public class TeacherController {
 		List<Video> videoList = videoService.getListByAccountId(user.getId(), pageCount, pageIndex);
 		// 数据总条数
 		Integer dataCount = videoService.getListCountByAccountId(user.getId());
-		
-		model.addAttribute("paging",PagingUtil.beginPaging(pageIndex, pageCount, dataCount));
+		Map<String,Integer> map = PagingUtil.beginPaging(pageIndex, pageCount, dataCount);
+		model.addAttribute("paging",map);
+		model.addAttribute("padingHTML",PagingUtil.padingHTML(map.get("allPageSize"), map.get("dataCount"), map.get("pageIndex"), map.get("pageCount")));
 		model.addAttribute("user",user);  
 		model.addAttribute("videoList",videoList);
 		InitUtil.iniSystem(model);
 		return "teacher/myVideoPage";
 	}
+	
+	/**
+	 * @description ajax得到我的视频列表
+	 * @author zhuziming
+	 * @time 2018年6月24日 上午11:26:46
+	 * @return
+	 */
+	@RequestMapping("/ajaxGetVideoList.action")
+	@ResponseBody
+	public String ajaxGetVideoList(HttpServletRequest request,HttpSession session){
+		try{
+			JSONObject jo = new JSONObject();
+			String sPageIndex = request.getParameter("pageIndex");
+			String sPageCount = request.getParameter("pageCount");
+			Integer pageIndex =null; // 页数
+			Integer pageCount =null; // 一页几条数据
+			// 如果没有传页数，默认是第0页
+			if(sPageIndex==null){
+				pageIndex = 0;
+			}else{
+				pageIndex = Integer.valueOf(sPageIndex);
+			}
+			// 如果没有传页条数，默认一页10条
+			if(sPageCount==null){
+				pageCount=10;
+			}else{
+				pageCount = Integer.valueOf(sPageCount);
+			}
+			User user = userService.getSessionUser(session);
+			List<Video> videoList = videoService.getListByAccountId(user.getId(), pageCount, pageIndex);
+			StringBuffer dataList = new StringBuffer(); // 数据集合
+			for (int i = 0; i < videoList.size(); i++) {
+				Video  video= videoList.get(i);
+				dataList.append("<tr>");
+				dataList.append("<td>"+video.getName()+"</td>");
+				dataList.append("<td>"+DateUtil.formatTimestampToStr(video.getCreateTime())+"</td>");
+				dataList.append("</tr>");
+			}
+			
+			StringBuffer padingHTML = new StringBuffer(); // 分页按钮集合
+			Integer dataCount = videoService.getListCountByAccountId(user.getId());// 数据总条数
+			Map<String,Integer> map = PagingUtil.beginPaging(pageIndex, pageCount, dataCount);
+			padingHTML.append(PagingUtil.padingHTML(map.get("allPageSize"), map.get("dataCount"), map.get("pageIndex"), map.get("pageCount")));
+			jo.put("dataList", dataList);
+			jo.put("padingHTML", padingHTML);
+			if(dataList.length() > 0){
+				return JSONUtil.returnJson("1", jo.toString());
+			}else{
+				return JSONUtil.returnJson("2", "没有数据了");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("3", "服务器异常");
+		}
+	}
+	
+	
 	
 	
 }
