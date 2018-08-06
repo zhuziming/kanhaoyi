@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.ICourseTypeDao">
+    
+    <select id="getAll" resultType="com.kanhaoyi.www.model.CourseType">
+    	SELECT id,name,namespace AS nameSpace FROM course_type
+    </select>
+    
+    <select id="getOneByID" parameterType="int" resultType="com.kanhaoyi.www.model.CourseType">
+    	SELECT id,name,namespace AS nameSpace FROM course_type WHERE id=#{id}
+    </select>
+    
+</mapper>

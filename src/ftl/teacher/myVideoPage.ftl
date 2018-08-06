@@ -61,27 +61,32 @@
 		  	</ol>
 		</nav>
     	
-     
-    	<table class="table table-striped">
-		  <thead>
-		    <tr>
-		      <th scope="col">标题</th>
-		      <th scope="col">创建时间</th>
-		    </tr>
-		  </thead>
-		  <tbody id="contentList">
-			<#list videoList as video>
-				<tr>
-					<td>${video.name}</td>
-				    <td>${video.createTime}</td>
-				</tr>
-		  	</#list>
-		  </tbody>
-		</table>
-		
-		<div id="padingHTML">
-			${padingHTML}
-		</div>
+     	<#if (videoList?size=0)>
+     		没有数据了
+     	<#else>
+			<table class="table table-striped">
+				<thead>
+				    <tr>
+				      <th scope="col">标题</th>
+				      <th scope="col">创建时间</th>
+				      <th scope="col">所属分组</th>
+				    </tr>
+			  	</thead>
+			  	<tbody id="contentList">
+					<#list videoList as video>
+						<tr>
+							<td>${video.name}</td>
+					    	<td>${video.createTime}</td>
+					    	<td>${video.groupName}</td>
+						</tr>
+			  		</#list>
+			  	</tbody>
+			</table>
+			
+			<div id="padingHTML">
+				${padingHTML}
+			</div>
+     	</#if>
 
     </div>
     <#include "../footer.ftl">

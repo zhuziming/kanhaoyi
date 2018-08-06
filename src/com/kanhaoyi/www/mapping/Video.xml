@@ -17,14 +17,13 @@
     </insert>
     
     <select id="getListByAccountIdAndGroupId" parameterType="map" resultType="com.kanhaoyi.www.model.Video">
-    	SELECT * FROM video WHERE account_id=#{accountID} AND group_id=#{groupID}
+    	SELECT * FROM video WHERE account_id=#{accoutID} AND group_id=#{groupID}
     </select>
     
     <select id="getListByAccountId" parameterType="map" resultType="com.kanhaoyi.www.model.Video">
-    	SELECT 
-    		id, name, letter_name AS letterName, 
-    		account_id AS accountID, remove, create_time AS createTime 
-    	FROM video 
+    	SELECT v.id, v.name, v.letter_name AS letterName, v.account_id AS accountID, 
+				v.remove, v.create_time AS createTime ,g.group_name AS groupName
+			FROM video v LEFT JOIN video_group g ON v.group_id=g.id
     		WHERE account_id=#{accountID} 
     	LIMIT 
     		${pageIndex*pageCount},${pageCount}

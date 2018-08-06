@@ -29,7 +29,7 @@
 			WHERE account=#{account}
     </select>
     
-    <insert id="insert" parameterType="com.kanhaoyi.www.model.User" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.User" keyProperty="id" useGeneratedKeys="true">
     	INSERT INTO user
     		(id,account,nickname,password,phone,email,sex,time)
 		VALUE(

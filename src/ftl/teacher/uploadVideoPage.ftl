@@ -99,7 +99,7 @@
 					      <input type="text" name="videoName0" class="form-control" id="validationDefault01" placeholder="视频名称" required>
 					    </div>
 					    <div class="col-md-4 mb-3">
-					      <label for="validationDefaultUsername">选择文件</label>
+					      <label for="validationDefaultUsername">选择文件 <code>请上传MP4格式</code></label>
 					      <div class="input-group">
 					        <input type="file" name="videoFile0" onchange="$(this).next().html(this.value)" class="custom-file-input" id="validatedCustomFile" required>
 							<label class="custom-file-label" for="validatedCustomFile">点击选择文件</label>
@@ -113,7 +113,7 @@
 					      <input type="text" name="videoName1" class="form-control" id="validationDefault01" placeholder="视频名称" required>
 					    </div>
 					    <div class="col-md-4 mb-3">
-					      <label for="validationDefaultUsername">选择文件</label>
+					      <label for="validationDefaultUsername">选择文件 <code>请上传MP4格式</code></label>
 					      <div class="input-group">
 					        <input type="file" name="videoFile1" onchange="$(this).next().html(this.value)" class="custom-file-input" id="validatedCustomFile" required>
 							<label class="custom-file-label" for="validatedCustomFile">点击选择文件</label>
@@ -127,7 +127,7 @@
 					      <input type="text" name="videoName2" class="form-control" id="validationDefault01" placeholder="视频名称" required>
 					    </div>
 					    <div class="col-md-4 mb-3">
-					      <label for="validationDefaultUsername">选择文件</label>
+					      <label for="validationDefaultUsername">选择文件 <code>请上传MP4格式</code></label>
 					      <div class="input-group">
 					        <input type="file" name="videoFile2" onchange="$(this).next().html(this.value)" class="custom-file-input" id="validatedCustomFile" required>
 							<label class="custom-file-label" for="validatedCustomFile">点击选择文件</label>
@@ -141,7 +141,7 @@
 					      <input type="text" name="videoName3" class="form-control" id="validationDefault01" placeholder="视频名称" required>
 					    </div>
 					    <div class="col-md-4 mb-3">
-					      <label for="validationDefaultUsername">选择文件</label>
+					      <label for="validationDefaultUsername">选择文件 <code>请上传MP4格式</code></label>
 					      <div class="input-group">
 					        <input type="file" name="videoFile3" onchange="$(this).next().html(this.value)" class="custom-file-input" id="validatedCustomFile" required>
 							<label class="custom-file-label" for="validatedCustomFile">点击选择文件</label>
@@ -155,7 +155,7 @@
 					      <input type="text" name="videoName4" class="form-control" id="validationDefault01" placeholder="视频名称" required>
 					    </div>
 					    <div class="col-md-4 mb-3">
-					      <label for="validationDefaultUsername">选择文件</label>
+					      <label for="validationDefaultUsername">选择文件 <code>请上传MP4格式</code></label>
 					      <div class="input-group">
 					        <input type="file" name="videoFile4" onchange="$(this).next().html(this.value)" class="custom-file-input" id="validatedCustomFile" required>
 							<label class="custom-file-label" for="validatedCustomFile">点击选择文件</label>
@@ -186,10 +186,8 @@
 			success: function(data){
 				var info = eval("("+data+")");
 				if(info.success==1){
-					var msg = eval("("+info.msg+")")
-					var opt = "<option selected='selected' value='"+msg.id+"'>"+msg.groupName+"</option>";
-					$("#groupName").prepend(opt);
-					console.log(msg);
+					alert("分组添加成功，请刷新页面查看");
+					window.location.reload();
 				}else if(info.success==2){
 					alert(info.msg);
 				}

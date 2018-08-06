@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,14 +28,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.kanhaoyi.www.model.Course;
+import com.kanhaoyi.www.model.CourseDetail;
+import com.kanhaoyi.www.model.CourseType;
 import com.kanhaoyi.www.model.User;
 import com.kanhaoyi.www.model.Video;
 import com.kanhaoyi.www.model.VideoGroup;
+import com.kanhaoyi.www.service.ICourseCommentService;
+import com.kanhaoyi.www.service.ICourseDetailService;
+import com.kanhaoyi.www.service.ICourseService;
+import com.kanhaoyi.www.service.ICourseTypeService;
 import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.service.IVideoGroupService;
 import com.kanhaoyi.www.service.IVideoService;
 import com.kanhaoyi.www.util.DateUtil;
+import com.kanhaoyi.www.util.FileUtil;
+import com.kanhaoyi.www.util.FreeMarkerUtil;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
 import com.kanhaoyi.www.util.PagingUtil;
@@ -57,6 +68,14 @@ public class TeacherController {
 	private IVideoGroupService videoGroupService;
 	@Resource
 	private IVideoService videoService;
+	@Resource
+	private ICourseTypeService courseTypeService;
+	@Resource
+	private ICourseService courseService;
+	@Resource
+	private ICourseDetailService courseDetailService;
+	@Resource
+	private ICourseCommentService courseCommentService;
 	
 	/**
 	 * @description 上传视频页面
@@ -79,25 +98,126 @@ public class TeacherController {
 	 * @time 2018年6月2日 下午6:14:13
 	 */
 	@RequestMapping("/publishCoursePage.action")
-	public String publishCourse(Model model,HttpSession session){
-		String account = SecurityUtils.getSubject().getPrincipal().toString();
-		String picture =null;
-		try {
-			User user = userService.getUserByAccount(account);
-			picture = user.getPicture(); // 照片
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(picture==null){
-			picture="default.jpg";
-		}
-		model.addAttribute("picture",picture);
-		model.addAttribute("account",account); // 账户
-		model.addAttribute("nickname",userService.getSessionNickname(session));  // 昵称
+	public String publishCoursePage(Model model,HttpSession session){
+		User user = userService.getSessionUser(session);
+		List<VideoGroup> videoGroupList = videoGroupService.selectListByUserID(user.getId()); // 用户自定义视频组名称
+		List<CourseType> courseTypeList = courseTypeService.getAll();
+		
+		model.addAttribute("user",user);
+		model.addAttribute("videoGroupList",videoGroupList); // 视频组的名称
+		model.addAttribute("courseTypeList",courseTypeList); // 科室列表
 		InitUtil.iniSystem(model);
 		return "teacher/publishCoursePage";
 	}
+	
+	
+	/**
+	 * @description 发布课程
+	 * @author zhuziming
+	 * @time 2018年7月8日 下午5:07:29
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/publishCourse.action")
+	@ResponseBody
+	public String publishCourse(HttpServletRequest request,
+			@RequestParam(value="courseImg",required=false) CommonsMultipartFile courseImg){
+		try{
+			User user = userService.getSessionUser(request.getSession());
+			String imgSavePath = PropertiesUtil.getValue("system.properties", "courseImg");
+			String projectPath = PropertiesUtil.getValue("system.properties", "projectPath");
+			// 文件后缀
+			String imgFormat = courseImg.getOriginalFilename().substring(courseImg.getOriginalFilename().lastIndexOf("."));
+			if(!".jpg".equalsIgnoreCase(imgFormat) && !".png".equalsIgnoreCase(imgFormat)){
+				String msg = URLEncoder.encode("图片格式错误", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
+			}
+			
+			// 重新生成文件名
+			String imgDataName = UUID.randomUUID().toString();
+			// 创建
+			FileUtil.createFile(imgSavePath, user.getId()+"", imgDataName, imgFormat, courseImg);
+
+			// 1.生成课程
+			String courseTitle = request.getParameter("courseTitle"); // 课程标题
+			String courseTypeID= request.getParameter("courseTypeID"); // 课程类型id
+			CourseType courseType = courseTypeService.getOneByID(Integer.valueOf(courseTypeID));
+			
+			Course course = new Course();
+			course.setCourseName(courseTitle);
+			course.setCourseTypeID(Integer.valueOf(courseTypeID));
+			course.setUserID(user.getId());
+			course.setPicturePath(imgDataName+imgFormat);
+			course.setClickVolume(0);
+			course.setTime(new Timestamp(new Date().getTime()));
+			courseService.insert(course);
+			
+			// 2.为课程生成集数，先排序在插入数据库
+			Enumeration<String> enu =request.getParameterNames(); // 取得所有的参数名
+			int sequence = 0;
+			List<Integer> numList = new ArrayList<Integer>();
+			while(enu.hasMoreElements()){
+				String param = enu.nextElement();
+				int ind = param.indexOf("courseName");
+				if(ind != -1){// 取课程名
+					String index = param.replace("courseName", ""); // 取参数后边的下标
+					numList.add(Integer.valueOf(index));
+				}
+			}
+			if(numList.size() > 0){
+				int[] array = new int[numList.size()];
+				for(int i=0;i<array.length;i++){
+					array[i] = numList.get(i);
+				}
+				// 冒泡排序，从小到大
+				int temp;
+				for (int i = 0; i < array.length; i++) {
+		            for (int j = i+1; j < array.length; j++) {
+		                if (array[i] > array[j]) {
+		                    temp = array[i];
+		                    array[i] = array[j];
+		                    array[j] = temp;  // 两个数交换位置
+		                }
+		            }
+		        }
+				// 程序排序后，跟据顺序插入数据库
+				for(int i:array){
+					sequence++;
+					String courseDetailName = request.getParameter("courseName"+i); // 取本集课程名字
+					String videoName = request.getParameter("videoName"+i); // 跟据下标取视频id
+					CourseDetail courseDetail = new CourseDetail();
+					courseDetail.setCourseID(course.getId());
+					courseDetailService.insert(courseDetail);
+					// 课程路径 项目目录/科室/用户id/页面id.html
+					String coursePath = "/"+courseType.getNameSpace()+"/"+user.getId()+"/"+courseDetail.getId()+".html";
+					courseDetail.setCoursePath(coursePath);
+					courseDetail.setCourseDetailName(courseDetailName);
+					courseDetail.setCreateTime(new Timestamp(new Date().getTime()));
+					courseDetail.setSequence(sequence);
+					courseDetail.setVideoID(videoName);
+					courseDetail.setClickVolume(0);
+					courseDetailService.update(courseDetail); 
+				}
+				if(sequence > 0){
+					CourseDetail courseDetail_1 = courseDetailService.getOneOrderBy("id", "asc", course.getId()+"");
+					course.setCoursePath(courseDetail_1.getCoursePath());
+					course.setQuantity(array.length);
+					courseService.update(course);
+				}
+				// 生成网页
+				courseService.createCourseHtml(course);
+				
+				String msg = URLEncoder.encode("上传完毕", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
+			}else{
+				String msg = URLEncoder.encode("课程不能为空", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+		}catch(Exception e){
+			return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("3", "异常了")+"')</script>";
+		}
+	}
+	
 	
 	/**
 	 * @desctiption 我的课程页面
@@ -135,6 +255,34 @@ public class TeacherController {
 		videoGroupService.insert(vg);
 		return JSONUtil.returnJson("1", JSONObject.toJSONString(vg));
 	}
+	
+	/**
+	 * @description 
+	 * @author zhuziming
+	 * @time 2018年7月8日 下午4:23:59
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/getVideo.action")
+	@ResponseBody
+	public String getVideo(HttpServletRequest request){
+		try{
+			User user = userService.getSessionUser(request.getSession());
+			String videoGroupID = request.getParameter("videoGroupID"); // 视频组id
+			List<Video> videolist = videoService.getListByAccountIdAndGroupId(user.getId()+"", videoGroupID);
+			if(videolist.size() > 0){
+				return JSONUtil.returnJson("1", JSONArray.toJSONString(videolist));
+			}else{
+				return JSONUtil.returnJson("2", "数据为空");
+			}
+		}catch(Exception e){
+			return JSONUtil.returnJson("3", "异常了");
+		}
+	}
+	
+	
+	
+	
 	
 	/**
 	 * 
@@ -226,27 +374,9 @@ public class TeacherController {
 					// 重新生成文件名
 					String dataName = UUID.randomUUID().toString();
 					User user = (User) request.getSession().getAttribute("user");
-					// 如果目录不存在，创建
-					String deskpath = savePath+"/"+user.getId()+"/";
-					File deskFile =new File(deskpath);    
-					if(!deskFile .exists()  && !deskFile .isDirectory()){
-						deskFile.mkdir();
-					}
-					
-	                //拿到输出流，同时重命名上传的文件  
-	                FileOutputStream os = new FileOutputStream( deskpath+dataName+format);  
-	                //拿到上传文件的输入流  
-	                FileInputStream in = (FileInputStream) file.getInputStream();  
-	                //以写字节的方式写文件  
-	                int b = 0;  
-	                while((b=in.read()) != -1){  
-	                    os.write(b);  
-	                }  
-	                os.flush();  
-	                os.close();  
-	                in.close(); 
+					// 创建
+					FileUtil.createFile(savePath, user.getId()+"", dataName, format, file);
 	                // 上传成功后，插入视频
-	                
 	                Video video = new Video();
 	                video.setAccountID(user.getId());
 	                video.setCreateTime(new Timestamp(new Date().getTime()));

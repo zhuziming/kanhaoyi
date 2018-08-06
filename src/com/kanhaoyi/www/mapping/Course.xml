@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.ICourseDao">
+    
+    <select id="getOneByID" parameterType="int" resultType="com.kanhaoyi.www.model.Course">
+    	SELECT id,course_name AS courseName,course_type_id AS courseTypeID,user_id AS userID, 
+    		time,click_volume AS clickVolume,picture_path AS picturePath,course_path AS coursePath,quantity
+    	FROM course WHERE id=#{id}
+    </select>
+    
+    
+    <select id="getListByUserID" parameterType="int" resultType="com.kanhaoyi.www.model.Course">
+    	id,course_name AS courseName,course_type_id AS courseTypeID,user_id AS userID 
+    		time,click_volume AS clickVolume,picture_path AS picturePath,course_path AS coursePath,quantity
+    	FROM course WHERE user_id=#{userID}
+    </select>
+    
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.Course" keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO course(id,course_name,course_type_id,user_id,time,
+			click_volume,picture_path,course_path,quantity) 
+		VALUE(null,#{courseName},#{courseTypeID},#{userID},#{time,jdbcType=TIMESTAMP},
+			#{clickVolume},#{picturePath},#{coursePath},#{quantity})
+    </insert>
+    
+    <update id="update" parameterType="com.kanhaoyi.www.model.Course">
+    	UPDATE course SET id=#{id}
+    	<if test="courseName!=null and courseName!=''">,course_name=#{courseName}</if>
+    	<if test="courseTypeID!=null and courseTypeID!=''">,course_type_id=#{courseTypeID}</if>
+    	<if test="userID!=null and userID!=''">,user_id=#{userID}</if>
+    	<if test="time!=null and time!=''">,time=#{time,jdbcType=TIMESTAMP}</if>
+    	<if test="clickVolume!=null and clickVolume!=''">,click_volume=#{clickVolume}</if>
+    	<if test="picturePath!=null and picturePath!=''">,picture_path=#{picturePath}</if>
+    	<if test="coursePath!=null and coursePath!=''">,course_path=#{coursePath}</if>
+    	<if test="quantity!=null and quantity!=''">,quantity=#{quantity}</if>
+    	WHERE id=#{id}
+    </update>
+    
+</mapper>

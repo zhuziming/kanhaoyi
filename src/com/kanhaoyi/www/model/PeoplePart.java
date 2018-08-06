@@ -1,15 +1,17 @@
 package com.kanhaoyi.www.model;
 
+
 /**
- * @discription 课程类型，描述现有的科室，比如内科，外科等...
+ * @description 人体部位
  * @author zhuziming
- * @time 2018年4月17日下午4:03:33
+ * @time 2018年7月29日 下午5:20:37
  */
-public class CourseType {
+public class PeoplePart {
 
 	private Integer id;
-	private String name; // 课程类型 
+	private String partName; // 部位名字
 	private String nameSpace; // 命名空间
+	
 	
 	public Integer getId() {
 		return id;
@@ -17,11 +19,11 @@ public class CourseType {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getPartName() {
+		return partName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPartName(String partName) {
+		this.partName = partName;
 	}
 	public String getNameSpace() {
 		return nameSpace;
@@ -29,5 +31,6 @@ public class CourseType {
 	public void setNameSpace(String nameSpace) {
 		this.nameSpace = nameSpace;
 	}
+	
 	
 }

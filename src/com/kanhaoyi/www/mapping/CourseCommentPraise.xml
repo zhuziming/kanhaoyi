@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.ICourseCommentPraiseDao">
+    
+    <select id="selectListByUserIdAndCommentId" parameterType="com.kanhaoyi.www.model.CourseCommentPraise" resultType="com.kanhaoyi.www.model.CourseCommentPraise">
+    	SELECT id,user_id userID,comment_id commentID,time 
+    	FROM course_comment_praise 
+    	WHERE user_id=#{userID} AND comment_id=#{commentID}
+    </select>
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.CourseCommentPraise" keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO course_comment_praise(id,user_id,comment_id,time) 
+    	VALUE(#{id},#{userID},#{commentID},#{time,jdbcType=TIMESTAMP})
+    </insert>
+    
+    <delete id="deleteById" parameterType="int">
+    	DELETE FROM course_comment_praise WHERE id=#{id}
+    </delete>
+    
+</mapper>

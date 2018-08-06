@@ -15,6 +15,11 @@ public class Video {
 	private Integer groupID; // 属于那个组
 	private String remove; // 是否删除 [0:未删除，初始值] [1:删除]
 	private Timestamp createTime; // 创建时间
+	
+	
+	private String groupName; // 组的名字，数据库中没有这一列，为页面显示而添加
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -56,6 +61,12 @@ public class Video {
 	}
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
+	}
+	public String getGroupName() {
+		return groupName;
+	}
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 
 }

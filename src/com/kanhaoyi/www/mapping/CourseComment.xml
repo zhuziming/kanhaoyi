@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.ICourseCommentDao">
+    
+    <select id="getListByCourseID" parameterType="map" resultType="map">
+    	SELECT c.id,c.course_id,c.user_id,c.content,c.praise,c.time,u.nickname,u.picture FROM course_comment c 
+    	LEFT JOIN user u ON c.user_id=u.id 
+    	WHERE c.course_id = #{courseID} ORDER BY id desc 
+    	LIMIT ${size}
+    </select>
+    
+    <select id="getListByCourseIDAndCommentID" parameterType="map" resultType="map">
+    	SELECT c.id,c.course_id,c.user_id,c.content,c.praise,c.time,u.nickname,u.picture FROM course_comment c 
+    	LEFT JOIN user u ON c.user_id=u.id 
+    	WHERE c.course_id = #{courseID}  AND c.id &lt; #{commentID} ORDER BY id desc 
+    	LIMIT ${size}
+    </select>
+    
+    <select id="getListByCourseIDPraise" parameterType="map" resultType="map">
+    	SELECT c.id,c.course_id,c.user_id,c.content,c.praise,c.time,u.nickname,u.picture FROM course_comment c 
+    	LEFT JOIN user u ON c.user_id=u.id 
+    	WHERE c.course_id = #{courseID} AND c.praise &gt; 0 ORDER BY praise desc 
+    	LIMIT ${size}
+    </select>
+    
+    <select id="getOneByCourseCommentId" parameterType="int" resultType="map">
+    	SELECT c.id,c.course_id,c.user_id,c.content,c.praise,c.time,u.nickname,u.picture FROM course_comment c 
+    	LEFT JOIN user u ON c.user_id=u.id 
+    	WHERE c.id=#{courseCommentId}
+    </select>
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.CourseComment" keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO course_comment(id,course_id,user_id,content,praise,time) 
+    	VALUE(null,#{courseID},#{userID},#{content},#{praise},#{time,jdbcType=TIMESTAMP});
+    </insert>
+    
+    
+    <update id="praiseAdd" parameterType="int">
+    	UPDATE course_comment SET praise=praise+1 WHERE id=#{commentID}
+    </update>
+    
+    <update id="praiseMinus" parameterType="int">
+    	UPDATE course_comment SET praise=praise-1 WHERE id=#{commentID}
+    </update>
+    
+</mapper>

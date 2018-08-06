@@ -6,13 +6,13 @@
     <title>看好医-外科</title>
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-    <link rel="stylesheet" href="http://192.168.1.175:8080/webWork/css/boots/bootstrap.min.css">
-    <link rel="stylesheet" href="http://192.168.1.175:8080/webWork/css/boots/blog.css">
-	<link rel="stylesheet" type="text/css" href="http://192.168.1.175:8080/webWork/css/video-js.css">
-    <link rel="stylesheet" href="http://192.168.1.175:8080/webWork/css/kanhaoyi-index.css">
-    <script src="http://192.168.1.175:8080/webWork/js/jquery.slim.min.js"></script>
-	<script src="http://192.168.1.175:8080/webWork/js/boots/bootstrap.min.js"></script>
-	<script src="http://192.168.1.175:8080/webWork/js/video.min.js"></script>
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/boots/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/boots/blog.css">
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/kanhaoyi/css/video-js.css">
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/kanhaoyi-index.css">
+    <script src="http://localhost:8080/kanhaoyi/js/jquery.min.js"></script>
+	<script src="http://localhost:8080/kanhaoyi/js/boots/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/kanhaoyi/js/video.min.js"></script>
   </head>
   
   <body>
@@ -21,12 +21,20 @@
         <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
         	<div class="container" >
 	            <div class="btn-group" role="group">
-				  <a class="btn btn-link text-dark">www.kanhaoyi.com，看好医</a>
 				  <a class="btn btn-link text-dark">首页</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				  <a href="http://192.168.1.175:8080/webWork/personal-center-index.html" class="btn btn-link text-dark">
-				  	少年还未登录
+				  <a id="people" href="http://localhost:8080/kanhaoyi/loginPage.action" class="btn btn-link text-dark">
+				  	未登录
+				  </a>
+				  <a id="signUp" href="http://localhost:8080/kanhaoyi/signUpPage.action" class="btn btn-link text-dark">
+				  	注册
+				  </a>
+				  <a id="logout" href="http://localhost:8080/kanhaoyi/logout.action" class="btn btn-link text-dark" style="display: none;">
+				  	退出
+				  </a>
+				  <a class="btn btn-link text-dark" href="http://localhost:8080/kanhaoyi/info-list.html">
+				  	消息<span class="text-danger" id="infoNum"></span>
 				  </a>
 				</div>
         	</div>
@@ -98,7 +106,7 @@
 	 <div class="row ">
 	 	<div class="col-lg-9">
 	  		<video width="100%" id="my-video" class="video-js" controls preload="auto"  poster="https://ninghao.net/files/screenshot/ninghao-net-00-00-intro.jpg" data-setup="{}">
-				<source src="http://192.168.1.175:8080/webWork/mp4/1.mp4" type="video/mp4">
+				<source src="http://localhost:8080/kanhaoyi/mp4/1.mp4" type="video/mp4">
 				<p class="vjs-no-js">
 				  To view this video please enable JavaScript, and consider upgrading to a web browser that
 				  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
@@ -114,7 +122,7 @@
 		  	
 		  	<div class="card mb-4">
 				<div class="card-header">
-					<img class="mr-3" style="width: 40px;" src="http://192.168.1.175:8080/webWork/image/0.jpg">
+					<img class="mr-3" style="width: 40px;" src="http://localhost:8080/kanhaoyi/image/0.jpg">
 					This text should overflow the parent.
 			   	 	<a class="float-right">
 			   	 		<span  class=" badge badge-primary "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
@@ -135,7 +143,7 @@
 			
 			<div class="card mb-4">
 			  <div class="card-header">
-			    <img class="mr-3" style="width: 40px;" src="http://192.168.1.175:8080/webWork/image/0.jpg">
+			    <img class="mr-3" style="width: 40px;" src="http://localhost:8080/kanhaoyi/image/0.jpg">
 			    Quote
 			    <a class="float-right">
 		   	 		<span  class=" badge badge-primary "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
@@ -158,7 +166,7 @@
 			
 			<div class="card mb-4">
 			  <div class="card-header">
-			    <img class="mr-3" style="width: 40px;" src="http://192.168.1.175:8080/webWork/image/0.jpg">
+			    <img class="mr-3" style="width: 40px;" src="http://localhost:8080/kanhaoyi/image/0.jpg">
 			    Quote
 			    <a class="float-right">
 		   	 		<span  class=" badge badge-primary "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
@@ -217,3 +225,4 @@
         console.log('Good to go!');
 	});
 </script>
+<script src="http://localhost:8080/kanhaoyi/js/kanhaoyi.js"></script>

@@ -12,9 +12,7 @@ public class Course {
 	private Integer id;
 	private String courseName; // 课程名字
 	private Integer courseTypeID; // 课程类型id
-	private String courseType; // 课程类型
 	private Integer userID;  // 作者id
-	private String userNickname; // 作者名称
 	private Timestamp time; // 创建时间
 	private Integer clickVolume; // 点击量
 	private String picturePath; // 封面地址
@@ -39,23 +37,11 @@ public class Course {
 	public void setCourseTypeID(Integer courseTypeID) {
 		this.courseTypeID = courseTypeID;
 	}
-	public String getCourseType() {
-		return courseType;
-	}
-	public void setCourseType(String courseType) {
-		this.courseType = courseType;
-	}
 	public Integer getUserID() {
 		return userID;
 	}
 	public void setUserID(Integer userID) {
 		this.userID = userID;
-	}
-	public String getUserNickname() {
-		return userNickname;
-	}
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
 	}
 	public Timestamp getTime() {
 		return time;
