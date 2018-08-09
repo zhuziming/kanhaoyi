@@ -48,4 +48,10 @@ public class VideoServiceImpl implements IVideoService {
 		return videoDao.getListCountByAccountId(accountID);
 	}
 
+
+	@Override
+	public Video getOneByID(Integer ID) {
+		return videoDao.getOneByID(ID);
+	}
+
 }

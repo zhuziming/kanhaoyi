@@ -33,4 +33,10 @@
     	SELECT count(1) FROM video WHERE account_id=#{accountID,jdbcType=INTEGER};
     </select>
     
+    <select id="getOneByID" parameterType="int" resultType="com.kanhaoyi.www.model.Video">
+    	SELECT id,name,letter_name AS letterName, account_id AS accountID, 
+			group_id AS groupID, remove, create_time AS createTime 
+		FROM video WHERE id=#{ID}
+    </select>
+    
 </mapper>

@@ -11,6 +11,8 @@ import java.util.Map;
 import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.CourseDetail;
 import com.kanhaoyi.www.model.CourseType;
+import com.kanhaoyi.www.model.PeoplePart;
+import com.kanhaoyi.www.model.Video;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -58,13 +60,13 @@ public class FreeMarkerUtil {
 	}
 	
 	/**
-	 * @description 生成网页
+	 * @description 生成课程页面网页
 	 * @author zhuziming
 	 * @time 2018年7月21日 下午5:01:53
 	 */
 	public static void createCourseHTML(CourseDetail courseDetail, List<CourseDetail> courseDetailList,
 			List<CourseType> courseTypeList, CourseType courseType,Course course,
-			List<Map<String,Object>> list,StringBuffer GoodPraise){
+			List<Map<String,Object>> list,StringBuffer GoodPraise,Video video){
 		// 准备数据
 		Map<String ,Object> data = new HashMap<String, Object>();
 		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
@@ -84,6 +86,7 @@ public class FreeMarkerUtil {
 		data.put("courseDetailList",courseDetailList); //课程集数列表
 		data.put("courseDetail",courseDetail);// 课程那一集
 		data.put("GoodPraise",GoodPraise); // 赞最多的评论
+		data.put("video",video); // 赞最多的评论
 		
 		// 目录要一级一级的创建，否则会失败
 		String deskpath = projectPath+"/"+courseType.getNameSpace()+"/"+course.getUserID()+"/";
@@ -113,7 +116,141 @@ public class FreeMarkerUtil {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * @desctiption 创建人体部位导航页
+	 * @author zhuziming
+	 * @time 2018年8月8日上午9:46:29
+	 */
+	public static boolean createPeoplePartHTML(List<Course> courseList, 
+			List<PeoplePart> peoplePartList,PeoplePart peoplePart){
+		
+		// 准备数据
+		Map<String ,Object> data = new HashMap<String, Object>();
+		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
+		String imgpath = PropertiesUtil.getValue("system.properties", "imgpath");
+		String csspath = PropertiesUtil.getValue("system.properties", "csspath");
+		String jspath = PropertiesUtil.getValue("system.properties", "jspath");
+		String projectPath = PropertiesUtil.getValue("system.properties", "projectPath");
+		String freeMarkerFtlpath = PropertiesUtil.getValue("system.properties", "freeMarkerFtlpath");
+		
+		data.put("indexpath", indexpath);
+		data.put("imgpath", imgpath);
+		data.put("csspath", csspath);
+		data.put("jspath", jspath);
+		data.put("courseList", courseList);
+		data.put("peoplePartList", peoplePartList);
+		data.put("peoplePart", peoplePart);
+		
+		// 得到ftl模版
+		Template tmp = FreeMarkerUtil.getTemplate(freeMarkerFtlpath,"front/template-two-navigation-peoplePart.ftl");
+		// 得到生成对象
+		Writer writer = FreeMarkerUtil.getWriter(projectPath+"/"+peoplePart.getNameSpace()+".html");	
+		try {
+			// 生成网页
+			tmp.process(data, writer);
+			// 清空缓存
+			writer.flush();
+			writer.close();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	
+	/**
+	 * @desctiption 创建课程类型导航页
+	 * @param courseList : 课程列表
+	 * @param courseTypeList : 课程类型列表
+	 * @param courseType : 当前课程类型
+	 * @author zhuziming
+	 * @time 2018年8月7日上午10:43:28
+	 */
+	public static boolean createCourseTypeHTML(List<Course> courseList, 
+			List<CourseType> courseTypeList,CourseType courseType){
+		
+		// 准备数据
+		Map<String ,Object> data = new HashMap<String, Object>();
+		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
+		String imgpath = PropertiesUtil.getValue("system.properties", "imgpath");
+		String csspath = PropertiesUtil.getValue("system.properties", "csspath");
+		String jspath = PropertiesUtil.getValue("system.properties", "jspath");
+		String projectPath = PropertiesUtil.getValue("system.properties", "projectPath");
+		String freeMarkerFtlpath = PropertiesUtil.getValue("system.properties", "freeMarkerFtlpath");
+		
+		data.put("indexpath", indexpath);
+		data.put("imgpath", imgpath);
+		data.put("csspath", csspath);
+		data.put("jspath", jspath);
+		data.put("courseList", courseList);
+		data.put("courseTypeList", courseTypeList);
+		data.put("courseType", courseType);
+		
+		// 得到ftl模版
+		Template tmp = FreeMarkerUtil.getTemplate(freeMarkerFtlpath,"front/template-two-navigation-courseType.ftl");
+		// 得到生成对象
+		Writer writer = FreeMarkerUtil.getWriter(projectPath+"/"+courseType.getNameSpace()+".html");	
+		try {
+			// 生成网页
+			tmp.process(data, writer);
+			// 清空缓存
+			writer.flush();
+			writer.close();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	/**
+	 * @desctiption 创建首页
+	 * @author zhuziming
+	 * @param maxClick: 最大点击量
+	 * @param newTime : 最新时间
+	 * @time 2018年8月7日下午2:56:25
+	 */
+	public static boolean createIndexHTML(List<Course> maxClickList,List<Course> newTimeList){
+		
+		// 准备数据
+		Map<String ,Object> data = new HashMap<String, Object>();
+		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
+		String imgpath = PropertiesUtil.getValue("system.properties", "imgpath");
+		String csspath = PropertiesUtil.getValue("system.properties", "csspath");
+		String jspath = PropertiesUtil.getValue("system.properties", "jspath");
+		String projectPath = PropertiesUtil.getValue("system.properties", "projectPath");
+		String freeMarkerFtlpath = PropertiesUtil.getValue("system.properties", "freeMarkerFtlpath");
+		
+		data.put("indexpath", indexpath);
+		data.put("imgpath", imgpath);
+		data.put("csspath", csspath);
+		data.put("jspath", jspath);
+		data.put("maxClickList", maxClickList);
+		data.put("newTimeList", newTimeList);
+		
+		// 得到ftl模版
+		Template tmp = FreeMarkerUtil.getTemplate(freeMarkerFtlpath,"front/template-index.ftl");
+		// 得到生成对象
+		Writer writer = FreeMarkerUtil.getWriter(projectPath+"/index.html");	
+		try {
+			// 生成网页
+			tmp.process(data, writer);
+			// 清空缓存
+			writer.flush();
+			writer.close();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	
 	public static void main(String[] args) {
 		String freeMarkerFtlpath = PropertiesUtil.getValue("system.properties", "freeMarkerFtlpath");
 		// 准备数据

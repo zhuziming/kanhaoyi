@@ -15,4 +15,5 @@ public interface IVideoDao {
 	public List<Video> getListByAccountIdAndGroupId(Map<String, String> map) ;
 	public List<Video> getListByAccountId(Map<String, Object> map);
 	public Integer getListCountByAccountId(Integer accountID);
+	public Video getOneByID(Integer ID);
 }

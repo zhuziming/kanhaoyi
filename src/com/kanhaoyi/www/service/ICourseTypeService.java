@@ -2,6 +2,7 @@ package com.kanhaoyi.www.service;
 
 import java.util.List;
 
+import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.CourseType;
 
 public interface ICourseTypeService {
@@ -21,5 +22,5 @@ public interface ICourseTypeService {
 	 * @return
 	 */
 	public CourseType getOneByID(Integer id);
-	
+
 }

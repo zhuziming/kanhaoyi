@@ -34,4 +34,6 @@ public interface IVideoService {
 	 * @return
 	 */
 	public Integer getListCountByAccountId(Integer accountID);
+	
+	public Video getOneByID(Integer ID);
 }

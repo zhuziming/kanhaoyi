@@ -28,13 +28,13 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
-              <li class="nav-item bg-dark">
-                <a class="nav-link text-light" href="${indexpath}/manage/index.action">
+              <li class="nav-item">
+                <a class="nav-link" href="${indexpath}/manage/index.action">
                  	 首页
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${indexpath}/manage/systemList.action">
+              <li class="nav-item bg-dark">
+                <a class="nav-link text-light" href="${indexpath}/manage/systemList.action">
                   	系统页列表
                 </a>
               </li>
@@ -49,7 +49,6 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
          	<form>
-         		
 				<nav class=" float-right" aria-label="Page navigation example">
 				  <ul class="pagination">
 				    <li class="page-item"><a class="page-link" href="#">首页</a></li>
@@ -61,28 +60,42 @@
 				</nav>
 				
          	</form>
-
+         	
          	<div class="table-responsive">
 	            <table class="table table-striped table-sm">
 	              <thead>
 	                <tr>
-	                  <th>id</th>
+	                  <th>级别</th>
 	                  <th>名称</th>
-	                  <th>作者</th>
-	                  <th>科室</th>
-	                  <th>点击量</th>
 	                  <th>操作</th>
 	                </tr>
 	              </thead>
 	              <tbody>
 	                <tr>
-	                  <td>Lorem</td>
-	                  <td>Lorem</td>
-	                  <td>ipsum</td>
-	                  <td>dolor</td>
-	                  <td>ipsum</td>
-	                  <td>生成页面</td>
+	                  <td>一级</td>
+	                  <td>首页</td>
+	                  <td>
+	                  	<button type="button" onclick="createIndex()" class="btn btn-info btn-sm">生成页面</button>
+	                  </td>
 	                </tr>
+	                <#list courseTypeList as courseType>
+		                <tr>
+		                  <td>二级</td>
+		                  <td>${courseType.name}</td>
+		                  <td >
+		                  	<button type="button" onclick="createCourseTypeNav(${courseType.id})" class="btn btn-info btn-sm">生成页面</button>
+		                  </td>
+		                </tr>
+	                </#list>
+					<#list peoplePartList as peoplePart>
+		                <tr>
+		                  <td>二级</td>
+		                  <td>${peoplePart.partName}</td>
+		                  <td >
+		                  	<button type="button" onclick="createPeoplePartNav(${peoplePart.id})" class="btn btn-info btn-sm">生成页面</button>
+		                  </td>
+		                </tr>
+	                </#list>
 	              </tbody>
 	            </table>
 	          </div>
@@ -91,3 +104,47 @@
     </div>
   </body>
 </html>
+<script>
+
+	/* 创建人体部位导航
+	   peoplePartID: 人体部位id
+	*/
+	function createPeoplePartNav(peoplePartID){
+		$.ajax({
+			type: "POST",
+			url: "${indexpath}/manage/createPeoplePartNav.action",
+			data:{peoplePartID:peoplePartID},
+			success: function(msg){
+				var info = eval("("+msg+")");
+				alert(info.msg);
+			}
+		});
+	}
+
+	/* 创建课程类型导航 
+	   courseTypeID: 课程类型id
+	 */
+	function createCourseTypeNav(courseTypeID){
+		$.ajax({
+			type: "POST",
+			url: "${indexpath}/manage/createCourseTypeNav.action",
+			data:{courseTypeID:courseTypeID},
+			success: function(msg){
+				var info = eval("("+msg+")");
+				alert(info.msg);
+			}
+		});
+	}
+	/* 创建首页 */
+	function createIndex(){
+		$.ajax({
+			type: "POST",
+			url: "${indexpath}/manage/createIndex.action",
+			data:{},
+			success: function(msg){
+				var info = eval("("+msg+")");
+				alert(info.msg);
+			}
+		});
+	}
+</script>

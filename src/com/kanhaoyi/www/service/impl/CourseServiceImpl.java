@@ -1,5 +1,6 @@
 package com.kanhaoyi.www.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +12,12 @@ import com.kanhaoyi.www.dao.ICourseDao;
 import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.CourseDetail;
 import com.kanhaoyi.www.model.CourseType;
+import com.kanhaoyi.www.model.Video;
 import com.kanhaoyi.www.service.ICourseCommentService;
 import com.kanhaoyi.www.service.ICourseDetailService;
 import com.kanhaoyi.www.service.ICourseService;
 import com.kanhaoyi.www.service.ICourseTypeService;
+import com.kanhaoyi.www.service.IVideoService;
 import com.kanhaoyi.www.util.FreeMarkerUtil;
 
 @Service("courseServiceImpl")
@@ -28,6 +31,8 @@ public class CourseServiceImpl implements ICourseService {
 	private ICourseDetailService courseDetailService;
 	@Resource
 	private ICourseCommentService courseCommentService;
+	@Resource
+	private IVideoService viceoService;
 	
 	@Override
 	public int insert(Course course) {
@@ -69,9 +74,11 @@ public class CourseServiceImpl implements ICourseService {
 			StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
 			
 			for(CourseDetail courseDetail_2 : courseDetailList_){
+				Video video_ = viceoService.getOneByID(courseDetail_2.getVideoID());
+				
 				// 生成网页
 				FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
-						courseTypeList_, courseType_, course_, list_, GoodPraise_);
+						courseTypeList_, courseType_, course_, list_, GoodPraise_,video_);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -79,6 +86,28 @@ public class CourseServiceImpl implements ICourseService {
 		}
 		
 		return true;
+	}
+
+	@Override
+	public List<Course> getListByCourseTypeID(Integer courseTypeID,String link, String sort,Integer num) {
+		Map<String ,Object> map = new HashMap<String, Object>();
+		map.put("courseTypeID", courseTypeID);
+		map.put("link", link);
+		map.put("sort", sort);
+		map.put("num", num);
+		List<Course> list = courseDao.getListByCourseTypeID(map);
+		return list;
+	}
+
+	@Override
+	public List<Course> getListByLinkSort(String link, String sort, Integer begin, Integer end) {
+		Map<String ,Object> map = new HashMap<String, Object>();
+		map.put("link", link);
+		map.put("sort", sort);
+		map.put("begin", begin);
+		map.put("end", end);
+		List<Course> list = courseDao.getListByLinkSort(map);
+		return list;
 	}
 
 

@@ -1,11 +1,8 @@
 package com.kanhaoyi.www.controller.teacher;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.net.URLEncoder;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -45,7 +42,6 @@ import com.kanhaoyi.www.service.IVideoGroupService;
 import com.kanhaoyi.www.service.IVideoService;
 import com.kanhaoyi.www.util.DateUtil;
 import com.kanhaoyi.www.util.FileUtil;
-import com.kanhaoyi.www.util.FreeMarkerUtil;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
 import com.kanhaoyi.www.util.PagingUtil;
@@ -125,7 +121,6 @@ public class TeacherController {
 		try{
 			User user = userService.getSessionUser(request.getSession());
 			String imgSavePath = PropertiesUtil.getValue("system.properties", "courseImg");
-			String projectPath = PropertiesUtil.getValue("system.properties", "projectPath");
 			// 文件后缀
 			String imgFormat = courseImg.getOriginalFilename().substring(courseImg.getOriginalFilename().lastIndexOf("."));
 			if(!".jpg".equalsIgnoreCase(imgFormat) && !".png".equalsIgnoreCase(imgFormat)){
@@ -136,7 +131,7 @@ public class TeacherController {
 			// 重新生成文件名
 			String imgDataName = UUID.randomUUID().toString();
 			// 创建
-			FileUtil.createFile(imgSavePath, user.getId()+"", imgDataName, imgFormat, courseImg);
+			FileUtil.createImageFile(imgSavePath, user.getId()+"", imgDataName, imgFormat, courseImg);
 
 			// 1.生成课程
 			String courseTitle = request.getParameter("courseTitle"); // 课程标题
@@ -147,7 +142,7 @@ public class TeacherController {
 			course.setCourseName(courseTitle);
 			course.setCourseTypeID(Integer.valueOf(courseTypeID));
 			course.setUserID(user.getId());
-			course.setPicturePath(imgDataName+imgFormat);
+			course.setPicturePath("/"+user.getId()+"/"+imgDataName+imgFormat);
 			course.setClickVolume(0);
 			course.setTime(new Timestamp(new Date().getTime()));
 			courseService.insert(course);
@@ -194,7 +189,7 @@ public class TeacherController {
 					courseDetail.setCourseDetailName(courseDetailName);
 					courseDetail.setCreateTime(new Timestamp(new Date().getTime()));
 					courseDetail.setSequence(sequence);
-					courseDetail.setVideoID(videoName);
+					courseDetail.setVideoID(Integer.valueOf(videoName));
 					courseDetail.setClickVolume(0);
 					courseDetailService.update(courseDetail); 
 				}
@@ -214,6 +209,7 @@ public class TeacherController {
 				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("3", "异常了")+"')</script>";
 		}
 	}

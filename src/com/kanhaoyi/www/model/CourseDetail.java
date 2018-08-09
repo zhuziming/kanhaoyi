@@ -13,7 +13,7 @@ public class CourseDetail {
 	private Integer courseID; // 课程id
 	private String courseDetailName; // 这一集的名字
 	private String coursePath; // 页面地址
-	private String videoID; // mp4文件 id
+	private Integer videoID; // mp4文件 id
 	private Integer sequence; // 课程展示顺序
 	private Integer clickVolume; // 点击量
 	private Timestamp createTime; // 创建时间
@@ -42,10 +42,10 @@ public class CourseDetail {
 	public void setCoursePath(String coursePath) {
 		this.coursePath = coursePath;
 	}
-	public String getVideoID() {
+	public Integer getVideoID() {
 		return videoID;
 	}
-	public void setVideoID(String videoID) {
+	public void setVideoID(Integer videoID) {
 		this.videoID = videoID;
 	}
 	public Integer getSequence() {

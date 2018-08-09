@@ -28,8 +28,8 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
-              <li class="nav-item bg-dark">
-                <a class="nav-link text-light" href="${indexpath}/manage/index.action">
+              <li class="nav-item">
+                <a class="nav-link" href="${indexpath}/manage/index.action">
                  	 首页
                 </a>
               </li>
@@ -38,8 +38,8 @@
                   	系统页列表
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${indexpath}/manage/courseList.action">
+              <li class="nav-item bg-dark">
+                <a class="nav-link text-light" href="${indexpath}/manage/courseList.action">
                   	课程列表
                 </a>
               </li>
@@ -67,7 +67,7 @@
 	              <thead>
 	                <tr>
 	                  <th>id</th>
-	                  <th>名称</th>
+	                  <th>课程名字</th>
 	                  <th>作者</th>
 	                  <th>科室</th>
 	                  <th>点击量</th>
@@ -75,14 +75,21 @@
 	                </tr>
 	              </thead>
 	              <tbody>
-	                <tr>
-	                  <td>Lorem</td>
-	                  <td>Lorem</td>
-	                  <td>ipsum</td>
-	                  <td>dolor</td>
-	                  <td>ipsum</td>
-	                  <td>生成页面</td>
-	                </tr>
+	              	<#if (courseList?size=0)>
+	              		暂时还没有课程
+	              	<#else>
+	              		<#list courseList as course>
+			                <tr>
+			                  <td>${course.id}</td>
+			                  <td>${course.courseName}</td>
+			                  <td>${course.userID}</td>
+			                  <td>${course.courseTypeID}</td>
+			                  <td>${course.clickVolume}</td>
+			                  <td>生成页面</td>
+			                </tr>
+		                </#list>
+					</#if>
+	              	
 	              </tbody>
 	            </table>
 	          </div>

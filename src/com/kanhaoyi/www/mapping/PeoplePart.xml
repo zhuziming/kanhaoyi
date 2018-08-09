@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.IPeoplePartDao">
+    
+    <select id="getAll" resultType="com.kanhaoyi.www.model.PeoplePart">
+    	SELECT id, part_name partName, namespace nameSpace FROM people_part 
+    </select>
+    
+    <select id="getOneByID" parameterType="int" resultType="com.kanhaoyi.www.model.PeoplePart">
+    	SELECT id, part_name partName, namespace nameSpace FROM people_part WHERE id=#{peoplePartID}
+    </select>
+    
+</mapper>
