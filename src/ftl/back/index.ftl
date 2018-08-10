@@ -24,7 +24,7 @@
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				  <a id="people" href="${indexpath}/back/index.action" class="btn btn-link text-white">
-				  	${nickname}
+				  	${user.nickname}
 				  </a>
 				</div>
         	</div>
@@ -35,10 +35,10 @@
 	  		<div class="row pt-5">
 	  			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 		 			<div class="media">
-					  <img width="150px;" src="${imgpath}/${picture}" class="figure-img img-fluid rounded-circle mr-3">
+					  <img width="150px;" src="${imgpath}/${user.picture}" class="figure-img img-fluid rounded-circle mr-3">
 					  <div class="media-body">
-					    <h5 class="mt-0">${account}</h5>
-					   	<span> ${nickname}</span>
+					    <h5 class="mt-0">${user.account}</h5>
+					   	<span> ${user.nickname}</span>
 					  </div>
 					</div>
 				</div>
@@ -74,15 +74,16 @@
 		  </div>
 		</nav>
 		
-		<div class="container mt-2 mb-2">
-			<a class="btn btn-success" href="${indexpath}/teacher/uploadVideoPage.action" role="button">上传视频</a>
-			<a class="btn btn-success" href="${indexpath}/teacher/myVideoPage.action" role="button">我的视频</a>
-			<a class="btn btn-success" href="${indexpath}/teacher/publishCoursePage.action" role="button">发布课程</a>
-			<a class="btn btn-success" href="${indexpath}/teacher/myCoursePage.action" role="button">我的课程</a>
-		</div>
-		
+		<#if (teacher!"")=="teacher">
+			<div class="container mt-2 mb-2">
+				<a class="btn btn-success" href="${indexpath}/teacher/uploadVideoPage.action" role="button">上传视频</a>
+				<a class="btn btn-success" href="${indexpath}/teacher/myVideoPage.action" role="button">我的视频</a>
+				<a class="btn btn-success" href="${indexpath}/teacher/publishCoursePage.action" role="button">发布课程</a>
+				<a class="btn btn-success" href="${indexpath}/teacher/myCoursePage.action" role="button">我的课程</a>
+			</div>
+		</#if>
 		<div class="jumbotron">
-		  <h1 class="display-4">Hello, ${nickname}</h1>
+		  <h1 class="display-4">Hello, ${user.nickname}</h1>
 		  <p class="lead"></p>
 		  <hr class="my-4">
 		  <p>

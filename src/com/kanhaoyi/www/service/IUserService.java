@@ -5,15 +5,11 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import com.kanhaoyi.www.model.User;
+import com.kanhaoyi.www.service.father.IServiceFather;
 
 
 
-public interface IUserService {
-	
-	public User selectById(int id);
-	
-	public int insert(User userModel);
-	
+public interface IUserService extends IServiceFather<User> {
 
 	/**
 	 * @desctiption 用户是否存在

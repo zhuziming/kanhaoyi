@@ -2,13 +2,11 @@ package com.kanhaoyi.www.dao;
 
 import java.util.Set;
 
+import com.kanhaoyi.www.dao.father.IDaoFather;
 import com.kanhaoyi.www.model.User;
 
-public interface IUserDao {
+public interface IUserDao extends IDaoFather<User> {
 
-	public User selectById(int id);
-	
-	public int insert(User userModel);
 	
 	public int selectAccountCount(String account);
 	

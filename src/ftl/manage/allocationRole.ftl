@@ -28,8 +28,8 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
-              <li class="nav-item bg-dark">
-                <a class="nav-link text-light" href="${indexpath}/manage/indexPage.action">
+              <li class="nav-item">
+                <a class="nav-link" href="${indexpath}/manage/indexPage.action">
                  	 首页
                 </a>
               </li>
@@ -46,6 +46,12 @@
               <li class="nav-item">
                 <a class="nav-link" href="${indexpath}/manage/userListPage.action">
                   	用户列表
+                </a>
+              </li>
+              <li class="nav-item bg-dark">
+                <a class="nav-link text-light">
+                  	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  	 分配角色
                 </a>
               </li>
               <li class="nav-item">
@@ -77,27 +83,59 @@
 	              <thead>
 	                <tr>
 	                  <th>id</th>
-	                  <th>名称</th>
-	                  <th>作者</th>
-	                  <th>科室</th>
-	                  <th>点击量</th>
+	                  <th>账号</th>
+	                  <th>昵称</th>
+	                  <th>手机号</th>
+	                  <th>性别</th>
 	                  <th>操作</th>
 	                </tr>
 	              </thead>
 	              <tbody>
 	                <tr>
-	                  <td>Lorem</td>
-	                  <td>Lorem</td>
-	                  <td>ipsum</td>
-	                  <td>dolor</td>
-	                  <td>ipsum</td>
-	                  <td>生成页面</td>
+	                  <td>${user.id}</td>
+	                  <td>${user.account}</td>
+	                  <td>${user.nickname}</td>
+	                  <td>${user.phone}</td>
+	                  <td>${user.sex}</td>
+	                  <td>
+	                  	<button type="button" onclick="updateRole()" class="btn btn-info btn-sm">
+	                  		赋予角色
+	                  	</button>
+	                  </td>
 	                </tr>
 	              </tbody>
 	            </table>
 	          </div>
         </main>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        	<#list roleList as role>
+		        <div style="width: 20%; display: inline-block; border: 1px solid #eee;padding: 5px">
+					<label class="checkbox">
+				      <input ${(role.flag=='1')?string("checked='checked'","")} name="roles" type="checkbox" value="${role.id}"> ${role.title}
+				    </label>
+				</div>
+	        </#list>
+        </main>
       </div>
     </div>
   </body>
 </html>
+
+<script>
+	/* 更新用户角色 */
+	function updateRole(){
+		var checkID = []; // 定义一个空数组
+		$("input[name='roles']:checked").each(function(i){ // 把所有被选中的复选框的值存入数组
+        	checkID[i] =$(this).val();
+    	});
+		$.ajax({
+			type: "POST",
+			url: "${indexpath}/manage/updateRole.action",
+			data:{userID:${user.id},roles:checkID},
+			success: function(data){
+				var info = eval("("+data+")");
+				alert(info.msg);
+			}
+		});
+	}
+</script>

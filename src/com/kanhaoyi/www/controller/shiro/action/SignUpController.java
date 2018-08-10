@@ -90,6 +90,7 @@ public class SignUpController {
 			return "front/sign_up";
 		}
 		user.setPassword(MyPasswordEncrypt.encryptPassword(user.getPassword()));
+		user.setInfoNum(0);
 		user.setTime(new Timestamp(System.currentTimeMillis()));
 		userService.insert(user);
 		// 注册完成后，直接登录

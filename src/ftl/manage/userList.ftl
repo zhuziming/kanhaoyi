@@ -28,8 +28,8 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
-              <li class="nav-item bg-dark">
-                <a class="nav-link text-light" href="${indexpath}/manage/indexPage.action">
+              <li class="nav-item">
+                <a class="nav-link" href="${indexpath}/manage/indexPage.action">
                  	 首页
                 </a>
               </li>
@@ -43,8 +43,8 @@
                   	课程列表
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${indexpath}/manage/userListPage.action">
+              <li class="nav-item bg-dark">
+                <a class="nav-link text-light" href="${indexpath}/manage/userListPage.action">
                   	用户列表
                 </a>
               </li>
@@ -77,22 +77,28 @@
 	              <thead>
 	                <tr>
 	                  <th>id</th>
-	                  <th>名称</th>
-	                  <th>作者</th>
-	                  <th>科室</th>
-	                  <th>点击量</th>
+	                  <th>账号</th>
+	                  <th>昵称</th>
+	                  <th>手机号</th>
+	                  <th>性别</th>
 	                  <th>操作</th>
 	                </tr>
 	              </thead>
 	              <tbody>
-	                <tr>
-	                  <td>Lorem</td>
-	                  <td>Lorem</td>
-	                  <td>ipsum</td>
-	                  <td>dolor</td>
-	                  <td>ipsum</td>
-	                  <td>生成页面</td>
-	                </tr>
+	              	<#list userList as user>
+	              		<tr>
+		                  <td>${user.id}</td>
+		                  <td>${user.account}</td>
+		                  <td>${user.nickname}</td>
+		                  <td>${user.phone}</td>
+		                  <td>${user.sex}</td>
+		                  <td>
+		                  	<a href="${indexpath}/manage/allocationRolePage.action?userid=${user.id}" class="btn btn-info btn-sm" role="button">
+		                  		分配角色
+		                  	</a>
+		                  </td>
+		                </tr>
+					</#list>
 	              </tbody>
 	            </table>
 	          </div>

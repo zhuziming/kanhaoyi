@@ -31,11 +31,10 @@ public class UserRealm extends AuthorizingRealm {
 	IUserService userService;
 	
 	/**
-	 * 授权
+	 * 用户角色与权限
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		 System.out.println("用户角色与权限****");
 		String username = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo auth = new SimpleAuthorizationInfo();
 		try{
@@ -55,11 +54,10 @@ public class UserRealm extends AuthorizingRealm {
 	
 	
 	/**
-	 * 验证先执行
+	 * 验证先执行用户登录认证
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		System.out.println("用户登录认证****");
 		// 登录认证 得到用户名
 		String account = (String) token.getPrincipal();  
 		// 取得用户完整信息 自定义业务实现

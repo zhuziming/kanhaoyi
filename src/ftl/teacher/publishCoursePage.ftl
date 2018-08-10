@@ -74,7 +74,7 @@
 			    <div class="col-md-6 mb-3">
 			    	<div class="form-row">
 			    		<div class="col-md-6">
-			    			<label for="validationTooltip01">课程图片 <code>只支持jpg png格式</code></label>
+			    			<label for="validationTooltip01">课程图片 <code>只支持jpg png格式 190x100</code></label>
 						      	<div class="input-group">
 							        <input type="file" name="courseImg" onchange="$('#outline').html(this.value)" class="custom-file-input" id="validatedCustomFile" required>
 									<label class="custom-file-label" for="validatedCustomFile" id="outline">点击选择文件</label>

@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -160,6 +161,29 @@ public class SayController {
 		InitUtil.iniSystem(model);
 		return "front/index";
 	}
-	
+	/**
+	 * @desctiption 得到昵称，消息数
+	 * @author zhuziming
+	 * @time 2018年4月28日上午10:18:22
+	 */
+	@RequestMapping("/getusername.action")
+	@ResponseBody
+	public String getUsername(HttpSession session){
+		//ajax返回格式{success:'',msg:''}
+		//success取值[1:成功][2:失败][3:异常]
+		//		msg只有在success为2时，才有值
+		
+		Object account = SecurityUtils.getSubject().getPrincipal();
+		if(account==null){
+			return JSONUtil.returnJson("2", "");
+		}else{
+			String infoNum = userService.getSessionInfoNum(session); // 消息数
+			String nickName= userService.getSessionNickname(session); // 昵称
+			JSONObject jo = new JSONObject();
+			jo.put("nickName", nickName);
+			jo.put("infoNum", infoNum);
+			return JSONUtil.returnJson("1", jo.toString());
+		}
+	}
 	
 }

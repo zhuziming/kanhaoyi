@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.IUserRoleDao">
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.UserRole">
+    	INSERT INTO user_role(id,uid,rid) VALUE (#{id},#{uid},#{rid})
+    </insert>
+    
+    <delete id="deleteByID"></delete>
+    
+    <delete id="deleteByUserID" parameterType="int">
+    	DELETE FROM user_role WHERE uid=#{userID}
+    </delete>
+    
+    <update id="update"></update>
+    
+    <select id="selectByID"></select>
+    
+    <select id="getListByLinkSort" parameterType="map">
+    	SELECT * FROM course ORDER BY ${link} ${sort} LIMIT ${begin},${end}
+    </select>
+    
+</mapper>

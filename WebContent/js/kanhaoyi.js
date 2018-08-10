@@ -5,7 +5,7 @@ var webname = "http://localhost:8080/kanhaoyi";
 function getusernmae(){
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:8080/kanhaoyi/getusername.action",
+		url: "http://localhost:8080/kanhaoyi/front/getusername.action",
 		success: function(msg){
 			var info = eval("("+msg+")");
 			if(info.success==1){

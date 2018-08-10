@@ -1,6 +1,7 @@
 package com.kanhaoyi.www.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
 
 import com.kanhaoyi.www.dao.IUserDao;
+import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.User;
 import com.kanhaoyi.www.service.IUserService;
 
@@ -21,8 +23,8 @@ public class UserServiceImpl implements IUserService {
 	private IUserDao userDao;
 	
 	@Override
-	public User selectById(int id) {
-		return userDao.selectById(id);
+	public User selectByID(int id) {
+		return userDao.selectByID(id);
 	}
 
 	@Override
@@ -100,6 +102,29 @@ public class UserServiceImpl implements IUserService {
 			}
 		}
 		return (User) session.getAttribute("user");
+	}
+
+	@Override
+	public int deleteByID(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(User t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<User> getListByLinkSort(String link, String sort, Integer begin, Integer end) {
+		Map<String ,Object> map = new HashMap<String, Object>();
+		map.put("link", link);
+		map.put("sort", sort);
+		map.put("begin", begin);
+		map.put("end", end);
+		List<User> list = userDao.getListByLinkSort(map);
+		return list;
 	}
 
 

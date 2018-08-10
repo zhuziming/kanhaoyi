@@ -1,9 +1,13 @@
 package com.kanhaoyi.www.controller.back;
 
+import java.util.Map;
+import java.util.Set;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.session.HttpServletSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,22 +37,16 @@ public class PersonalIndex {
 	
 	@RequestMapping("/index.action")
 	public String index(Model model,HttpSession session){
-		String account = SecurityUtils.getSubject().getPrincipal().toString();
+		User user = userService.getSessionUser(session);
+		
+		Subject subject = SecurityUtils.getSubject();
+		// 如果是老师，在页面中显示老师拥有的菜单
+		if(subject.hasRole("teacher")){
+			model.addAttribute("teacher","teacher");
+		}
+		
 		Essay essay = essayService.getRandom();
-		String picture =null;
-		try {
-			User user = userService.getUserByAccount(account);
-			picture = user.getPicture(); // 照片
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(picture==null){
-			picture="default.jpg";
-		}
-		model.addAttribute("picture",picture);
-		model.addAttribute("account",account); // 账户
-		model.addAttribute("nickname",userService.getSessionNickname(session));  // 昵称
+		model.addAttribute("user",user);  
 		if(essay==null){
 			model.addAttribute("essay","这里空空如也");
 		}else{

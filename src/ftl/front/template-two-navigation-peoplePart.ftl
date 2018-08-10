@@ -92,3 +92,4 @@
 	
   </body>
 </html>
+<script src="${jspath}/kanhaoyi.js"></script>

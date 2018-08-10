@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.IRoleDao">
+    
+    <insert id="insert"></insert>
+    
+    <delete id="deleteByID"></delete>
+    
+    <update id="update"></update>
+    
+    <select id="selectByID"></select>
+    
+    <select id="getListByLinkSort" parameterType="map">
+    	SELECT * FROM role ORDER BY ${link} ${sort} LIMIT ${begin},${end}
+    </select>
+    
+    <select id="getAll" resultType="com.kanhaoyi.www.model.Role">
+    	SELECT * FROM role
+    </select>
+    
+</mapper>
