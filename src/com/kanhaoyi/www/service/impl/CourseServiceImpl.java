@@ -25,14 +25,7 @@ public class CourseServiceImpl implements ICourseService {
 
 	@Resource
 	private ICourseDao courseDao;
-	@Resource
-	private ICourseTypeService courseTypeService;
-	@Resource
-	private ICourseDetailService courseDetailService;
-	@Resource
-	private ICourseCommentService courseCommentService;
-	@Resource
-	private IVideoService viceoService;
+
 	
 	@Override
 	public int insert(Course course) {
@@ -55,46 +48,36 @@ public class CourseServiceImpl implements ICourseService {
 	}
 
 	@Override
-	public boolean createCourseHtml(Course course) {
-		try{
-			// 生成html页面
-			// 准备数据 课程
-			Course course_ = this.getOneByID(course.getId());
-			// 课程类型列表，网页中导航部分用
-			List<CourseType> courseTypeList_ = courseTypeService.getAll();
-			// 当前课程类型，面包屑导航用
-			CourseType courseType_ = courseTypeService.getOneByID(course.getCourseTypeID());
-			// 课程详情列表，右则课程列表显示用
-			List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course.getId(), "ASC");
-			// 当前课程，为了对右则课程列表高亮显示
-			//CourseDetail courseDetail_ = courseDetailService.getOneById(courseDetail.getId());
-			// 得到最多的赞评论 5条
-			List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course.getId()), 5);
-			// 把赞评论转为html
-			StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
-			
-			for(CourseDetail courseDetail_2 : courseDetailList_){
-				Video video_ = viceoService.getOneByID(courseDetail_2.getVideoID());
-				
-				// 生成网页
-				FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
-						courseTypeList_, courseType_, course_, list_, GoodPraise_,video_);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			return false;
-		}
-		
-		return true;
+	public Integer getCountByUserID(Integer userID) {
+		return this.courseDao.getCountByUserID(userID);
 	}
-
+	
 	@Override
-	public List<Course> getListByCourseTypeID(Integer courseTypeID,String link, String sort,Integer num) {
+	public List<Map> getListByUserIDLeftCourseType(Integer userID,String link, String sort,Integer pageCount,Integer pageIndex) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userID", userID);
+		map.put("link", link);
+		map.put("sort", sort);
+		map.put("pageCount", pageCount);
+		map.put("pageIndex", pageIndex);
+		return this.courseDao.getListByUserIDLeftCourseType(map);
+	}
+	public List<Map> getListLeftCourseType(String link, String sort,Integer pageCount,Integer pageIndex) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("link", link);
+		map.put("sort", sort);
+		map.put("pageCount", pageCount);
+		map.put("pageIndex", pageIndex);
+		return this.courseDao.getListLeftCourseType(map);
+	}
+	
+	
+	@Override
+	public List<Course> getListByCourseTypeID(Integer courseTypeID,String link, String sort) {
 		Map<String ,Object> map = new HashMap<String, Object>();
 		map.put("courseTypeID", courseTypeID);
 		map.put("link", link);
 		map.put("sort", sort);
-		map.put("num", num);
 		List<Course> list = courseDao.getListByCourseTypeID(map);
 		return list;
 	}
@@ -110,6 +93,27 @@ public class CourseServiceImpl implements ICourseService {
 		return list;
 	}
 
+	@Override
+	public List<Course> getAll() {
+		return courseDao.getAll();
+	}
 
+	@Override
+	public Integer getCountAll() {
+		return courseDao.getCountAll();
+	}
 
+	@Override
+	public int deleteByID(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Course selectByID(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

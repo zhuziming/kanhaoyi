@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>看好医-外科</title>
+    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">

@@ -30,4 +30,6 @@ public interface IDaoFather<T> {
 	 */
 	public List<T> getListByLinkSort(Map<String, Object> map);
 	
+	public Integer getCountAll();
+	
 }

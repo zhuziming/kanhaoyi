@@ -73,6 +73,23 @@
 		<location>/unauthUrl.action</location>
 	</error-page>
 	
+	<!-- 错误页处理 -->
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/404.html</location>
+	</error-page>
 	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

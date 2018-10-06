@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.User;
+import com.kanhaoyi.www.model.UserRole;
+import com.kanhaoyi.www.service.IUserRoleService;
 import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.util.CodeUtil;
 import com.kanhaoyi.www.util.InitUtil;
@@ -43,6 +45,8 @@ public class SignUpController {
 	
 	@Resource
 	IUserService userService;
+	@Resource
+	IUserRoleService userRoleService;
 	
 	/**
 	 * @desctiption 注册页
@@ -92,7 +96,15 @@ public class SignUpController {
 		user.setPassword(MyPasswordEncrypt.encryptPassword(user.getPassword()));
 		user.setInfoNum(0);
 		user.setTime(new Timestamp(System.currentTimeMillis()));
+		user.setPicture("/userDefault.jpg");
 		userService.insert(user);
+		
+		UserRole ur = new UserRole(); // 为用户加上访问个人中心的权限
+		ur.setRid(1);
+		ur.setUid(user.getId());
+		userRoleService.insert(ur);
+		
+		model.addAttribute("user", user);
 		// 注册完成后，直接登录
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(account,password);

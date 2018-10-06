@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.ICoursePeopleDao">
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.CoursePeople" keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO course_people(id,course_id,people_part_id) VALUE(#{id},#{courseID},#{PeoplePartID})
+    </insert>
+    
+    <delete id="deleteByID"></delete>
+    
+    <update id="update"></update>
+    
+    <select id="selectByID"></select>
+    
+    <select id="getListByLinkSort" parameterType="map">
+    	SELECT * FROM course ORDER BY ${link} ${sort} LIMIT ${begin},${end}
+    </select>
+    
+    <select id="getCourseListByPeoplePartID" parameterType="int" resultType="com.kanhaoyi.www.model.Course">
+    	SELECT c.id,course_name AS courseName,c.course_type_id AS courseTypeID,c.user_id AS userID, 
+    		c.time,c.click_volume AS clickVolume,c.picture_path AS picturePath,c.course_path AS coursePath,c.quantity FROM course_people cp LEFT JOIN course c ON cp.course_id=c.id
+		WHERE cp.people_part_id=#{peoplePartID}
+    </select>
+    
+</mapper>

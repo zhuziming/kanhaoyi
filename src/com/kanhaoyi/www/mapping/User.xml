@@ -29,19 +29,23 @@
 			WHERE account=#{account}
     </select>
     
+    <select id="getCountAll" resultType="int">
+    	SELECT count(1) FROM user
+    </select>
+    
     <insert id="insert" parameterType="com.kanhaoyi.www.model.User" keyProperty="id" useGeneratedKeys="true">
     	INSERT INTO user
-    		(id,account,nickname,password,phone,email,sex,info_num,time)
+    		(id,account,nickname,password,phone,email,picture,sex,info_num,time)
 		VALUE(
 			#{id},#{account},#{nickname},#{password},
-			#{phone},#{email},#{sex},#{infoNum},#{time,jdbcType=TIMESTAMP}
+			#{phone},#{email},#{picture},#{sex},#{infoNum},#{time,jdbcType=TIMESTAMP}
 		)
     </insert>
     
     
     <select id="getListByLinkSort" parameterType="map" resultType="com.kanhaoyi.www.model.User">
     	SELECT id,account,nickname,password,phone,email,picture,sex,info_num AS infoNum,time 
-    	FROM user ORDER BY ${link} ${sort} LIMIT ${begin},${end}
+    	FROM user ORDER BY ${link} ${sort} LIMIT ${pageIndex*pageCount},${pageCount}
     </select>
     
 </mapper>

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>看好医</title>
+    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
     <meta http-equiv="keywords" content="看好医,医学讲解,医学视频">
 	<meta http-equiv="description" content="看好医从事疾病的讲解，让用户了解病情的发生发展过程，从而帮助疾病的预防">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">
@@ -20,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
         	<div class="container" >
 	            <div class="btn-group" role="group">
-				  <a class="btn btn-link text-dark">首页</a>
+				  <a href="${indexpath}" class="btn btn-link text-dark">首页</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				  <a id="people" href="${indexpath}/loginPage.action" class="btn btn-link text-dark">
@@ -93,29 +94,25 @@
 			    <ol class="carousel-indicators">
 			      <li data-target="#carouselExampleCaptions" data-slide-to="0" class=""></li>
 			      <li data-target="#carouselExampleCaptions" data-slide-to="1" class="active"></li>
-			      <li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
 			    </ol>
 			    <div class="carousel-inner">
 			      <div class="carousel-item">
-			        <img class="d-block w-100" data-src="" alt="第一张幻灯片[570x400]" src="${imgpath}/5.png" data-holder-rendered="true">
-			        <div class="carousel-caption d-none d-md-block">
-			          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">首张幻灯片标签</font></font></h5>
-			          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nulla vitae elit libero，pharetra augue mollis interdum。</font></font></p>
-			        </div>
+			      	<a href="${indexpath}">
+				        <img class="d-block w-100" data-src="" alt="痤疮的防治" src="${imgpath}/cover_cuochuang.jpg" data-holder-rendered="true">
+				        <div class="carousel-caption d-none d-md-block">
+				          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">痤疮的防治</font></font></h5>
+				          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">痤疮是如何发生的，痤疮瘢痕怎么清除</font></font></p>
+				        </div>
+			        </a>
 			      </div>
 			      <div class="carousel-item active">
-			        <img class="d-block w-100" data-src="" alt="第二张幻灯片[570x400]" src="${imgpath}/5.png" data-holder-rendered="true">
-			        <div class="carousel-caption d-none d-md-block">
-			          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第二张幻灯片标签</font></font></h5>
-			          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lorem ipsum dolor坐在amet，consectetur adipiscing elit。</font></font></p>
-			        </div>
-			      </div>
-			      <div class="carousel-item">
-			        <img class="d-block w-100" data-src="" alt="第三张幻灯片[570x400]" src="${imgpath}/5.png" data-holder-rendered="true">
-			        <div class="carousel-caption d-none d-md-block">
-			          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第三张幻灯片标签</font></font></h5>
-			          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Praesent commodo cursus magna，vel scelerisque nisl consectetur。</font></font></p>
-			        </div>
+			        <a href="${indexpath}">
+				        <img class="d-block w-100" data-src="" alt="青光眼的防治" src="${imgpath}/cover_qingguangyan.jpg" data-holder-rendered="true">
+				        <div class="carousel-caption d-none d-md-block">
+				          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">青光眼的防治</font></font></h5>
+				          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">青光眼的易感人群，如何防治</font></font></p>
+				        </div>
+				    </a>
 			      </div>
 			    </div>
 			    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
@@ -225,8 +222,8 @@
 		  	<#list maxClickList as course>
 			    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
 			    	<a href="${indexpath}${course.coursePath}">
-			    		<img width="100%;" src="${imgpath}${course.picturePath}"></img>
-			      		<p style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${course.courseName}</p>
+			    		<img width="100%;" src="${imgpath}/courseImg${course.picturePath}"></img>
+			      		<p class="k-course-sort">${course.courseName}</p>
 			    	</a>
 			    </div>
 		    </#list>
@@ -243,8 +240,8 @@
 		  	<#list newTimeList as course>
 			    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
 			    	<a href="${indexpath}${course.coursePath}">
-			    		<img width="100%;" src="${imgpath}${course.picturePath}"></img>
-			      		<p style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${course.courseName}</p>
+			    		<img width="100%;" src="${imgpath}/courseImg${course.picturePath}"></img>
+			      		<p class="k-course-sort">${course.courseName}</p>
 			    	</a>
 			    </div>
 		    </#list>

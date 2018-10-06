@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>看好医后台</title>
+    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
     <link href="${csspath}/boots/bootstrap.min.css" rel="stylesheet">
     <link href="${csspath}/dashboard.css" rel="stylesheet" >
     <script src="${jspath}/jquery.min.js"></script>
@@ -59,17 +60,9 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
          	<form>
-         		
-				<nav class=" float-right" aria-label="Page navigation example">
-				  <ul class="pagination">
-				    <li class="page-item"><a class="page-link" href="#">首页</a></li>
-				    <li class="page-item"><a class="page-link" href="#">1</a></li>
-				    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-				    <li class="page-item"><a class="page-link" href="#">3</a></li>
-				    <li class="page-item"><a class="page-link" href="#">末页</a></li>
-				  </ul>
-				</nav>
-				
+				<div id="padingHTML">
+					${padingHTML}
+				</div>
          	</form>
 
          	<div class="table-responsive">
@@ -81,21 +74,19 @@
 	                  <th>作者</th>
 	                  <th>科室</th>
 	                  <th>点击量</th>
-	                  <th>操作</th>
 	                </tr>
 	              </thead>
-	              <tbody>
-	              	<#if (courseList?size=0)>
+	              <tbody  id="contentList">
+	              	<#if (courseListMap?size=0)>
 	              		暂时还没有课程
 	              	<#else>
-	              		<#list courseList as course>
+	              		<#list courseListMap as courseMap>
 			                <tr>
-			                  <td>${course.id}</td>
-			                  <td>${course.courseName}</td>
-			                  <td>${course.userID}</td>
-			                  <td>${course.courseTypeID}</td>
-			                  <td>${course.clickVolume}</td>
-			                  <td>生成页面</td>
+			                  <td>${courseMap.id}</td>
+			                  <td>${courseMap.course_name}</td>
+			                  <td>${courseMap.account}</td>
+			                  <td>${courseMap.name}</td>
+			                  <td>${courseMap.click_volume}</td>
 			                </tr>
 		                </#list>
 					</#if>
@@ -108,3 +99,24 @@
     </div>
   </body>
 </html>
+<script>
+	function ajaxPaging(pageIndex){
+		$.ajax({
+		   	type: "POST",
+		   	url: "${indexpath}/manage/ajaxGetCourseList.action",
+		   	data: {"pageIndex":pageIndex},
+		   	success: function(msg){
+		   		var data = eval("("+msg+")");
+		   		if(data.success==1){
+		   			var result = eval("("+data.msg+")");
+		   			$("#contentList").html(result.dataList);
+		   			$("#padingHTML").html(result.padingHTML);
+		   		}else if(data.success==2){
+		   			alert(data.msg);
+		   		}else{
+		   			alert("网络异常，请稍后在试");
+		   		}
+		   	}
+		});
+	}
+</script>

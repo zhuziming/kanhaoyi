@@ -24,7 +24,7 @@
     	SELECT v.id, v.name, v.letter_name AS letterName, v.account_id AS accountID, 
 				v.remove, v.create_time AS createTime ,g.group_name AS groupName
 			FROM video v LEFT JOIN video_group g ON v.group_id=g.id
-    		WHERE account_id=#{accountID} 
+    		WHERE account_id=#{accountID} ORDER BY id DESC 
     	LIMIT 
     		${pageIndex*pageCount},${pageCount}
     </select>

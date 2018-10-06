@@ -54,4 +54,10 @@ public class UserRoleServiceImpl implements IUserRoleService {
 		return this.userRoleDao.deleteByUserID(userID);
 	}
 
+	@Override
+	public Integer getCountAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>看好医-${courseType.name}</title>
+    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">
@@ -19,7 +20,7 @@
         <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
         	<div class="container" >
 	            <div class="btn-group" role="group">
-				  <a class="btn btn-link text-dark">首页</a>
+				  <a href="${indexpath}" class="btn btn-link text-dark">首页</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				  <a id="people" href="${indexpath}/loginPage.action" class="btn btn-link text-dark">
@@ -46,7 +47,7 @@
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
-		  <a class="navbar-brand" href="#">分类</a>
+		  <a class="navbar-brand" href="${indexpath}">分类</a>
 		
 		  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -77,7 +78,7 @@
 				    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
 				    	<a href="${indexpath}${course.coursePath}">
 				    		<img width="100%;" src="${imgpath}/courseImg${course.picturePath}"></img>
-				      		<p style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${course.courseName}</p>
+				      		<p class="k-course-sort">${course.courseName}</p>
 				    	</a>
 				    </div>
 			    </#list>

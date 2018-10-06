@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <title>看好医</title>
+	    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
 	    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<link href="${csspath}/boots/bootstrap.min.css" rel="stylesheet" >
@@ -40,7 +41,10 @@
 		            
 		            <div class="mb-3">
 		              <label for="user">手机号</label>
-		              <input type="text" value="${(user.phone)!''}" class="form-control" name="phone" id="phone">
+		              <input type="text" value="${(user.phone)!''}" class="form-control" name="phone" id="phone" required>
+		              <div class="invalid-feedback">
+		               	手机号不能为空
+		              </div>
 		            </div>
 		            
 		            <div class="mb-3">
@@ -60,11 +64,14 @@
 		            
 		            <div class="mb-3">
 		                <label for="state">性别</label>
-		                <select class="custom-select d-block w-100" name="sex" id="sex">
+		                <select class="custom-select d-block w-100" name="sex" id="sex" required>
 		                  <option value="">--/--</option>
 		                  <option value="男">男</option>
 		                  <option value="女">女</option>
 		                </select>
+		                <div class="invalid-feedback">
+		               	性别不能为空
+		              	</div>
 		              </div>
 		            
 		            

@@ -117,14 +117,19 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<User> getListByLinkSort(String link, String sort, Integer begin, Integer end) {
+	public List<User> getListByLinkSort(String link, String sort, Integer pageCount,Integer pageIndex) {
 		Map<String ,Object> map = new HashMap<String, Object>();
 		map.put("link", link);
 		map.put("sort", sort);
-		map.put("begin", begin);
-		map.put("end", end);
+		map.put("pageCount", pageCount);
+		map.put("pageIndex", pageIndex);
 		List<User> list = userDao.getListByLinkSort(map);
 		return list;
+	}
+
+	@Override
+	public Integer getCountAll() {
+		return userDao.getCountAll();
 	}
 
 

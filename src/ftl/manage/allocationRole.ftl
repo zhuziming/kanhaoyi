@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>看好医后台</title>
+    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
     <link href="${csspath}/boots/bootstrap.min.css" rel="stylesheet">
     <link href="${csspath}/dashboard.css" rel="stylesheet" >
     <script src="${jspath}/jquery.min.js"></script>

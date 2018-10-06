@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,19 +31,24 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.CourseDetail;
+import com.kanhaoyi.www.model.CoursePeople;
 import com.kanhaoyi.www.model.CourseType;
+import com.kanhaoyi.www.model.PeoplePart;
 import com.kanhaoyi.www.model.User;
 import com.kanhaoyi.www.model.Video;
 import com.kanhaoyi.www.model.VideoGroup;
 import com.kanhaoyi.www.service.ICourseCommentService;
 import com.kanhaoyi.www.service.ICourseDetailService;
+import com.kanhaoyi.www.service.ICoursePeopleService;
 import com.kanhaoyi.www.service.ICourseService;
 import com.kanhaoyi.www.service.ICourseTypeService;
+import com.kanhaoyi.www.service.IPeoplePartService;
 import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.service.IVideoGroupService;
 import com.kanhaoyi.www.service.IVideoService;
 import com.kanhaoyi.www.util.DateUtil;
 import com.kanhaoyi.www.util.FileUtil;
+import com.kanhaoyi.www.util.FreeMarkerUtil;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
 import com.kanhaoyi.www.util.PagingUtil;
@@ -72,6 +79,12 @@ public class TeacherController {
 	private ICourseDetailService courseDetailService;
 	@Resource
 	private ICourseCommentService courseCommentService;
+	@Resource
+	private IVideoService viceoService;
+	@Resource
+	private IPeoplePartService peoplePartService;
+	@Resource
+	private ICoursePeopleService coursePeopleService;
 	
 	/**
 	 * @description 上传视频页面
@@ -98,10 +111,12 @@ public class TeacherController {
 		User user = userService.getSessionUser(session);
 		List<VideoGroup> videoGroupList = videoGroupService.selectListByUserID(user.getId()); // 用户自定义视频组名称
 		List<CourseType> courseTypeList = courseTypeService.getAll();
+		List<PeoplePart> peoplePartList = peoplePartService.getAll();
 		
 		model.addAttribute("user",user);
 		model.addAttribute("videoGroupList",videoGroupList); // 视频组的名称
 		model.addAttribute("courseTypeList",courseTypeList); // 科室列表
+		model.addAttribute("peoplePartList",peoplePartList); // 课程部位
 		InitUtil.iniSystem(model);
 		return "teacher/publishCoursePage";
 	}
@@ -116,18 +131,25 @@ public class TeacherController {
 	 */
 	@RequestMapping("/publishCourse.action")
 	@ResponseBody
+	@Transactional
 	public String publishCourse(HttpServletRequest request,
 			@RequestParam(value="courseImg",required=false) CommonsMultipartFile courseImg){
 		try{
+			
+			String[] peoplePartIDs = request.getParameterValues("peopelPartID"); // 人体部位id
+			if(peoplePartIDs==null || peoplePartIDs.length==0){
+				String msg = URLEncoder.encode("请选课程所属部位", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+			
 			User user = userService.getSessionUser(request.getSession());
 			String imgSavePath = PropertiesUtil.getValue("system.properties", "courseImg");
 			// 文件后缀
 			String imgFormat = courseImg.getOriginalFilename().substring(courseImg.getOriginalFilename().lastIndexOf("."));
 			if(!".jpg".equalsIgnoreCase(imgFormat) && !".png".equalsIgnoreCase(imgFormat)){
 				String msg = URLEncoder.encode("图片格式错误", "UTF-8");
-				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
 			}
-			
 			// 重新生成文件名
 			String imgDataName = UUID.randomUUID().toString();
 			// 创建
@@ -146,6 +168,13 @@ public class TeacherController {
 			course.setClickVolume(0);
 			course.setTime(new Timestamp(new Date().getTime()));
 			courseService.insert(course);
+			
+			for (String peoplePartID : peoplePartIDs) { // 插入课程与部位关联表
+				CoursePeople cp = new CoursePeople();
+				cp.setCourseID(course.getId());
+				cp.setPeoplePartID(Integer.valueOf(peoplePartID));
+				coursePeopleService.insert(cp);
+			}
 			
 			// 2.为课程生成集数，先排序在插入数据库
 			Enumeration<String> enu =request.getParameterNames(); // 取得所有的参数名
@@ -199,9 +228,29 @@ public class TeacherController {
 					course.setQuantity(array.length);
 					courseService.update(course);
 				}
-				// 生成网页
-				courseService.createCourseHtml(course);
 				
+				// 生成html页面
+				// 准备数据 课程
+				Course course_ = courseService.getOneByID(course.getId());
+				// 课程类型列表，网页中导航部分用
+				List<CourseType> courseTypeList_ = courseTypeService.getAll();
+				// 当前课程类型，面包屑导航用
+				CourseType courseType_ = courseTypeService.getOneByID(course.getCourseTypeID());
+				// 课程详情列表，右则课程列表显示用
+				List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course.getId(), "ASC");
+				// 当前课程，为了对右则课程列表高亮显示
+				//CourseDetail courseDetail_ = courseDetailService.getOneById(courseDetail.getId());
+				// 得到最多的赞评论 5条
+				List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course.getId()), 5);
+				// 把赞评论转为html
+				StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
+				
+				for(CourseDetail courseDetail_2 : courseDetailList_){
+					Video video_ = viceoService.getOneByID(courseDetail_2.getVideoID());
+					// 生成网页
+					FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
+							courseTypeList_, courseType_, course_, list_, GoodPraise_,video_);
+				}
 				String msg = URLEncoder.encode("上传完毕", "UTF-8");
 				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
 			}else{
@@ -221,12 +270,87 @@ public class TeacherController {
 	 * @time 2018年5月10日下午5:38:00
 	 */
 	@RequestMapping("/myCoursePage.action")
-	public String myCoursePage(Model model,HttpSession session){
+	public String myCoursePage(Model model,HttpSession session, Integer pageIndex,Integer pageCount){
+		// 如果没有传页数，默认第0页
+		if(pageIndex==null){
+			pageIndex=0;
+		}
+		// 如果没有传页条数，默认一页10条
+		if(pageCount==null){
+			pageCount=10;
+		}
 		User user = userService.getSessionUser(session);
-		model.addAttribute("user",user);  
+		Integer dataCount = courseService.getCountByUserID(user.getId());
+		Map<String,Integer> map = PagingUtil.beginPaging(pageIndex, pageCount,dataCount);
+		List<Map> courseListMap = courseService.getListByUserIDLeftCourseType(user.getId(),"id","DESC",pageCount,pageIndex);
+		model.addAttribute("paging",map);
+		model.addAttribute("padingHTML",PagingUtil.padingHTML(map.get("allPageSize"), map.get("dataCount"), map.get("pageIndex"), map.get("pageCount")));
+		model.addAttribute("courseListMap",courseListMap);
+		model.addAttribute("user",user);
 		InitUtil.iniSystem(model);
 		return "teacher/myCoursePage";
 	}
+	
+	
+	/**
+	 * @description ajax得到我的课程列表
+	 * @author zhuziming
+	 * @time 2018年6月24日 上午11:26:46
+	 * @return
+	 */
+	@RequestMapping("/ajaxGetCourseList.action")
+	@ResponseBody
+	public String ajaxGetCourseList(HttpServletRequest request,HttpSession session){
+		try{
+			JSONObject jo = new JSONObject();
+			String sPageIndex = request.getParameter("pageIndex");
+			String sPageCount = request.getParameter("pageCount");
+			Integer pageIndex =null; // 页数
+			Integer pageCount =null; // 一页几条数据
+			// 如果没有传页数，默认是第0页
+			if(sPageIndex==null){
+				pageIndex = 0;
+			}else{
+				pageIndex = Integer.valueOf(sPageIndex);
+			}
+			// 如果没有传页条数，默认一页10条
+			if(sPageCount==null){
+				pageCount=10;
+			}else{
+				pageCount = Integer.valueOf(sPageCount);
+			}
+			User user = userService.getSessionUser(session);
+			List<Map> courseListMap = courseService.getListByUserIDLeftCourseType(user.getId(),"id","DESC",pageCount,pageIndex);
+			StringBuffer dataList = new StringBuffer(); // 数据集合
+			for (int i = 0; i < courseListMap.size(); i++) {
+				Map  map= courseListMap.get(i);
+				dataList.append("<tr>");
+				dataList.append("<td scope=\"row\">"+map.get("course_name")+"</td>");
+				dataList.append("<td>"+map.get("name")+"</td>");
+				dataList.append("<td>"+DateUtil.formatTimestampToStr(map.get("time").toString())+"</td>");
+				dataList.append("<td>"+map.get("click_volume")+"</td>");
+				dataList.append("<td>"+map.get("quantity")+"</td>");
+				dataList.append("</tr>");
+			}
+			// DateUtil.formatTimestampToStr(map.get("time"))
+			StringBuffer padingHTML = new StringBuffer(); // 分页按钮集合
+			Integer dataCount = courseService.getCountByUserID(user.getId());
+			Map<String,Integer> map = PagingUtil.beginPaging(pageIndex, pageCount, dataCount);
+			padingHTML.append(PagingUtil.padingHTML(map.get("allPageSize"), map.get("dataCount"), map.get("pageIndex"), map.get("pageCount")));
+			jo.put("dataList", dataList);
+			jo.put("padingHTML", padingHTML);
+			if(dataList.length() > 0){
+				return JSONUtil.returnJson("1", jo.toString());
+			}else{
+				return JSONUtil.returnJson("2", "没有数据了");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("3", "服务器异常");
+		}
+	}
+	
+	
 	
 	/**
 	 * @description 新建视频组
@@ -459,6 +583,7 @@ public class TeacherController {
 				dataList.append("<tr>");
 				dataList.append("<td>"+video.getName()+"</td>");
 				dataList.append("<td>"+DateUtil.formatTimestampToStr(video.getCreateTime())+"</td>");
+				dataList.append("<td>"+video.getGroupName()+"</td>");
 				dataList.append("</tr>");
 			}
 			

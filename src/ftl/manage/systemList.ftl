@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>看好医后台</title>
+    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
     <link href="${csspath}/boots/bootstrap.min.css" rel="stylesheet">
     <link href="${csspath}/dashboard.css" rel="stylesheet" >
     <script src="${jspath}/jquery.min.js"></script>
@@ -58,18 +59,6 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-         	<form>
-				<nav class=" float-right" aria-label="Page navigation example">
-				  <ul class="pagination">
-				    <li class="page-item"><a class="page-link" href="#">首页</a></li>
-				    <li class="page-item"><a class="page-link" href="#">1</a></li>
-				    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-				    <li class="page-item"><a class="page-link" href="#">3</a></li>
-				    <li class="page-item"><a class="page-link" href="#">末页</a></li>
-				  </ul>
-				</nav>
-				
-         	</form>
          	
          	<div class="table-responsive">
 	            <table class="table table-striped table-sm">
@@ -106,6 +95,13 @@
 		                  </td>
 		                </tr>
 	                </#list>
+					<tr>
+	                  <td>二级</td>
+	                  <td>网站地图</td>
+	                  <td >
+	                  	<button type="button" onclick="createWebMap()" class="btn btn-info btn-sm">生成页面</button>
+	                  </td>
+	                </tr>
 	              </tbody>
 	            </table>
 	          </div>
@@ -150,6 +146,18 @@
 		$.ajax({
 			type: "POST",
 			url: "${indexpath}/manage/createIndex.action",
+			data:{},
+			success: function(msg){
+				var info = eval("("+msg+")");
+				alert(info.msg);
+			}
+		});
+	}
+	/* 创建网站地图  */
+	function createWebMap(){
+		$.ajax({
+			type: "POST",
+			url: "${indexpath}/manage/createWebMap.action",
 			data:{},
 			success: function(msg){
 				var info = eval("("+msg+")");

@@ -44,6 +44,10 @@ public class PersonalIndex {
 		if(subject.hasRole("teacher")){
 			model.addAttribute("teacher","teacher");
 		}
+		// 如果是管理员，在页面中显示管理员拥有的菜单
+		if(subject.hasRole("admin")){
+			model.addAttribute("admin","admin");
+		}
 		
 		Essay essay = essayService.getRandom();
 		model.addAttribute("user",user);  

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.User;
 import com.kanhaoyi.www.service.IUserService;
+import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
 import com.kanhaoyi.www.util.PropertiesUtil;
 
@@ -41,16 +42,12 @@ public class ShiroLoginAction {
 				request.setAttribute("bugMsg", "该用户不存在");
 			}
 		}
-		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
-		
-		model.addAttribute("indexpath",indexpath);
+		InitUtil.iniSystem(model);
 		return "front/sign_in";
 	}
 	@RequestMapping("/loginPage.action")
 	public String loginPage(Model model){
-		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
-		
-		model.addAttribute("indexpath",indexpath);
+		InitUtil.iniSystem(model);
 		return "front/sign_in";
 	}
 	
@@ -74,8 +71,7 @@ public class ShiroLoginAction {
 		System.out.println("登录成功跳转页");
 		userService.getSessionUser(session);
 		
-		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
-		model.addAttribute("indexpath",indexpath);
+		InitUtil.iniSystem(model);
 		return "redirect:index.html";
 	}
 }

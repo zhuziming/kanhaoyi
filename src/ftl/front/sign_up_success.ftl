@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <title>看好医</title>
+	    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
 	    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<link href="${csspath}/boots/bootstrap.min.css" rel="stylesheet">
@@ -17,13 +18,10 @@
 	        <nav style="height:42px; background-color: hsla(0,0%,100%,.4);box-shadow: 0 1px 2px rgba(0,0,0,.1);" class="navbar navbar-expand-md navbar-dark absolute-top">
 	        	<div class="container">
 		            <div class="btn-group" role="group" aria-label="Basic example">
-					  <a style="color: black;" class="btn btn-link">www.kanhaoyi.com，看好医</a>
-					  <a style="color: black;" class="btn btn-link">首页</a>
+					  
 					</div>
 					<div class="btn-group" role="group" aria-label="Basic example">
-					  <a href="${indexpath}/personal-center-index.html" style="color: black;" class="btn btn-link">
-					  	少年还未登录
-					  </a>
+					  
 					</div>
 	        	</div>
 		    </nav>
@@ -33,7 +31,7 @@
 		<div class="container">
 			<div class="jumbotron">
 			  <h1 class="display-4">注册成功</h1>
-			  <p class="lead">杰克先生 感谢您对我们的支持</p>
+			  <p class="lead">${user.nickname} 感谢您对我们的支持</p>
 			  <hr class="my-4">
 			  <p>如果使用中您有想看的内容是我们没有的，请在kanhaoyi@sina.cn 或 留言板块给我们留言</p>
 			  <p class="lead">

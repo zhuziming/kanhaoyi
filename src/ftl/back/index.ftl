@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>看好医-个人中心-首页</title>
+    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
     <link rel="stylesheet" href="${indexpath}/css/boots/bootstrap.min.css">
@@ -16,20 +17,7 @@
   
   <body>
   	<header>
-      <div class="bg-dark collapse show " id="navbarHeader" >
-        <nav class="navbar navbar-expand-md absolute-top k-ma-nav-back">
-        	<div class="container text-white" >
-	            <div class="btn-group" role="group" aria-label="Basic example">
-				   <a href="${indexpath}" class="btn btn-link text-white">www.kanhaoyi.com</a>
-				</div>
-				<div class="btn-group" role="group" aria-label="Basic example">
-				  <a id="people" href="${indexpath}/back/index.action" class="btn btn-link text-white">
-				  	${user.nickname}
-				  </a>
-				</div>
-        	</div>
-	    </nav>
-	  </div>
+      <#include "../head.ftl">
 	  <div class="bg-info text-white">
 	  	<div class="container">
 	  		<div class="row pt-5">
@@ -63,25 +51,34 @@
 		      <li class="nav-item active">
 		        <a class="nav-link btn btn-outline-primary" href="${indexpath}/back/index.action">个人中心</a>
 		      </li>
-		      <li class="nav-item active">
-		        <a class="nav-link" href="${indexpath}/back/myFootprint.action">我的足迹</a>
-		      </li>
-		      <li class="nav-item active">
-		        <a class="nav-link" href="${indexpath}/back/collect.action">收藏</a>
-		      </li>
+		     <#-- 注释
+			      <li class="nav-item active">
+			        <a class="nav-link" href="${indexpath}/back/myFootprint.action">我的足迹</a>
+			      </li>
+			      <li class="nav-item active">
+			        <a class="nav-link" href="${indexpath}/back/collect.action">收藏</a>
+			      </li>
+		      -->
 		    </ul>
 		    
 		  </div>
 		</nav>
 		
-		<#if (teacher!"")=="teacher">
-			<div class="container mt-2 mb-2">
+		
+		<div class="container mt-2 mb-2">
+			<#if (teacher!"")=="teacher">
 				<a class="btn btn-success" href="${indexpath}/teacher/uploadVideoPage.action" role="button">上传视频</a>
 				<a class="btn btn-success" href="${indexpath}/teacher/myVideoPage.action" role="button">我的视频</a>
 				<a class="btn btn-success" href="${indexpath}/teacher/publishCoursePage.action" role="button">发布课程</a>
 				<a class="btn btn-success" href="${indexpath}/teacher/myCoursePage.action" role="button">我的课程</a>
-			</div>
-		</#if>
+			</#if>
+			<#if (admin!"")=="admin">
+				<a class="btn btn-danger" href="${indexpath}/manage/indexPage.action" role="button">后台管理页</a>
+			</#if>
+		</div>
+		
+
+		
 		<div class="jumbotron">
 		  <h1 class="display-4">Hello, ${user.nickname}</h1>
 		  <p class="lead"></p>

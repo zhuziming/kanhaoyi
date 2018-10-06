@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>看好医-个人中心-收藏</title>
+    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">
@@ -15,20 +16,7 @@
   
   <body>
   	<header>
-      <div class="bg-dark collapse show " id="navbarHeader" >
-        <nav class="navbar navbar-expand-md absolute-top k-ma-nav-back">
-        	<div class="container text-white" >
-	            <div class="btn-group" role="group" aria-label="Basic example">
-				   <a href="${indexpath}" class="btn btn-link text-white">www.kanhaoyi.com</a>
-				</div>
-				<div class="btn-group" role="group" aria-label="Basic example">
-				  <a id="people" href="${indexpath}/back/index.action" class="btn btn-link text-white">
-				  	${nickname}
-				  </a>
-				</div>
-        	</div>
-	    </nav>
-	  </div>
+      <#include "../head.ftl">
 	  <div class="bg-info text-white">
 	  	<div class="container">
 	  		<div class="row pt-5">

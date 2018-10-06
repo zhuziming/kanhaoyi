@@ -54,4 +54,10 @@ public class RoleServiceImpl implements IRoleService {
 		return this.roleDao.getAll();
 	}
 
+	@Override
+	public Integer getCountAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

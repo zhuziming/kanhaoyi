@@ -249,7 +249,52 @@ public class FreeMarkerUtil {
 		}
 		return true;
 	}
-	
+	/**
+	 * @desctiption 创建网站地图
+	 * @author zhuziming
+	 * @param courseTypeList 课程类型列表
+	 * @param peoplePartList 课程部位列表
+	 * @param map 列表的值{"key":"list"}
+	 * @time 2018年8月7日下午2:56:25
+	 */
+	public static boolean createWebMapHTML(List<CourseType> courseTypeList,
+			List<PeoplePart> peoplePartList,Map<String,List<Course>> map){
+		
+		// 准备数据
+		Map<String ,Object> data = new HashMap<String, Object>();
+		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
+		String imgpath = PropertiesUtil.getValue("system.properties", "imgpath");
+		String csspath = PropertiesUtil.getValue("system.properties", "csspath");
+		String jspath = PropertiesUtil.getValue("system.properties", "jspath");
+		String projectPath = PropertiesUtil.getValue("system.properties", "projectPath");
+		String freeMarkerFtlpath = PropertiesUtil.getValue("system.properties", "freeMarkerFtlpath");
+		
+		data.put("indexpath", indexpath);
+		data.put("imgpath", imgpath);
+		data.put("csspath", csspath);
+		data.put("jspath", jspath);
+		data.put("courseTypeList", courseTypeList);
+		data.put("peoplePartList", peoplePartList);
+		data.put("map", map);
+
+		
+		// 得到ftl模版
+		Template tmp = FreeMarkerUtil.getTemplate(freeMarkerFtlpath,"front/template-webmap.ftl");
+		// 得到生成对象
+		Writer writer = FreeMarkerUtil.getWriter(projectPath+"/web-map.html");	
+		try {
+			// 生成网页
+			tmp.process(data, writer);
+			// 清空缓存
+			writer.flush();
+			writer.close();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 	
 	public static void main(String[] args) {
 		String freeMarkerFtlpath = PropertiesUtil.getValue("system.properties", "freeMarkerFtlpath");

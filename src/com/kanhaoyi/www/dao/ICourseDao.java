@@ -13,7 +13,13 @@ public interface ICourseDao {
 	
 	public Course getOneByID(Integer id);
 	
+	public Integer getCountByUserID(Integer userID);
+	
 	public List<Course> getListByUserID(Integer userID);
+	
+	public List<Map> getListByUserIDLeftCourseType(Map<String,Object> map);
+	public List<Map> getListLeftCourseType(Map<String,Object> map);
+	
 	/**
 	 * @desctiption 跟据课程类型id查询列表，并排序
 	 * @author zhuziming
@@ -28,4 +34,14 @@ public interface ICourseDao {
 	 * @time 2018年8月8日上午11:18:07
 	 */
 	public List<Course> getListByLinkSort(Map<String, Object> map);
+	
+	/**
+	 * @description 取全部数据
+	 * @author zhuziming
+	 * @time 2018年8月13日 下午7:44:31
+	 * @return
+	 */
+	public List<Course> getAll();
+	
+	public Integer getCountAll();
 }
