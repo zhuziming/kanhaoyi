@@ -60,6 +60,7 @@
 			      <th scope="col">创建时间</th>
 			      <th scope="col">点击量</th>
 			      <th scope="col">有几集</th>
+			      <th scope="col">操作</th>
 			    </tr>
 			  </thead>
 			  <tbody id="contentList">
@@ -70,6 +71,9 @@
 				      <td>${courseMap.time?string("yyyy-MM-dd HH:mm:ss")}</td>
 				      <td>${courseMap.click_volume}</td>
 				      <td>${courseMap.quantity}</td>
+				      <td>
+				      	<a href="${indexpath}/teacher/compileCoursePage.action?courseID=${courseMap.id}" class="btn btn-info btn-sm">编辑</a>
+				      </td>
 				    </tr>
 				</#list>
 			  </tbody>

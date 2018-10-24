@@ -103,6 +103,7 @@
 				加载更多...
 			</button>
 			
+			<div>${(course.intro)!""}</div>
 		  	
 	 	</div>
 	

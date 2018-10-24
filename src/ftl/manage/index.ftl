@@ -26,37 +26,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item bg-dark">
-                <a class="nav-link text-light" href="${indexpath}/manage/indexPage.action">
-                 	 首页
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${indexpath}/manage/systemListPage.action">
-                  	系统页列表
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${indexpath}/manage/courseListPage.action">
-                  	课程列表
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${indexpath}/manage/userListPage.action">
-                  	用户列表
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="${indexpath}/manage/userListPage.action">
-                  	老师列表
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <#include "leftMenu.ftl">
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
          	<form>

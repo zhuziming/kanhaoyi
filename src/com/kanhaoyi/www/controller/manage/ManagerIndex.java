@@ -71,6 +71,7 @@ public class ManagerIndex {
 	@RequestMapping("/indexPage.action")
 	public String indexPage(Model model){
 		InitUtil.iniSystem(model);
+		model.addAttribute("methodName","indexPage"); // leftMenu页面中当前选中的参数
 		return "manage/index";
 	}
 	/**
@@ -86,6 +87,7 @@ public class ManagerIndex {
 		model.addAttribute("courseTypeList",courseTypeList); 
 		model.addAttribute("peoplePartList",peoplePartList);
 		InitUtil.iniSystem(model);
+		model.addAttribute("methodName","systemListPage");// leftMenu页面中当前选中的参数
 		return "manage/systemList";
 	}
 	/**
@@ -147,9 +149,9 @@ public class ManagerIndex {
 	public String createIndex(){
 		try{
 			// 查点击量最高的6个
-			List<Course> maxClickList = courseService.getListByLinkSort("click_volume", "DESC", 0,6);
+			List<Course> maxClickList = courseService.getListByLinkSort("click_volume", "DESC", 0,12);
 			// 查时间最新的6个
-			List<Course> newTimeList  = courseService.getListByLinkSort("time", "DESC", 0,6);
+			List<Course> newTimeList  = courseService.getListByLinkSort("time", "DESC", 0,12);
 
 			FreeMarkerUtil.createIndexHTML(maxClickList,newTimeList);
 			return JSONUtil.returnJson("1", "生成完毕");
@@ -209,6 +211,7 @@ public class ManagerIndex {
 		Map<String,Integer> map = PagingUtil.beginPaging(pageIndex, pageCount,dataCount);
 		model.addAttribute("padingHTML",PagingUtil.padingHTML(map.get("allPageSize"), map.get("dataCount"), map.get("pageIndex"), map.get("pageCount")));
 		model.addAttribute("courseListMap", courseListMap);
+		model.addAttribute("methodName","courseListPage"); // leftMenu页面中当前选中的参数
 		InitUtil.iniSystem(model);
 		return "manage/courseList";
 	}
@@ -270,8 +273,7 @@ public class ManagerIndex {
 			return JSONUtil.returnJson("3", "服务器异常");
 		}
 	}
-	
-	
+
 	
 	/**
 	 * @desctiption 用户列表页面
@@ -294,6 +296,7 @@ public class ManagerIndex {
 		model.addAttribute("padingHTML",PagingUtil.padingHTML(map.get("allPageSize"), map.get("dataCount"), map.get("pageIndex"), map.get("pageCount")));
 		InitUtil.iniSystem(model);
 		model.addAttribute("userList",userList);
+		model.addAttribute("methodName","userListPage"); // leftMenu页面中当前选中的参数
 		return "manage/userList";
 	}
 	
@@ -382,6 +385,7 @@ public class ManagerIndex {
 		InitUtil.iniSystem(model);
 		model.addAttribute("user",user);
 		model.addAttribute("roleList",roleList);
+		model.addAttribute("methodName","allocationRolePage"); // leftMenu页面中当前选中的参数
 		return "manage/allocationRole";
 	}
 	

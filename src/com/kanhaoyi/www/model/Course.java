@@ -18,6 +18,7 @@ public class Course {
 	private String picturePath; // 封面地址
 	private String coursePath; // 课程页面地址，记录课程详情里，第一个课程的地址
 	private Integer quantity; // 数量，有几集
+	private String intro; // 课程简介，大文本，主要给百度抓虫看，做SEO
 	
 	public Integer getId() {
 		return id;
@@ -73,4 +74,11 @@ public class Course {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+	
 }

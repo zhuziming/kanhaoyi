@@ -235,7 +235,7 @@ public class TeacherController {
 				// 课程类型列表，网页中导航部分用
 				List<CourseType> courseTypeList_ = courseTypeService.getAll();
 				// 当前课程类型，面包屑导航用
-				CourseType courseType_ = courseTypeService.getOneByID(course.getCourseTypeID());
+				CourseType courseType_ = courseTypeService.getOneByID(course_.getCourseTypeID());
 				// 课程详情列表，右则课程列表显示用
 				List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course.getId(), "ASC");
 				// 当前课程，为了对右则课程列表高亮显示
@@ -301,6 +301,7 @@ public class TeacherController {
 	@RequestMapping("/ajaxGetCourseList.action")
 	@ResponseBody
 	public String ajaxGetCourseList(HttpServletRequest request,HttpSession session){
+		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
 		try{
 			JSONObject jo = new JSONObject();
 			String sPageIndex = request.getParameter("pageIndex");
@@ -330,6 +331,7 @@ public class TeacherController {
 				dataList.append("<td>"+DateUtil.formatTimestampToStr(map.get("time").toString())+"</td>");
 				dataList.append("<td>"+map.get("click_volume")+"</td>");
 				dataList.append("<td>"+map.get("quantity")+"</td>");
+				dataList.append("<td><a href=\""+indexpath+"/teacher/compileCoursePage.action?courseID="+map.get("id")+"\" class=\"btn btn-info btn-sm\">编辑</a></td>");
 				dataList.append("</tr>");
 			}
 			// DateUtil.formatTimestampToStr(map.get("time"))
@@ -350,7 +352,57 @@ public class TeacherController {
 		}
 	}
 	
+	/**
+	 * @description 编辑课程页面
+	 * @author zhuziming
+	 * @time 2018年10月22日 上午11:06:45
+	 * @return
+	 */
+	@RequestMapping("/compileCoursePage.action")
+	public String compileCoursePage(HttpSession session,Model model,Integer courseID){
+		User user = userService.getSessionUser(session);
+		Course course = courseService.getOneByID(courseID);
+		model.addAttribute("course",course);
+		model.addAttribute("user",user);
+		InitUtil.iniSystem(model);
+		return "teacher/compileCoursePage";
+	}
 	
+	@RequestMapping("/compileCourse.action")
+	@ResponseBody
+	public String compileCourse(Course course,HttpSession session){
+		User user = userService.getSessionUser(session);
+		Course course_check = courseService.getOneByID(course.getId()); // 取当前课程，查看是否属于该用户
+		if(user.getId()!=course_check.getUserID()){
+			return JSONUtil.returnJson("2", "该课程不属于当前用户，无法操作");
+		}
+		courseService.update(course);
+		String intro2 = course.getIntro().replaceAll("\n", "<br/>"); // 把换行换成html <br/>
+		intro2 = intro2.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
+		intro2 = intro2.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
+		// 生成html页面
+		// 准备数据 课程
+		Course course_ = courseService.getOneByID(course.getId());
+		course_.setIntro(intro2); // 替换生成页面的介绍
+		// 课程类型列表，网页中导航部分用
+		List<CourseType> courseTypeList_ = courseTypeService.getAll();
+		// 当前课程类型，面包屑导航用
+		CourseType courseType_ = courseTypeService.getOneByID(course_.getCourseTypeID());
+		// 课程详情列表，右则课程列表显示用
+		List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course.getId(), "ASC");
+		// 得到最多的赞评论 5条
+		List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course.getId()), 5);
+		// 把赞评论转为html
+		StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
+		
+		for(CourseDetail courseDetail_2 : courseDetailList_){
+			Video video_ = viceoService.getOneByID(courseDetail_2.getVideoID());
+			// 生成网页
+			FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
+					courseTypeList_, courseType_, course_, list_, GoodPraise_,video_);
+		}
+		return JSONUtil.returnJson("1", "修改成功");
+	}
 	
 	/**
 	 * @description 新建视频组
