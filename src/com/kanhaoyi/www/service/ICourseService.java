@@ -71,5 +71,12 @@ public interface ICourseService extends IServiceFather<Course> {
 	 * @return
 	 */
 	public List<Course> getAll();
+	/**
+	 * @description 增加课程点击量 +1
+	 * @author zhuziming
+	 * @time 2018年10月25日 下午3:35:48
+	 * @return
+	 */
+	public int addClickVolume(int courseID);
 	
 }

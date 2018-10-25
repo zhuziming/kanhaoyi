@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>看好医-${courseType.name}</title>
+    <title>${courseType.name}</title>
     <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
+    <meta http-equiv="keywords" content="看好医,${courseType.name}">
+	<meta http-equiv="description" content="">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">
     <link rel="stylesheet" href="${csspath}/boots/blog.css">
     <link rel="stylesheet" href="${csspath}/kanhaoyi-index.css">
@@ -63,8 +63,7 @@
 		    </ul>
 		  </div>
 		</nav>
-	  
-	  
+
 	  	<#if (courseList?size=0)>
 		  	<div class="jumbotron">
 			  <h1 class="display-4">Hello, world!</h1>
@@ -76,7 +75,7 @@
 	  		<div class="row">
 		  		<#list courseList as course>
 				    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
-				    	<a href="${indexpath}${course.coursePath}">
+				    	<a href="${indexpath}${course.coursePath}" target="_blank">
 				    		<img width="100%;" src="${imgpath}/courseImg${course.picturePath}"></img>
 				      		<p class="k-course-sort">${course.courseName}</p>
 				    	</a>
@@ -84,8 +83,6 @@
 			    </#list>
 			</div>
 		</#if>
-	    
-	  
 
 	</div>
 

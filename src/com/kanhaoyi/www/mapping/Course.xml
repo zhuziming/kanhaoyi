@@ -80,4 +80,8 @@
     	WHERE id=#{id}
     </update>
     
+    <update id="addClickVolume" parameterType="int">
+    	UPDATE course SET click_volume=click_volume+1 WHERE id=#{courseID}
+    </update>
+    
 </mapper>

@@ -44,4 +44,6 @@ public interface ICourseDao {
 	public List<Course> getAll();
 	
 	public Integer getCountAll();
+	
+	public int addClickVolume(int courseID);
 }

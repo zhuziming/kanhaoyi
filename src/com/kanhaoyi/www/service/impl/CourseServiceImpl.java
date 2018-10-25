@@ -115,5 +115,10 @@ public class CourseServiceImpl implements ICourseService {
 		return null;
 	}
 
+	@Override
+	public int addClickVolume(int courseID) {
+		return courseDao.addClickVolume(courseID);
+	}
+
 	
 }

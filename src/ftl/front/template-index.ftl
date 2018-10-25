@@ -24,7 +24,7 @@
 				  <a href="${indexpath}" class="btn btn-link text-dark">首页</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				  <a id="people" href="${indexpath}/loginPage.action" class="btn btn-link text-dark">
+				  <a id="people" href="${indexpath}/loginPage.action" target="_blank" class="btn btn-link text-dark">
 				  	未登录
 				  </a>
 				  <a id="signUp" href="${indexpath}/signUpPage.action" class="btn btn-link text-dark">
@@ -97,7 +97,7 @@
 			    </ol>
 			    <div class="carousel-inner">
 			      <div class="carousel-item">
-			      	<a href="${indexpath}">
+			      	<a href="${indexpath}" target="_blank">
 				        <img class="d-block w-100" data-src="" alt="痤疮的防治" src="${imgpath}/cover_cuochuang.jpg" data-holder-rendered="true">
 				        <div class="carousel-caption d-none d-md-block">
 				          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">痤疮的防治</font></font></h5>
@@ -106,7 +106,7 @@
 			        </a>
 			      </div>
 			      <div class="carousel-item active">
-			        <a href="${indexpath}">
+			        <a href="${indexpath}" target="_blank">
 				        <img class="d-block w-100" data-src="" alt="青光眼的防治" src="${imgpath}/cover_qingguangyan.jpg" data-holder-rendered="true">
 				        <div class="carousel-caption d-none d-md-block">
 				          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">青光眼的防治</font></font></h5>
@@ -137,7 +137,7 @@
 							</a>
 						</td>
 						<td>
-							<a href="www.baidu.com">
+							<a>
 								<img src="${imgpath}/people-template/people_02.png" alt="" width="55" height="58">
 							</a>
 						</td>
@@ -147,12 +147,12 @@
 							</a>
 						</td>
 						<td>
-							<a href="www.baidu.com">
+							<a>
 								<img src="${imgpath}/people-template/people_04.png" alt="" width="56" height="58">
 							</a>
 						</td>
 						<td rowspan="6">
-							<a href="www.baidu.com">
+							<a>
 								<img src="${imgpath}/people-template/people_05.png" alt="" width="49" height="399">
 							</a>
 						</td>
@@ -221,7 +221,7 @@
 		  <div class="row">
 		  	<#list maxClickList as course>
 			    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
-			    	<a href="${indexpath}${course.coursePath}">
+			    	<a href="${indexpath}${course.coursePath}" target="_blank">
 			    		<img width="100%;" src="${imgpath}/courseImg${course.picturePath}"></img>
 			      		<p class="k-course-sort">${course.courseName}</p>
 			    	</a>
@@ -239,7 +239,7 @@
 		  <div class="row">
 		  	<#list newTimeList as course>
 			    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
-			    	<a href="${indexpath}${course.coursePath}">
+			    	<a href="${indexpath}${course.coursePath}" target="_blank">
 			    		<img width="100%;" src="${imgpath}/courseImg${course.picturePath}"></img>
 			      		<p class="k-course-sort">${course.courseName}</p>
 			    	</a>
