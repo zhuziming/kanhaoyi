@@ -367,7 +367,14 @@ public class TeacherController {
 		InitUtil.iniSystem(model);
 		return "teacher/compileCoursePage";
 	}
-	
+	/**
+	 * @description 编辑课程
+	 * @author zhuziming
+	 * @time 2018年10月26日 下午2:33:18
+	 * @param course
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/compileCourse.action")
 	@ResponseBody
 	public String compileCourse(Course course,HttpSession session){
