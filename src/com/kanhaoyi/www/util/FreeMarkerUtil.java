@@ -212,9 +212,10 @@ public class FreeMarkerUtil {
 	 * @author zhuziming
 	 * @param maxClick: 最大点击量
 	 * @param newTime : 最新时间
+	 * @param indexNewsMapList : 首页轮播图
 	 * @time 2018年8月7日下午2:56:25
 	 */
-	public static boolean createIndexHTML(List<Course> maxClickList,List<Course> newTimeList){
+	public static boolean createIndexHTML(List<Course> maxClickList,List<Course> newTimeList,List<Map<String,String>> indexNewsMapList){
 		
 		// 准备数据
 		Map<String ,Object> data = new HashMap<String, Object>();
@@ -231,6 +232,7 @@ public class FreeMarkerUtil {
 		data.put("jspath", jspath);
 		data.put("maxClickList", maxClickList);
 		data.put("newTimeList", newTimeList);
+		data.put("indexNewsMapList", indexNewsMapList);
 		
 		// 得到ftl模版
 		Template tmp = FreeMarkerUtil.getTemplate(freeMarkerFtlpath,"front/template-index.ftl");

@@ -1,10 +1,12 @@
 package com.kanhaoyi.www.controller.manage;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +18,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.CourseType;
+import com.kanhaoyi.www.model.IndexNews;
 import com.kanhaoyi.www.model.PeoplePart;
 import com.kanhaoyi.www.model.Role;
 import com.kanhaoyi.www.model.User;
@@ -27,11 +31,13 @@ import com.kanhaoyi.www.model.UserRole;
 import com.kanhaoyi.www.service.ICoursePeopleService;
 import com.kanhaoyi.www.service.ICourseService;
 import com.kanhaoyi.www.service.ICourseTypeService;
+import com.kanhaoyi.www.service.IIndexNewsService;
 import com.kanhaoyi.www.service.IPeoplePartService;
 import com.kanhaoyi.www.service.IRoleService;
 import com.kanhaoyi.www.service.IUserRoleService;
 import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.util.DateUtil;
+import com.kanhaoyi.www.util.FileUtil;
 import com.kanhaoyi.www.util.FreeMarkerUtil;
 import com.kanhaoyi.www.util.InitUtil;
 import com.kanhaoyi.www.util.JSONUtil;
@@ -62,6 +68,8 @@ public class ManagerIndex {
 	private IUserRoleService userRoleService;
 	@Resource
 	private ICoursePeopleService coursePeopleService;
+	@Resource
+	private IIndexNewsService indexNewsService;
 	
 	/**
 	 * @desctiption 后台首页
@@ -70,10 +78,80 @@ public class ManagerIndex {
 	 */
 	@RequestMapping("/indexPage.action")
 	public String indexPage(Model model){
+		List<IndexNews> indexNewslist = indexNewsService.getListByLinkSort("id", "DESC", 10, 0);
 		InitUtil.iniSystem(model);
+		model.addAttribute("indexNewslist", indexNewslist);
 		model.addAttribute("methodName","indexPage"); // leftMenu页面中当前选中的参数
 		return "manage/index";
 	}
+	
+	/**
+	 * @description 添加一个首页新闻
+	 * @author zhuziming
+	 * @time 2018年10月26日 下午1:52:23
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/addIndexNews.action")
+	public String addIndexNews(@RequestParam(value="indexNewsImg",required=true) CommonsMultipartFile indexNewsImg
+			,int courseID,String title,String context){
+		try{
+			// 验证课程是否存在
+			Course course = courseService.selectByID(courseID);
+			if(course==null){
+				String msg = URLEncoder.encode("不存在的课程", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+			if(indexNewsImg==null){
+				String msg = URLEncoder.encode("图片不能为空", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+			
+			String indexNewsPath = PropertiesUtil.getValue("system.properties", "indexNewsImg");
+			// 验证文件后缀
+			String imgFormat = indexNewsImg.getOriginalFilename().substring(indexNewsImg.getOriginalFilename().lastIndexOf("."));
+			if(!".jpg".equalsIgnoreCase(imgFormat) && !".png".equalsIgnoreCase(imgFormat)){
+				String msg = URLEncoder.encode("图片格式错误", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+			// 重新生成文件名
+			String imgDataName = UUID.randomUUID().toString();
+			// 创建
+			FileUtil.createIndexNewsImage(indexNewsPath, imgDataName, imgFormat, indexNewsImg);
+
+			IndexNews indexNews = new IndexNews();
+			indexNews.setContext(context);
+			indexNews.setTitle(title);
+			indexNews.setCourseID(courseID);
+			indexNews.setImg("/"+imgDataName+imgFormat);
+			indexNewsService.insert(indexNews);
+			
+			String msg = URLEncoder.encode("添加成功，请重新生成首页", "UTF-8");
+			return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("3", null)+"')</script>";
+		}
+	}
+	
+	/**
+	 * @description 删除一个首页新闻
+	 * @author zhuziming
+	 * @time 2018年10月26日 下午1:53:05
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/delIndexNews.action")
+	public String delIndexNews(int indexNewsID){
+		try{
+			indexNewsService.deleteByID(indexNewsID);
+			return JSONUtil.returnJson("1", "删除成功");
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("2", "异常，请稍后在试");
+		}
+	}
+	
 	/**
 	 * @desctiption 系统页列表
 	 * @author zhuziming
@@ -140,7 +218,7 @@ public class ManagerIndex {
 	}
 	
 	/**
-	 * @desctiption 创建首页，每个导航栏目查询点击量最高的6个
+	 * @desctiption 创建首页，每个导航栏目查询点击量最高的12个
 	 * @author zhuziming
 	 * @time 2018年8月7日下午2:45:22
 	 */
@@ -148,12 +226,28 @@ public class ManagerIndex {
 	@ResponseBody
 	public String createIndex(){
 		try{
+			List<IndexNews> indexNewslist = indexNewsService.getListByLinkSort("id", "DESC", 10, 0);
+			List<Map<String,String>> indexNewsMapList = new ArrayList<Map<String,String>>();
+			for (IndexNews indexNews : indexNewslist) {
+				Course course = courseService.selectByID(indexNews.getCourseID());
+				if(course==null){
+					continue;
+				}
+				Map<String,String> indexNewsMap = new HashMap<String,String>();
+				indexNewsMap.put("id", indexNews.getId()+"");
+				indexNewsMap.put("picture", indexNews.getImg()); // 轮播图
+				indexNewsMap.put("title", indexNews.getTitle());
+				indexNewsMap.put("context", indexNews.getContext());
+				indexNewsMap.put("webPath", course.getCoursePath()); //网页地址
+				indexNewsMapList.add(indexNewsMap);
+			}
+			
 			// 查点击量最高的6个
 			List<Course> maxClickList = courseService.getListByLinkSort("click_volume", "DESC", 0,12);
 			// 查时间最新的6个
 			List<Course> newTimeList  = courseService.getListByLinkSort("time", "DESC", 0,12);
 
-			FreeMarkerUtil.createIndexHTML(maxClickList,newTimeList);
+			FreeMarkerUtil.createIndexHTML(maxClickList,newTimeList,indexNewsMapList);
 			return JSONUtil.returnJson("1", "生成完毕");
 		}catch(Exception e){
 			e.printStackTrace();

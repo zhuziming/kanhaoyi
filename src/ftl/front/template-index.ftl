@@ -92,28 +92,38 @@
 				      
 			<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 			    <ol class="carousel-indicators">
-			      <li data-target="#carouselExampleCaptions" data-slide-to="0" class=""></li>
-			      <li data-target="#carouselExampleCaptions" data-slide-to="1" class="active"></li>
+			    	<#list indexNewsMapList as indexNewsMap>
+			    		<#if indexNewsMap_index==0>
+			    			<li data-target="#carouselExampleCaptions" data-slide-to="${indexNewsMap.id}" class="active"></li>
+			    		<#else>
+			    			<li data-target="#carouselExampleCaptions" data-slide-to="${indexNewsMap.id}" class=""></li>
+						</#if>			    		
+					</#list>
 			    </ol>
 			    <div class="carousel-inner">
-			      <div class="carousel-item">
-			      	<a href="${indexpath}" target="_blank">
-				        <img class="d-block w-100" data-src="" alt="痤疮的防治" src="${imgpath}/cover_cuochuang.jpg" data-holder-rendered="true">
-				        <div class="carousel-caption d-none d-md-block">
-				          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">痤疮的防治</font></font></h5>
-				          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">痤疮是如何发生的，痤疮瘢痕怎么清除</font></font></p>
-				        </div>
-			        </a>
-			      </div>
-			      <div class="carousel-item active">
-			        <a href="${indexpath}" target="_blank">
-				        <img class="d-block w-100" data-src="" alt="青光眼的防治" src="${imgpath}/cover_qingguangyan.jpg" data-holder-rendered="true">
-				        <div class="carousel-caption d-none d-md-block">
-				          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">青光眼的防治</font></font></h5>
-				          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">青光眼的易感人群，如何防治</font></font></p>
-				        </div>
-				    </a>
-			      </div>
+			      <#list indexNewsMapList as indexNewsMap>
+			      	<#if indexNewsMap_index==0>
+			      		<div class="carousel-item active">
+					        <a href="${indexpath}${indexNewsMap.webPath}" target="_blank">
+						        <img class="d-block w-100" data-src="" alt="${(indexNewsMap.title)!''}" src="${imgpath}/indexNewsImg${indexNewsMap.picture}" data-holder-rendered="true">
+						        <div class="carousel-caption d-none d-md-block">
+						          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${(indexNewsMap.title)!''}</font></font></h5>
+						          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${(indexNewsMap.context)!''}</font></font></p>
+						        </div>
+						    </a>
+					    </div>
+			      	<#else>
+			      		<div class="carousel-item">
+					        <a href="${indexpath}${indexNewsMap.webPath}" target="_blank">
+						        <img class="d-block w-100" data-src="" alt="${(indexNewsMap.title)!''}" src="${imgpath}/indexNewsImg${indexNewsMap.picture}" data-holder-rendered="true">
+						        <div class="carousel-caption d-none d-md-block">
+						          <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${(indexNewsMap.title)!''}</font></font></h5>
+						          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${(indexNewsMap.context)!''}</font></font></p>
+						        </div>
+						    </a>
+					    </div>
+			      	</#if>
+			      </#list>
 			    </div>
 			    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
 			      <span class="carousel-control-prev-icon" aria-hidden="true"></span>

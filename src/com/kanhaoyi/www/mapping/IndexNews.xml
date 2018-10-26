@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.IIndexNewsDao">
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.IndexNews"  keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO index_news(id,course_id,img,title,context) 
+    	VALUE(null,#{courseID},#{img},#{title},#{context})
+    </insert>
+    
+    <delete id="deleteByID" parameterType="int">
+    	delete from index_news where id=#{id}
+    </delete>
+    
+    <update id="update"></update>
+    
+    <select id="selectByID"></select>
+    
+    <select id="getListByLinkSort" parameterType="map" resultType="com.kanhaoyi.www.model.IndexNews">
+    	SELECT id,course_id AS courseID, img,title,context 
+    	FROM index_news ORDER BY ${link} ${sort} LIMIT ${pageIndex*pageCount},${pageCount}
+    </select>
+    
+</mapper>

@@ -111,8 +111,7 @@ public class CourseServiceImpl implements ICourseService {
 
 	@Override
 	public Course selectByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return courseDao.getOneByID(id);
 	}
 
 	@Override

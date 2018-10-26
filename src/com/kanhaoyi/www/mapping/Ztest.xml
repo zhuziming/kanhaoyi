@@ -15,4 +15,7 @@
     	SELECT * FROM course ORDER BY ${link} ${sort} LIMIT ${begin},${end}
     </select>
     
+    <select id="getCountAll" resultType="int">
+    	SELECT count(1) FROM course
+    </select>
 </mapper>

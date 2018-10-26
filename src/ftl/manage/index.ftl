@@ -42,27 +42,55 @@
 				</nav>
 				
          	</form>
-
+			<iframe name="newPage" hidden></iframe>
          	<div class="table-responsive">
 	            <table class="table table-striped table-sm">
 	              <thead>
 	                <tr>
-	                  <th>id</th>
-	                  <th>名称</th>
-	                  <th>作者</th>
-	                  <th>科室</th>
-	                  <th>点击量</th>
+	                  <th>课程id</th>
+	                  <th>图片</th>
+	                  <th>标题</th>
+	                  <th>说明</th>
 	                  <th>操作</th>
 	                </tr>
 	              </thead>
 	              <tbody>
+	              	<#if (indexNewslist?size=0)>
+	              		没有数据了
+	              	<#else>
+	              		<#list indexNewslist as indexNews>
+	              			<tr id="${indexNews.id}">
+			                  <td>${indexNews.courseID}</td>
+			                  <td>${indexNews.img}</td>
+			                  <td>${indexNews.title}</td>
+			                  <td>${indexNews.context}</td>
+			                  <td>
+							  	<button type="button" onclick="delIndexNews(${indexNews.id})" class="btn btn-info btn-sm">删除</button> 
+							  </td>
+			                </tr>
+	              		</#list>
+	              	</#if>
+
 	                <tr>
-	                  <td>Lorem</td>
-	                  <td>Lorem</td>
-	                  <td>ipsum</td>
-	                  <td>dolor</td>
-	                  <td>ipsum</td>
-	                  <td>生成页面</td>
+		                <form target="newPage" action="${indexpath}/manage/addIndexNews.action" enctype="multipart/form-data" method="post">
+		                	<div class="form-row">
+			                  <td>
+							  	<input type="number" name="courseID" class="form-control" required>
+							  </td>
+			                  <td>
+								<input type="file" name="indexNewsImg" class="form-control-file" required>
+							  </td>
+			                  <td>
+								<input type="text" name="title" class="form-control" required>
+							  </td>
+			                  <td>
+								<input type="text" name="context" class="form-control" required>
+							  </td>
+			                  <td>
+							  	<button type="submit" class="btn btn-info btn-sm">添加轮播</button> 
+							  </td>
+						  	</div>
+						</form>
 	                </tr>
 	              </tbody>
 	            </table>
@@ -72,3 +100,27 @@
     </div>
   </body>
 </html>
+<script>
+	function ajaxFileUpload(msg){
+		var data = eval("("+msg+")");
+		alert(decodeURIComponent(data.msg));
+	}
+	
+	function delIndexNews(indexNewsID){
+		$.ajax({
+		   	type: "POST",
+		   	url: "${indexpath}/manage/delIndexNews.action",
+		   	data: {"indexNewsID":indexNewsID},
+		   	dataType: 'json',
+		   	success: function(data){
+		   		if(data.success==1){
+		   			$("#"+indexNewsID).remove()
+		   			alert(data.msg)
+		   		}else{
+		   			alert(data.msg)
+		   		}
+		   		
+		   	}
+		});
+	}
+</script>
