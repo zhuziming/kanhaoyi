@@ -54,6 +54,7 @@
 			<thead>
 				<tr>
 			      <th scope="col">课程名称</th>
+			      <th scope="col">科室</th>
 			      <th scope="col">创建时间</th>
 			      <th scope="col">点击量</th>
 			      <th scope="col">有几集</th>
@@ -63,6 +64,17 @@
     		<tbody>
 				<tr>
 			      <td scope="row">${course.courseName}</td>
+			      <td>
+			      	<select id="courseTypeID" name="courseTypeID">
+			      		<#list courseTypeList as courseType>
+			      			<#if course.courseTypeID==courseType.id>
+			      				<option selected="selected" value="${courseType.id}">${courseType.name}</option>
+			      			<#else>
+			      				<option value="${courseType.id}">${courseType.name}</option>
+							</#if>
+						</#list>
+			      	</select>
+			      </td>
 			      <td>${course.time}</td>
 			      <td>${course.clickVolume}</td>
 			      <td>${course.quantity}</td>
@@ -98,7 +110,7 @@
 		$.ajax({
 		   	type: "POST",
 		   	url: "${indexpath}/teacher/compileCourse.action",
-		   	data: {"id":$("#courseID").val(),"intro":$("#courseIntro").val()},
+		   	data: {"id":$("#courseID").val(),"intro":$("#courseIntro").val(),"courseTypeID":$("#courseTypeID").val()},
 		   	success: function(msg){
 		   		var data = eval("("+msg+")");
 		   		if(data.success==1){

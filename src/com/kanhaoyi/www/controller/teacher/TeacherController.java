@@ -361,9 +361,13 @@ public class TeacherController {
 	@RequestMapping("/compileCoursePage.action")
 	public String compileCoursePage(HttpSession session,Model model,Integer courseID){
 		User user = userService.getSessionUser(session);
-		Course course = courseService.getOneByID(courseID);
+		Course course = courseService.getOneByID(courseID); // 当前课程
+		List<CourseType> courseTypeList = courseTypeService.getAll(); // 全部科室
+		
+		
 		model.addAttribute("course",course);
 		model.addAttribute("user",user);
+		model.addAttribute("courseTypeList",courseTypeList);
 		InitUtil.iniSystem(model);
 		return "teacher/compileCoursePage";
 	}
@@ -377,6 +381,7 @@ public class TeacherController {
 	 */
 	@RequestMapping("/compileCourse.action")
 	@ResponseBody
+	@Transactional
 	public String compileCourse(Course course,HttpSession session){
 		User user = userService.getSessionUser(session);
 		Course course_check = courseService.getOneByID(course.getId()); // 取当前课程，查看是否属于该用户
@@ -384,6 +389,22 @@ public class TeacherController {
 			return JSONUtil.returnJson("2", "该课程不属于当前用户，无法操作");
 		}
 		courseService.update(course);
+		
+		/* 更改每一集课程的网页目录 */
+		CourseType courseType_1 = courseTypeService.getOneByID(course.getCourseTypeID());
+		List<CourseDetail> courseDetailList = courseDetailService.getListByCourseIdAndSequence(course.getId(), "ASC");
+		for (CourseDetail courseDetail_2 : courseDetailList) {
+			// 课程路径 项目目录/科室/用户id/页面id.html
+			String coursePath = "/"+courseType_1.getNameSpace()+"/"+user.getId()+"/"+courseDetail_2.getId()+".html";
+			courseDetail_2.setCoursePath(coursePath);
+			courseDetailService.update(courseDetail_2); 
+		}
+		/* 更改课程网页目录为课程详情中的第一页 */
+		CourseDetail courseDetail_1 = courseDetailService.getOneOrderBy("id", "asc", course.getId()+"");
+		course.setCoursePath(courseDetail_1.getCoursePath());
+		courseService.update(course);
+		
+		
 		String intro2 = course.getIntro().replaceAll("\n", "<br/>"); // 把换行换成html <br/>
 		intro2 = intro2.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
 		intro2 = intro2.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
@@ -396,9 +417,9 @@ public class TeacherController {
 		// 当前课程类型，面包屑导航用
 		CourseType courseType_ = courseTypeService.getOneByID(course_.getCourseTypeID());
 		// 课程详情列表，右则课程列表显示用
-		List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course.getId(), "ASC");
+		List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course_.getId(), "ASC");
 		// 得到最多的赞评论 5条
-		List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course.getId()), 5);
+		List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course_.getId()), 5);
 		// 把赞评论转为html
 		StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
 		
