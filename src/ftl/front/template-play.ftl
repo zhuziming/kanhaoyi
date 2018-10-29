@@ -92,9 +92,43 @@
 			  </div>
 			</div>
 		  	
+		  	<div class="row pt-3 pb-3">
+		  		<#if courseLinkList[0]??>
+		  			<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+			  			<a target="_blank" href="${(courseLinkList[0].webLocation)!""}">
+				    		<img width="100%;" src="${imgpath}/courseLinkImg/${course.userID}/${course.id}/${courseLinkList[0].picture}${courseLinkList[0].format}"></img>
+				      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${(courseLinkList[0].intro)!""}</h5>
+				    	</a>
+			  		</div>
+				</#if>
+		  		<#if courseLinkList[1]??>
+			  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+			  			<a target="_blank" href="${(courseLinkList[1].webLocation)!""}">
+				    		<img width="100%;" src="${imgpath}/courseLinkImg/${course.userID}/${course.id}/${courseLinkList[1].picture}${courseLinkList[1].format}"></img>
+				      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${(courseLinkList[0].intro)!""}</h5>
+				    	</a>
+			  		</div>
+		  		</#if>
+				<#if courseLinkList[2]??>
+			  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+			  			<a target="_blank" href="${(courseLinkList[2].webLocation)!""}">
+				    		<img width="100%;" src="${imgpath}/courseLinkImg/${course.userID}/${course.id}/${courseLinkList[2].picture}${courseLinkList[2].format}"></img>
+				      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${(courseLinkList[2].intro)!""}</h5>
+				    	</a>
+			  		</div>
+		  		</#if>
+				<#if courseLinkList[3]??>
+			  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+			  			<a target="_blank" href="${(courseLinkList[3].webLocation)!""}">
+				    		<img width="100%;" src="${imgpath}/courseLinkImg/${course.userID}/${course.id}/${courseLinkList[3].picture}${courseLinkList[3].format}"></img>
+				      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${(courseLinkList[3].intro)!""}</h5>
+				    	</a>
+			  		</div>
+		  		</#if>
+		  	</div>
+
 		  	${GoodPraise}
 
-		  	
 		  	<div id="newComment" class="alert alert-success" role="alert">
 			  	以下是最新评论
 			</div>

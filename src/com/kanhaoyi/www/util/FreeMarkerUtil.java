@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.CourseDetail;
+import com.kanhaoyi.www.model.CourseLink;
 import com.kanhaoyi.www.model.CourseType;
 import com.kanhaoyi.www.model.PeoplePart;
 import com.kanhaoyi.www.model.Video;
@@ -66,7 +67,7 @@ public class FreeMarkerUtil {
 	 */
 	public static void createCourseHTML(CourseDetail courseDetail, List<CourseDetail> courseDetailList,
 			List<CourseType> courseTypeList, CourseType courseType,Course course,
-			List<Map<String,Object>> list,StringBuffer GoodPraise,Video video){
+			List<Map<String,Object>> list,StringBuffer GoodPraise,Video video,List<CourseLink> courseLinkList_){
 		// 准备数据
 		Map<String ,Object> data = new HashMap<String, Object>();
 		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
@@ -87,6 +88,7 @@ public class FreeMarkerUtil {
 		data.put("courseDetail",courseDetail);// 课程那一集
 		data.put("GoodPraise",GoodPraise); // 赞最多的评论
 		data.put("video",video); // 赞最多的评论
+		data.put("courseLinkList", courseLinkList_);
 		
 		// 目录要一级一级的创建，否则会失败
 		String deskpath = projectPath+"/"+courseType.getNameSpace()+"/"+course.getUserID()+"/";

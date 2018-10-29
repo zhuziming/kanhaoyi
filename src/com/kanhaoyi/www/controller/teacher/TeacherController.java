@@ -31,6 +31,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.CourseDetail;
+import com.kanhaoyi.www.model.CourseLink;
 import com.kanhaoyi.www.model.CoursePeople;
 import com.kanhaoyi.www.model.CourseType;
 import com.kanhaoyi.www.model.PeoplePart;
@@ -39,6 +40,7 @@ import com.kanhaoyi.www.model.Video;
 import com.kanhaoyi.www.model.VideoGroup;
 import com.kanhaoyi.www.service.ICourseCommentService;
 import com.kanhaoyi.www.service.ICourseDetailService;
+import com.kanhaoyi.www.service.ICourseLinkService;
 import com.kanhaoyi.www.service.ICoursePeopleService;
 import com.kanhaoyi.www.service.ICourseService;
 import com.kanhaoyi.www.service.ICourseTypeService;
@@ -85,6 +87,8 @@ public class TeacherController {
 	private IPeoplePartService peoplePartService;
 	@Resource
 	private ICoursePeopleService coursePeopleService;
+	@Resource
+	private ICourseLinkService courseLinkService;
 	
 	/**
 	 * @description 上传视频页面
@@ -249,7 +253,7 @@ public class TeacherController {
 					Video video_ = viceoService.getOneByID(courseDetail_2.getVideoID());
 					// 生成网页
 					FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
-							courseTypeList_, courseType_, course_, list_, GoodPraise_,video_);
+							courseTypeList_, courseType_, course_, list_, GoodPraise_,video_,null);
 				}
 				String msg = URLEncoder.encode("上传完毕", "UTF-8");
 				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
@@ -363,11 +367,15 @@ public class TeacherController {
 		User user = userService.getSessionUser(session);
 		Course course = courseService.getOneByID(courseID); // 当前课程
 		List<CourseType> courseTypeList = courseTypeService.getAll(); // 全部科室
+		List<CourseLink> courseLinkList = courseLinkService.getListByCourseID(courseID); // 商品链接
 		
-		
+		for (CourseLink courseLink : courseLinkList) {
+			model.addAttribute("courseLink"+courseLink.getPicture(),courseLink);
+		}
 		model.addAttribute("course",course);
 		model.addAttribute("user",user);
 		model.addAttribute("courseTypeList",courseTypeList);
+		
 		InitUtil.iniSystem(model);
 		return "teacher/compileCoursePage";
 	}
@@ -412,6 +420,8 @@ public class TeacherController {
 		// 准备数据 课程
 		Course course_ = courseService.getOneByID(course.getId());
 		course_.setIntro(intro2); // 替换生成页面的介绍
+		// 课程商品链接列表
+		List<CourseLink> courseLinkList_ = courseLinkService.getListByCourseID(course_.getId());
 		// 课程类型列表，网页中导航部分用
 		List<CourseType> courseTypeList_ = courseTypeService.getAll();
 		// 当前课程类型，面包屑导航用
@@ -427,10 +437,87 @@ public class TeacherController {
 			Video video_ = viceoService.getOneByID(courseDetail_2.getVideoID());
 			// 生成网页
 			FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
-					courseTypeList_, courseType_, course_, list_, GoodPraise_,video_);
+					courseTypeList_, courseType_, course_, list_, GoodPraise_,video_,courseLinkList_);
 		}
 		return JSONUtil.returnJson("1", "修改成功");
 	}
+	
+	/**
+	 * @description 添加一个网页链接
+	 * @author zhuziming
+	 * @time 2018年10月28日 下午4:17:13
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/addLink.action")
+	public String addLink(@RequestParam(value="pictureFile",required=true) CommonsMultipartFile pictureFile,
+			CourseLink courseLink,HttpServletRequest request){
+		try{
+			// 检查图片
+			if(pictureFile.isEmpty()){
+				String msg = URLEncoder.encode("图片不能为空", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+			User user = userService.getSessionUser(request.getSession());
+			// 检查该课程是否属于该用户
+			Course course = courseService.getOneByID(courseLink.getCourseID());
+			if(course.getUserID()!=user.getId()){
+				String msg = URLEncoder.encode("非法操作", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+			// 检查记录数是否超出
+			List<CourseLink> courseLinkList = courseLinkService.getListByCourseID(courseLink.getCourseID());
+			if(courseLinkList!=null && courseLinkList.size() >= 4){
+				String msg = URLEncoder.encode("已超过4条，请先删除后在添加", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
+			// 检查同一个位置是否多次插入
+			for (CourseLink courseLink_f : courseLinkList) {
+				if(courseLink_f.getPicture()==courseLink.getPicture()){
+					String msg = URLEncoder.encode("已存在的信息，请先删除后在添加", "UTF-8");
+					return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+				}
+			}
+			
+			
+			String imgSavePath = PropertiesUtil.getValue("system.properties", "courseLinkImg");
+			String imgFormat = pictureFile.getOriginalFilename().substring(pictureFile.getOriginalFilename().lastIndexOf("."));
+			// 创建图片
+			FileUtil.createCourceLinkImage(imgSavePath, user.getId(),courseLink.getCourseID() ,courseLink.getPicture(), imgFormat, pictureFile);
+			courseLink.setFormat(imgFormat);
+			courseLinkService.insert(courseLink);
+			String msg = URLEncoder.encode("保存成功", "UTF-8");
+			return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
+		}catch(Exception e){
+			return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("3", "异常了")+"')</script>";
+		}
+	}
+	/**
+	 * @description 删除课程商品链接
+	 * @author zhuziming
+	 * @time 2018年10月29日 下午2:35:04
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/delLink.action")
+	public String delCourseLink(HttpServletRequest request,CourseLink courseLink){
+		try{
+			User user = userService.getSessionUser(request.getSession());
+			// 检查该课程是否属于该用户
+			Course course = courseService.getOneByID(courseLink.getCourseID());
+			if(course.getUserID()!=user.getId()){
+				String msg = URLEncoder.encode("非法操作", "UTF-8");
+				return JSONUtil.returnJson("2", msg);
+			}
+			courseLinkService.deleteByID(courseLink.getId());
+			String msg = URLEncoder.encode("删除成功", "UTF-8");
+			return JSONUtil.returnJson("1", msg);
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("3", "error");
+		}
+	}
+	
 	
 	/**
 	 * @description 新建视频组

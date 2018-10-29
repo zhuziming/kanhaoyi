@@ -85,6 +85,7 @@
 			</tbody>
 		</table>
 		<input class="d-none" id="courseID" value="${course.id}"/>
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -99,7 +100,141 @@
 				</tr>  	
 			</tbody>
 		</table>
+		<iframe name="newPage" hidden></iframe>
+		<table class="table">
+			<thead>
+				<tr>
+			      <th scope="col">第一个链接</th>
+			      <th scope="col">第二个链接</th>
+			    </tr>
+			</thead>
+    		<tbody>
+				<tr>
+			      <td>
+			      	<form action="${indexpath}/teacher/addLink.action" enctype="multipart/form-data" method="post" target="newPage">
+				      	<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">图片：</label>
+						    <div class="col-sm-10">
+						      <input type="file" name="pictureFile" />
+						      <button type="submit" class="btn btn-info btn-sm">保存</button>
+						      <input hidden type="number" name="picture" value="1" />
+						      <input hidden class="d-none" name="courseID" value="${course.id}"/>
+						      <a href="javascript:delLink(${(courseLink1.id)!""})" class="btn btn-warning btn-sm">删除</a>
+						    </div>
+						</div>
+				      	<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">描述：</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="intro" value="${(courseLink1.intro)!""}" class="form-control" placeholder="链接描述">
+						    </div>
+						</div>
+						<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">地址：</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="webLocation" value="${(courseLink1.webLocation)!""}" class="form-control" placeholder="链接地址">
+						    </div>
+						</div>
+					</form>
+			      </td>
+			      <td>
+			      	<form action="${indexpath}/teacher/addLink.action" enctype="multipart/form-data" method="post" target="newPage">
+				      	<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">图片：</label>
+						    <div class="col-sm-10">
+						      <input type="file" name="pictureFile" />
+						      <button type="submit" class="btn btn-info btn-sm">保存</button>
+						      <input hidden type="number" name="picture" value="2" />
+						      <input hidden class="d-none" name="courseID" value="${course.id}"/>
+						      <a href="javascript:delLink(${(courseLink2.id)!""})" class="btn btn-warning btn-sm">删除</a>
+						    </div>
+						</div>
+				      	<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">描述：</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="intro" value="${(courseLink2.intro)!""}" class="form-control" placeholder="链接描述">
+						    </div>
+						</div>
+						<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">地址：</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="webLocation" value="${(courseLink2.webLocation)!""}" class="form-control" placeholder="链接地址">
+						    </div>
+						</div>
+					</form>
+			      </td>
+				</tr>  	
+			</tbody>
+		</table>
+		
+		<table class="table">
+			<thead>
+				<tr>
+			      <th scope="col">第三个链接</th>
+			      <th scope="col">第四个链接</th>
+			    </tr>
+			</thead>
+    		<tbody>
+				<tr>
+			      <td>
+			      	<form action="${indexpath}/teacher/addLink.action" enctype="multipart/form-data" method="post" target="newPage">
+				      	<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">图片：</label>
+						    <div class="col-sm-10">
+						      <input type="file" name="pictureFile" />
+						      <button type="submit" class="btn btn-info btn-sm">保存</button>
+						      <input hidden type="number" name="picture" value="3" />
+						      <input hidden class="d-none" name="courseID" value="${course.id}"/>
+						      <a href="javascript:delLink(${(courseLink3.id)!""})" class="btn btn-warning btn-sm">删除</a>
+						    </div>
+						</div>
+				      	<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">描述：</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="intro" value="${(courseLink3.intro)!""}" class="form-control" placeholder="链接描述">
+						    </div>
+						</div>
+						<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">地址：</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="webLocation" value="${(courseLink3.webLocation)!""}" class="form-control" placeholder="链接地址">
+						    </div>
+						</div>
+					</form>
+			      </td>
+			      <td>
+			      	<form action="${indexpath}/teacher/addLink.action" enctype="multipart/form-data" method="post" target="newPage">
+				      	<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">图片：</label>
+						    <div class="col-sm-10">
+						      <input type="file" name="pictureFile" />
+						      <button type="submit" class="btn btn-info btn-sm">保存</button>
+						      <input hidden type="number" name="picture" value="4" />
+						      <input hidden class="d-none" name="courseID" value="${course.id}"/>
+						      <a href="javascript:delLink(${(courseLink4.id)!""})" class="btn btn-warning btn-sm">删除</a>
+						    </div>
+						</div>
+				      	<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">描述：</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="intro" value="${(courseLink4.intro)!""}" class="form-control" placeholder="链接描述">
+						    </div>
+						</div>
+						<div class="form-group row">
+						    <label class="col-sm-2 col-form-label">地址：</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="webLocation" value="${(courseLink4.webLocation)!""}" class="form-control" placeholder="链接地址">
+						    </div>
+						</div>
+					</form>
+			      </td>
+				</tr>  	
+			</tbody>
+		</table>
+		
     </div>
+    
+    
+    
     
     <#include "../footer.ftl">
     
@@ -120,8 +255,26 @@
 		   		}else{
 		   			alert("网络异常，请稍后在试");
 		   		}
-		   		
 		   	}
 		});
 	}
+	
+	
+	function delLink(linkID){
+		$.ajax({
+		   	type: "POST",
+		   	url: "${indexpath}/teacher/delLink.action",
+		   	data: {"courseID":$("#courseID").val(),"id":linkID},
+		   	dataType: 'json',
+		   	success: function(data){
+		   		alert(decodeURIComponent(data.msg));
+		   	}
+		});
+	}
+	
+	function ajaxFileUpload(msg){
+		var data = eval("("+msg+")");
+		alert(decodeURIComponent(data.msg));
+	}
+	
 </script>
