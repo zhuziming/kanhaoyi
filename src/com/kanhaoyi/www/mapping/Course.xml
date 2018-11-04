@@ -58,6 +58,13 @@
     	SELECT count(1) FROM course
     </select>
     
+    <select id="vagueQueryByIntro" parameterType="string" resultType="com.kanhaoyi.www.model.Course">
+    	SELECT id,course_name AS courseName,course_type_id AS courseTypeID,user_id AS userID, 
+    		time,click_volume AS clickVolume,picture_path AS picturePath,course_path AS coursePath,
+    		quantity,intro 
+    	FROM course WHERE intro like #{keyword} ORDER BY quantity DESC
+    </select>
+    
     
     <insert id="insert" parameterType="com.kanhaoyi.www.model.Course" keyProperty="id" useGeneratedKeys="true">
     	INSERT INTO course(id,course_name,course_type_id,user_id,time,

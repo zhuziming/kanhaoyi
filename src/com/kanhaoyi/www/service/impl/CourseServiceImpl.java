@@ -119,5 +119,10 @@ public class CourseServiceImpl implements ICourseService {
 		return courseDao.addClickVolume(courseID);
 	}
 
+	@Override
+	public List<Course> vagueQueryByIntro(String keyword) {
+		return courseDao.vagueQueryByIntro(keyword);
+	}
+
 	
 }

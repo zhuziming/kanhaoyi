@@ -46,4 +46,6 @@ public interface ICourseDao {
 	public Integer getCountAll();
 	
 	public int addClickVolume(int courseID);
+	
+	public List<Course> vagueQueryByIntro(String keyword);
 }

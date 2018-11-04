@@ -78,5 +78,13 @@ public interface ICourseService extends IServiceFather<Course> {
 	 * @return
 	 */
 	public int addClickVolume(int courseID);
+	/**
+	 * @description 模糊查询通过intro字段
+	 * @author zhuziming
+	 * @time 2018年11月4日 下午12:11:53
+	 * @param keyword
+	 * @return
+	 */
+	public List<Course> vagueQueryByIntro(String keyword);
 	
 }
