@@ -104,8 +104,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-			      <th scope="col">第一个链接</th>
-			      <th scope="col">第二个链接</th>
+			      <th scope="col">第一个链接 190 x 100</th>
+			      <th scope="col">第二个链接 190 x 100</th>
 			    </tr>
 			</thead>
     		<tbody>
@@ -169,8 +169,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-			      <th scope="col">第三个链接</th>
-			      <th scope="col">第四个链接</th>
+			      <th scope="col">第三个链接 190 x 100</th>
+			      <th scope="col">第四个链接 190 x 100</th>
 			    </tr>
 			</thead>
     		<tbody>
@@ -231,6 +231,186 @@
 			</tbody>
 		</table>
 		
+		<table class="table">
+			<thead>
+				<tr>
+			      <th scope="col">补充课程，每次只能补充5集</th>
+			    </tr>
+			</thead>
+			<tbody>
+				<tr>
+			      <td>
+			      	<div class="form-row" id="1">
+						<div class="col-md-6 mb-3">
+					      <label for="validationTooltip02">第一集课程名称</label>
+					      <input type="text" name="courseName1" class="form-control" id="courseName1" placeholder="course name"  required>
+					      <div class="valid-tooltip">
+					        Looks good!
+					      </div>
+					    </div>
+					    <div class="col-md-6 mb-3">
+					    	<div class="form-row">
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip03">选择视频</label>
+								      	<select id="1_video" name="videoName1" class="custom-select" required>
+									      	
+									    </select>
+					    		</div>
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip01">课程所属类别</label>
+								      	<div class="input-group">
+									        <select id="1_videoGroup" class="custom-select" onchange="getVideo(1)" required>
+									        	<option></option>
+										      	<#list videoGroupList as videoGroup>
+										    		<option value="${videoGroup.id}">${(videoGroup.groupName)!''}</option>
+										    	</#list>
+										    </select>
+								      	</div>
+					    		</div>
+					    	</div>
+					    </div>
+					</div>
+			      </td>
+			    </tr>
+			    <tr>
+			      <td>
+			      	<div class="form-row" id="2">
+						<div class="col-md-6 mb-3">
+					      <label for="validationTooltip02">第二集课程名称</label>
+					      <input type="text" name="courseName2" class="form-control" id="courseName2" placeholder="course name"  required>
+					      <div class="valid-tooltip">
+					        Looks good!
+					      </div>
+					    </div>
+					    <div class="col-md-6 mb-3">
+					    	<div class="form-row">
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip03">选择视频</label>
+								      	<select id="2_video" name="videoName2" class="custom-select" required>
+									      	
+									    </select>
+					    		</div>
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip01">课程所属类别</label>
+								      	<div class="input-group">
+									        <select id="2_videoGroup" class="custom-select" onchange="getVideo(2)" required>
+									        	<option></option>
+										      	<#list videoGroupList as videoGroup>
+										    		<option value="${videoGroup.id}">${(videoGroup.groupName)!''}</option>
+										    	</#list>
+										    </select>
+								      	</div>
+					    		</div>
+					    	</div>
+					    </div>
+					</div>
+			      </td>
+			    </tr>
+			    <tr>
+			      <td>
+			      	<div class="form-row" id="3">
+						<div class="col-md-6 mb-3">
+					      <label for="validationTooltip02">第三集课程名称</label>
+					      <input type="text" name="courseName3" class="form-control" id="courseName3" placeholder="course name"  required>
+					      <div class="valid-tooltip">
+					        Looks good!
+					      </div>
+					    </div>
+					    <div class="col-md-6 mb-3">
+					    	<div class="form-row">
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip03">选择视频</label>
+								      	<select id="3_video" name="videoName3" class="custom-select" required>
+									      	
+									    </select>
+					    		</div>
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip01">课程所属类别</label>
+								      	<div class="input-group">
+									        <select id="3_videoGroup" class="custom-select" onchange="getVideo(3)" required>
+									        	<option></option>
+										      	<#list videoGroupList as videoGroup>
+										    		<option value="${videoGroup.id}">${(videoGroup.groupName)!''}</option>
+										    	</#list>
+										    </select>
+								      	</div>
+					    		</div>
+					    	</div>
+					    </div>
+					</div>
+			      </td>
+			    </tr>
+			    <tr>
+			      <td>
+			      	<div class="form-row" id="4">
+						<div class="col-md-6 mb-3">
+					      <label for="validationTooltip02">第四集课程名称</label>
+					      <input type="text" name="courseName4" class="form-control" id="courseName4" placeholder="course name"  required>
+					      <div class="valid-tooltip">
+					        Looks good!
+					      </div>
+					    </div>
+					    <div class="col-md-6 mb-3">
+					    	<div class="form-row">
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip03">选择视频</label>
+								      	<select id="4_video" name="videoName4" class="custom-select" required>
+									      	
+									    </select>
+					    		</div>
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip01">课程所属类别</label>
+								      	<div class="input-group">
+									        <select id="4_videoGroup" class="custom-select" onchange="getVideo(4)" required>
+									        	<option></option>
+										      	<#list videoGroupList as videoGroup>
+										    		<option value="${videoGroup.id}">${(videoGroup.groupName)!''}</option>
+										    	</#list>
+										    </select>
+								      	</div>
+					    		</div>
+					    	</div>
+					    </div>
+					</div>
+			      </td>
+			    </tr>
+			    <tr>
+			      <td>
+			      	<div class="form-row" id="5">
+						<div class="col-md-6 mb-3">
+					      <label for="validationTooltip02">第五集课程名称</label>
+					      <input type="text" name="courseName5" class="form-control" id="courseName5" placeholder="course name"  required>
+					      <div class="valid-tooltip">
+					        Looks good!
+					      </div>
+					    </div>
+					    <div class="col-md-6 mb-3">
+					    	<div class="form-row">
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip03">选择视频</label>
+								      	<select id="5_video" name="videoName5" class="custom-select" required>
+									      	
+									    </select>
+					    		</div>
+					    		<div class="col-md-6">
+					    			<label for="validationTooltip01">课程所属类别</label>
+								      	<div class="input-group">
+									        <select id="5_videoGroup" class="custom-select" onchange="getVideo(5)" required>
+									        	<option></option>
+										      	<#list videoGroupList as videoGroup>
+										    		<option value="${videoGroup.id}">${(videoGroup.groupName)!''}</option>
+										    	</#list>
+										    </select>
+								      	</div>
+					    		</div>
+					    	</div>
+					    </div>
+					</div>
+			      </td>
+			    </tr>
+			</tbody>
+		</table>
+		
     </div>
     
     
@@ -245,7 +425,12 @@
 		$.ajax({
 		   	type: "POST",
 		   	url: "${indexpath}/teacher/compileCourse.action",
-		   	data: {"id":$("#courseID").val(),"intro":$("#courseIntro").val(),"courseTypeID":$("#courseTypeID").val()},
+		   	data: {"id":$("#courseID").val(),"intro":$("#courseIntro").val(),"courseTypeID":$("#courseTypeID").val(),
+		   			"courseName1":$("#courseName1").val(),"courseName2":$("#courseName2").val(),
+		   			"courseName3":$("#courseName3").val(),"courseName4":$("#courseName4").val(),
+		   			"courseName5":$("#courseName5").val(),"videoName1":$("#1_video").val(),
+		   			"videoName2":$("#2_video").val(),"videoName3":$("#3_video").val(),
+		   			"videoName4":$("#4_video").val(),"videoName5":$("#5_video").val()},
 		   	success: function(msg){
 		   		var data = eval("("+msg+")");
 		   		if(data.success==1){
@@ -275,6 +460,34 @@
 	function ajaxFileUpload(msg){
 		var data = eval("("+msg+")");
 		alert(decodeURIComponent(data.msg));
+	}
+	
+	
+	
+	// ，加载用的当前视频组的视频
+	function getVideo(eleID){
+		var videoGroupID = $("#"+eleID+"_videoGroup").val();
+	
+		$.ajax({
+			type: "POST",
+			url: "${indexpath}/teacher/getVideo.action",
+			data:{"videoGroupID":videoGroupID},
+			success: function(data){
+				var info = eval("("+data+")");
+				if(info.success==1){
+					var eleHTML = "";
+					var msg = eval("("+info.msg+")");
+					for(var i=0;i<msg.length;i++){
+						eleHTML += "<option value='"+msg[i].id+"'>"+msg[i].name+"</option>";
+					}
+					$("#"+eleID+"_video").html(eleHTML);
+				}else if(info.success==2){
+					$("#"+eleID+"_video").html("");
+				}else if(info.success==3){
+					alert(info.msg);
+				}
+			}
+		});
 	}
 	
 </script>

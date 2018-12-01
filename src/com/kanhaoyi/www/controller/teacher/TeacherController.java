@@ -368,6 +368,7 @@ public class TeacherController {
 		Course course = courseService.getOneByID(courseID); // 当前课程
 		List<CourseType> courseTypeList = courseTypeService.getAll(); // 全部科室
 		List<CourseLink> courseLinkList = courseLinkService.getListByCourseID(courseID); // 商品链接
+		List<VideoGroup> videoGroupList = videoGroupService.selectListByUserID(user.getId()); // 用户自定义视频组名称
 		
 		for (CourseLink courseLink : courseLinkList) {
 			model.addAttribute("courseLink"+courseLink.getPicture(),courseLink);
@@ -375,6 +376,7 @@ public class TeacherController {
 		model.addAttribute("course",course);
 		model.addAttribute("user",user);
 		model.addAttribute("courseTypeList",courseTypeList);
+		model.addAttribute("videoGroupList",videoGroupList);
 		
 		InitUtil.iniSystem(model);
 		return "teacher/compileCoursePage";
@@ -390,7 +392,7 @@ public class TeacherController {
 	@RequestMapping("/compileCourse.action")
 	@ResponseBody
 	@Transactional
-	public String compileCourse(Course course,HttpSession session){
+	public String compileCourse(Course course,HttpSession session,HttpServletRequest request){
 		User user = userService.getSessionUser(session);
 		Course course_check = courseService.getOneByID(course.getId()); // 取当前课程，查看是否属于该用户
 		if(user.getId()!=course_check.getUserID()){
@@ -416,6 +418,74 @@ public class TeacherController {
 		String intro2 = course.getIntro().replaceAll("\n", "<br/>"); // 把换行换成html <br/>
 		intro2 = intro2.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
 		intro2 = intro2.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
+		
+		/* 如果有新添加的集数，为其生成网页 */
+		Enumeration<String> enu =request.getParameterNames(); // 取得所有的参数名
+		
+		List<Integer> numList = new ArrayList<Integer>();
+		while(enu.hasMoreElements()){
+			String param = enu.nextElement();
+			int ind = param.indexOf("courseName");
+			if(ind != -1){// 取课程名，有可能为空值，
+				String CN = request.getParameter(param).replace(" ", "");
+				if(CN != null && !CN.equals("")){ // 检查课程名是否为空
+					String index = param.replace("courseName", ""); // 取参数后边的下标
+					String VN = request.getParameter("videoName"+index);
+					if(VN != null && !VN.equals("")){
+						numList.add(Integer.valueOf(index));
+					}
+				}
+			}
+		}
+		if(numList.size() > 0){
+			int[] array = new int[numList.size()];
+			for(int i=0;i<array.length;i++){
+				array[i] = numList.get(i);
+			}
+			// 冒泡排序，从小到大
+			int temp;
+			for (int i = 0; i < array.length; i++) {
+	            for (int j = i+1; j < array.length; j++) {
+	                if (array[i] > array[j]) {
+	                    temp = array[i];
+	                    array[i] = array[j];
+	                    array[j] = temp;  // 两个数交换位置
+	                }
+	            }
+	        }
+			// 程序排序后，跟据顺序插入数据库
+			CourseDetail courseDetail_se = courseDetailService.getOneOrderBy("sequence", "DESC", course.getId()+"");
+			int sequence = 0;
+			try{
+				sequence = courseDetail_se.getSequence(); // 取之前课程中排序的最大数，为新添加的课程叠加顺序
+			}catch(Exception e){ }
+			
+			for(int i:array){
+				sequence++;
+				String courseDetailName = request.getParameter("courseName"+i); // 取本集课程名字
+				String videoName = request.getParameter("videoName"+i); // 跟据下标取视频id
+				CourseDetail courseDetail = new CourseDetail();
+				courseDetail.setCourseID(course.getId());
+				courseDetailService.insert(courseDetail);
+				// 课程路径 项目目录/科室/用户id/页面id.html
+				String coursePath = "/"+courseType_1.getNameSpace()+"/"+user.getId()+"/"+courseDetail.getId()+".html";
+				courseDetail.setCoursePath(coursePath);
+				courseDetail.setCourseDetailName(courseDetailName);
+				courseDetail.setCreateTime(new Timestamp(new Date().getTime()));
+				courseDetail.setSequence(sequence);
+				courseDetail.setVideoID(Integer.valueOf(videoName));
+				courseDetail.setClickVolume(0);
+				courseDetailService.update(courseDetail); 
+			}
+			if(sequence > 0){
+				CourseDetail courseDetail_11 = courseDetailService.getOneOrderBy("id", "asc", course.getId()+"");
+				course.setCoursePath(courseDetail_11.getCoursePath());
+				int quantity = courseDetailService.getListByCourseIdAndSequence(course.getId(), "ASC").size();
+				course.setQuantity(quantity);// 课程集数
+				courseService.update(course);
+			}
+		}	
+			
 		// 生成html页面
 		// 准备数据 课程
 		Course course_ = courseService.getOneByID(course.getId());
