@@ -65,15 +65,21 @@
 		</nav>
 		
 		
-		<div class="container mt-2 mb-2">
-			<#if (teacher!"")=="teacher">
-				<a class="btn btn-success" href="${indexpath}/teacher/uploadVideoPage.action" role="button">上传视频</a>
-				<a class="btn btn-success" href="${indexpath}/teacher/myVideoPage.action" role="button">我的视频</a>
-				<a class="btn btn-success" href="${indexpath}/teacher/publishCoursePage.action" role="button">发布课程</a>
-				<a class="btn btn-success" href="${indexpath}/teacher/myCoursePage.action" role="button">我的课程</a>
+		<div class="container mt-2">
+			<#-- 老师 -->
+			<#if (teacher!"")=="teacher"> 
+				<a class="btn btn-success mb-2" href="${indexpath}/teacher/uploadVideoPage.action" role="button">上传视频</a>
+				<a class="btn btn-success mb-2" href="${indexpath}/teacher/myVideoPage.action" role="button">我的视频</a>
+				<a class="btn btn-success mb-2" href="${indexpath}/teacher/publishCoursePage.action" role="button">发布课程</a>
+				<a class="btn btn-success mb-2" href="${indexpath}/teacher/myCoursePage.action" role="button">我的课程</a>
 			</#if>
-			<#if (admin!"")=="admin">
-				<a class="btn btn-danger" href="${indexpath}/manage/indexPage.action" role="button">后台管理页</a>
+			<#-- 超级管理员 -->
+			<#if (admin!"")=="admin"> 
+				<a class="btn btn-danger  mb-2" href="${indexpath}/manage/indexPage.action" role="button">后台管理页</a>
+			</#if>
+			<#-- 客服 -->
+			<#if (customerService!"")=="customerService">
+				<a class="btn btn-info mb-2" href="${indexpath}/customer/indexPage.action" role="button">呼叫中心</a>
 			</#if>
 		</div>
 		

@@ -36,6 +36,13 @@
 		LIMIT ${pageIndex*pageCount},${pageCount}
     </select>
     
+    <select id="getOneLeftCourseTypeByID" parameterType="int" resultType="map">
+    	SELECT c.id,c.course_name,c.time,c.click_volume,c.quantity,t.name,t.namespace,u.account,u.nickname
+		FROM course c LEFT JOIN course_type t ON c.course_type_id=t.id 
+		LEFT JOIN user u ON c.user_id=u.id 
+		WHERE c.id=#{id}
+    </select>
+    
     <select id="getListByCourseTypeID" parameterType="map" resultType="com.kanhaoyi.www.model.Course">
     	SELECT id,course_name AS courseName,course_type_id AS courseTypeID,user_id AS userID, 
     		time,click_volume AS clickVolume,picture_path AS picturePath,course_path AS coursePath,quantity

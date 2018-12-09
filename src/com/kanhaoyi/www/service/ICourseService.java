@@ -51,6 +51,14 @@ public interface ICourseService extends IServiceFather<Course> {
 	 */
 	public List<Map> getListLeftCourseType(String link, String sort,Integer pageCount,Integer pageIndex);
 	
+	/**
+	 * @description 查看一个课程 左连 课程类型
+	 * @author zhuziming
+	 * @time 2018年12月9日 下午12:18:00
+	 * @param id
+	 * @return
+	 */
+	public Map getOneLeftCourseTypeByID(Integer id);
 	
 	/**
 	 * @desctiption 跟据课程类型id查询列表，并排序

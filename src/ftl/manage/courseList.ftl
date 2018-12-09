@@ -44,6 +44,7 @@
 	                  <th>作者</th>
 	                  <th>科室</th>
 	                  <th>点击量</th>
+	                  <th>操作</th>
 	                </tr>
 	              </thead>
 	              <tbody  id="contentList">
@@ -57,6 +58,9 @@
 			                  <td>${courseMap.account}</td>
 			                  <td>${courseMap.name}</td>
 			                  <td>${courseMap.click_volume}</td>
+			                  <td>
+			                  	<a href="${indexpath}/manage/setCustomerPage.action?courseID=${courseMap.id}" class="btn btn-info btn-sm" role="button">分配客服</a>
+			                  </td>
 			                </tr>
 		                </#list>
 					</#if>

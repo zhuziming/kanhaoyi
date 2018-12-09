@@ -48,7 +48,11 @@ public class PersonalIndex {
 		if(subject.hasRole("admin")){
 			model.addAttribute("admin","admin");
 		}
-		
+		// 如果是客服，在页面中显示客服拥有的菜单
+		if(subject.hasRole("customerService")){
+			model.addAttribute("customerService","customerService");
+		}
+				
 		Essay essay = essayService.getRandom();
 		model.addAttribute("user",user);  
 		if(essay==null){

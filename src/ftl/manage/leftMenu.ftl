@@ -16,6 +16,14 @@
           	课程列表
         </a>
       </li>
+      <#if 'setCustomerPage'==methodName>
+      	<li class="nav-item ${('setCustomerPage'==methodName)?string('bg-dark','')}">
+          <a class="nav-link ${('setCustomerPage'==methodName)?string('text-light','')}" href="#">
+          	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          	分配客服
+          </a>
+        </li>
+	  </#if>
       <li class="nav-item ${('userListPage'==methodName)?string('bg-dark','')}">
         <a class="nav-link ${('userListPage'==methodName)?string('text-light','')}" href="${indexpath}/manage/userListPage.action">
           	用户列表
@@ -30,9 +38,9 @@
         </li>
 	  </#if>
       
-      <li class="nav-item ${('teacherListPage'==methodName)?string('bg-dark','')}">
-        <a class="nav-link ${('teacherListPage'==methodName)?string('text-light','')}" href="${indexpath}/manage/teacherListPage.action">
-          	老师列表
+      <li class="nav-item ${('customerListPage'==methodName)?string('bg-dark','')}">
+        <a class="nav-link ${('customerListPage'==methodName)?string('text-light','')}" href="${indexpath}/manage/customerListPage.action">
+          	呼叫服务
         </a>
       </li>
     </ul>

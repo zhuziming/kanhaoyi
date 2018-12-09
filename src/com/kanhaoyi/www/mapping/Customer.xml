@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.ICustomerDao">
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.Customer" keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO customer(id,user_id,course_id,create_time,remove_time,begin_time,end_time,cancel)
+		VALUE(null,#{userID},#{courseID},#{createTime,jdbcType=TIMESTAMP},#{removeTime,jdbcType=TIMESTAMP},#{beginTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP},#{cancel});
+    </insert>
+    
+    <delete id="deleteByID" parameterType="int">
+    	DELETE FROM customer WHERE id=#{id};
+    </delete>
+    
+    <update id="update" parameterType="com.kanhaoyi.www.model.Customer">
+		UPDATE customer SET id=#{id}
+		<if test="userID!=null and userID!=''">,user_id=#{userID}</if>
+		<if test="courseID!=null and courseID!=''">,course_id=#{courseID}</if>
+		<if test="createTime!=null and createTime!=''">,create_time=#{createTime}</if>
+		<if test="removeTime!=null and removeTime!=''">,remove_time=#{removeTime}</if>
+		<if test="beginTime!=null and beginTime!=''">,begin_time=#{beginTime,jdbcType=TIMESTAMP}</if>
+		<if test="endTime!=null and endTime!=''">,end_time=#{endTime,jdbcType=TIMESTAMP}</if>
+		<if test="cancel!=null and cancel!=''">,cancel=#{cancel}</if>
+		WHERE id=#{id};
+    </update>
+    
+    <select id="selectListByCourseIDAndCancel" parameterType="com.kanhaoyi.www.model.Customer" resultType="com.kanhaoyi.www.model.Customer">
+    	SELECT id,user_id AS userID,course_id AS courseID,create_time AS createTime,
+    		remove_time AS removeTime,begin_time AS beginTime,end_time AS endTime,cancel 
+    	FROM customer WHERE course_id = #{courseID} AND cancel=#{cancel}
+    </select>
+    
+    <select id="getMapListLeftCourseByUserID" parameterType="int" resultType="map">
+		SELECT c.id,c.user_id,c.course_id,c.begin_time,c.end_time,co.course_name,co.picture_path 
+		FROM customer c LEFT JOIN course co ON c.course_id=co.id 
+		WHERE c.user_id=#{userID} AND c.end_time > NOW()
+    </select>
+    
+    <select id="selectByID" parameterType="int" resultType="com.kanhaoyi.www.model.Customer">
+    	SELECT id,user_id AS userID,course_id AS courseID,create_time AS createTime,
+    		remove_time AS removeTime,begin_time AS beginTime,end_time AS endTime,cancel 
+    	FROM customer WHERE id=#{id}
+    </select>
+    
+    <select id="getListByLinkSort" parameterType="map" resultType="com.kanhaoyi.www.model.Customer">
+    	SELECT id,user_id AS userID,course_id AS courseID,create_time AS createTime,
+    		remove_time AS removeTime,begin_time AS beginTime,end_time AS endTime,cancel 
+    	FROM customer ORDER BY #{link} #{sort} LIMIT ${pageIndex*pageCount},${pageCount}
+    </select>
+    
+    <select id="getCountAll" resultType="int">
+    	SELECT count(1) FROM customer
+    </select>
+</mapper>

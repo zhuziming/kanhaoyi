@@ -156,7 +156,8 @@
 			<value>
 				/loginUrl.action=loginFilter
 				/back/**=authc,roles["ordinary"]
-				<!-- /manage/**=authc,roles["admin"] -->
+				<!-- /manage/**=authc,roles["admin"] 
+				/customer/**=authc,roles["customerService"]-->
 				/logout.action=logout
 				/teacher/**=authc,roles["teacher"]
 				/**=anon

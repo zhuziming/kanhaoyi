@@ -19,6 +19,7 @@ public interface ICourseDao {
 	
 	public List<Map> getListByUserIDLeftCourseType(Map<String,Object> map);
 	public List<Map> getListLeftCourseType(Map<String,Object> map);
+	public Map getOneLeftCourseTypeByID(Integer id);
 	
 	/**
 	 * @desctiption 跟据课程类型id查询列表，并排序

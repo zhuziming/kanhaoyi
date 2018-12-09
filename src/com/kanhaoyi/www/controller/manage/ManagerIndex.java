@@ -1,6 +1,7 @@
 package com.kanhaoyi.www.controller.manage;
 
 import java.net.URLEncoder;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.Course;
 import com.kanhaoyi.www.model.CourseType;
+import com.kanhaoyi.www.model.Customer;
 import com.kanhaoyi.www.model.IndexNews;
 import com.kanhaoyi.www.model.PeoplePart;
 import com.kanhaoyi.www.model.Role;
@@ -31,6 +33,7 @@ import com.kanhaoyi.www.model.UserRole;
 import com.kanhaoyi.www.service.ICoursePeopleService;
 import com.kanhaoyi.www.service.ICourseService;
 import com.kanhaoyi.www.service.ICourseTypeService;
+import com.kanhaoyi.www.service.ICustomerService;
 import com.kanhaoyi.www.service.IIndexNewsService;
 import com.kanhaoyi.www.service.IPeoplePartService;
 import com.kanhaoyi.www.service.IRoleService;
@@ -70,6 +73,8 @@ public class ManagerIndex {
 	private ICoursePeopleService coursePeopleService;
 	@Resource
 	private IIndexNewsService indexNewsService;
+	@Resource
+	private ICustomerService customerService;
 	
 	/**
 	 * @desctiption 后台首页
@@ -507,6 +512,72 @@ public class ManagerIndex {
 		}
 	}
 	
+	/**
+	 * @description 客服列表页
+	 * @author zhuziming
+	 * @time 2018年12月8日 下午6:39:59
+	 * @return
+	 */
+	@RequestMapping("/setCustomerPage.action")
+	public String customerListPage(Model model,Integer courseID){
+		Customer customer = new Customer();
+		customer.setCourseID(courseID);
+		customer.setCancel(0);
+		List<Customer> list = customerService.selectListByCourseIDAndCancel(customer);
+		if(list!=null && list.size()>0){
+			customer = list.get(0);
+		}
+		Map courseMap = courseService.getOneLeftCourseTypeByID(courseID);
+		InitUtil.iniSystem(model);
+		model.addAttribute("courseMap", courseMap);
+		model.addAttribute("customer", customer);
+		model.addAttribute("methodName","setCustomerPage"); // leftMenu页面中当前选中的参数
+		return "manage/setCustomer";
+	}
 	
+	/**
+	 * @description 添加客服
+	 * @author zhuziming
+	 * @time 2018年12月9日 下午2:13:42
+	 * @return
+	 */
+	@RequestMapping("/addCustomer.action")
+	@ResponseBody
+	public String addCustomer(Customer customer){
+		customer.setCancel(0);
+		List<Customer> list = customerService.selectListByCourseIDAndCancel(customer);
+		if(list != null && list.size() > 0){
+			return JSONUtil.returnJson("2", "记录已存在，请先删除");
+		}
+		if(customer.getUserID()==null || customer.getUserID()==0){
+			return JSONUtil.returnJson("2", "请指明用户");
+		}
+		if(customer.getBeginTime()==null || "".equals(customer.getBeginTime())){
+			return JSONUtil.returnJson("2", "开始时间不能为空");
+		}
+		if(customer.getEndTime()==null || "".equals(customer.getEndTime())){
+			return JSONUtil.returnJson("2", "结束时间不能为空");
+		}
+		customer.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		customerService.insert(customer);
+		return JSONUtil.returnJson("1", "添加成功");
+	}
+	
+	/**
+	 * @description 删除客服
+	 * @author zhuziming
+	 * @time 2018年12月9日 下午3:33:52
+	 * @return
+	 */
+	@RequestMapping("/delCustomer.action")
+	@ResponseBody
+	public String delCustomer(Integer customerID){
+		Customer customer = new Customer();
+		customer.setId(customerID);
+		customer.setCancel(1);
+		customer.setRemoveTime(new Timestamp(System.currentTimeMillis()));
+		customerService.update(customer);
+		return JSONUtil.returnJson("1", "删除成功");
+	}
 	
 }

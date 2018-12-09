@@ -71,6 +71,9 @@ public class CourseServiceImpl implements ICourseService {
 		return this.courseDao.getListLeftCourseType(map);
 	}
 	
+	public Map getOneLeftCourseTypeByID(Integer id){
+		return this.courseDao.getOneLeftCourseTypeByID(id);
+	}
 	
 	@Override
 	public List<Course> getListByCourseTypeID(Integer courseTypeID,String link, String sort) {

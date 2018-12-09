@@ -14,6 +14,7 @@
     <script src="${jspath}/jquery.min.js"></script>
 	<script src="${jspath}/boots/bootstrap.min.js"></script>
 	<script src="${jspath}/video.min.js"></script>
+	<script src="${jspath}/socketClient.js"></script>
   </head>
   
   <body>
@@ -156,6 +157,31 @@
 	 </div>
 	</div>
 
+	<div id="customer" style="width: 400px;position: fixed; right: 0; bottom: 0; display:none; z-index:10">
+		<div class="float-right modal-content">
+		  <div class="modal-header alert alert-primary">
+			<h5 class="modal-title">看好医客服<span id="customerTitleStatus" class="badge badge-primary">~</span></h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span  onclick="showCustomer()">×</span>
+			</button>
+		  </div>
+		  <div id="sayContent" class="modal-body" style="height:200px;  overflow-y: auto;">
+			<div id="sayBottom"></div>
+		  </div>
+		  <div class="modal-footer">
+			<input class="form-control" type="text" id="say"/>
+			<button type="button" id="sayButton" class="btn btn-primary"  onclick="sendSay()">发送</button>
+		  </div>
+		</div>
+    </div>
+	
+	<div class="align-middle" style="position: fixed; top: 50%; right: 10px;">
+		<div class="text-center" onclick="showCustomer()">
+			<img src="${imgpath}/webLibrary/customerServer60x60.jpg">
+			<p>客服</p>
+		</div>
+	</div>
+
 	<#include "../footer.ftl">
 	
   </body>
@@ -207,4 +233,10 @@
 			}
 		});
 	}
+</script>
+<script>
+ws.onopen = function() {       
+	var content = getContent("client","","${course.id}","","signUp");
+	ws.send(JSON.stringify(content));   
+};
 </script>
