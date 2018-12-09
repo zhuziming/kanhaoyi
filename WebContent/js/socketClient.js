@@ -1,6 +1,5 @@
 var ws = new WebSocket("ws://192.168.0.107:9000/");   // 低版本的浏览器没有webSocket对象，会报错   
 ws.onmessage = function (evt) {    // 当服务端向客户端发来一个削息时     
-    console.log(evt.data);
 	var msg = JSON.parse(evt.data);
 	
 	if(msg.role=="dialogue"){
@@ -14,19 +13,18 @@ ws.onmessage = function (evt) {    // 当服务端向客户端发来一个削息
 			contentPackage.role = "dialogue"; // 注册成功后，改注册为会话
 			showCustomer();
 		}else if(msg.content=="failure"){ // 注册失败
-			$("#customerTitleStatus").html("不在线");
-			$("#sayButton").addClass('disabled'); 
+			$("#sayButton").attr('disabled',true);
 		}
 	}
 	
 };       
        
 ws.onclose = function() {       // 当服务端关闭时
-   alert("Closed");       
+	console.log("Closed");       
 };       
        
 ws.onerror = function(err) {       // 当服务端出错时
-   alert("Error: " + err);       
+	console.log("Error: " + err);       
 };   
 
 //var time1 = new Date().format("yyyy-MM-dd HH:mm:ss");              

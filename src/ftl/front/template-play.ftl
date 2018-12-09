@@ -161,7 +161,7 @@
 		<div id="customer" class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12" style="position: fixed; right: 0; bottom: 0; display:none; z-index:10">
 			<div class="float-right modal-content">
 			  <div class="modal-header alert alert-primary">
-				<h5 class="modal-title">看好医客服<span id="customerTitleStatus" class="badge badge-primary">~</span></h5>
+				<h5 class="modal-title">看好医客服<span id="customerTitleStatus" class="badge badge-primary">此窗口出售</span></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				  <span  onclick="showCustomer()">×</span>
 				</button>
