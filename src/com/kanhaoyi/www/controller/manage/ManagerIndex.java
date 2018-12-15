@@ -403,6 +403,10 @@ public class ManagerIndex {
 		try{
 			List<Course> courseList = courseService.getAll();
 			for (Course course2 : courseList) {
+				String intro2 = course2.getIntro().replaceAll("\n", "<br/>"); // 把换行换成html <br/>
+				intro2 = intro2.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
+				intro2 = intro2.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
+				course2.setIntro(intro2); // 替换生成页面的介绍
 				// 生成html页面
 				// 准备数据 课程
 				Course course_ = course2;
