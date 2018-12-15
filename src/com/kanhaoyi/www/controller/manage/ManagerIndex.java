@@ -23,6 +23,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.Course;
+import com.kanhaoyi.www.model.CourseDetail;
+import com.kanhaoyi.www.model.CourseLink;
 import com.kanhaoyi.www.model.CourseType;
 import com.kanhaoyi.www.model.Customer;
 import com.kanhaoyi.www.model.IndexNews;
@@ -30,6 +32,10 @@ import com.kanhaoyi.www.model.PeoplePart;
 import com.kanhaoyi.www.model.Role;
 import com.kanhaoyi.www.model.User;
 import com.kanhaoyi.www.model.UserRole;
+import com.kanhaoyi.www.model.Video;
+import com.kanhaoyi.www.service.ICourseCommentService;
+import com.kanhaoyi.www.service.ICourseDetailService;
+import com.kanhaoyi.www.service.ICourseLinkService;
 import com.kanhaoyi.www.service.ICoursePeopleService;
 import com.kanhaoyi.www.service.ICourseService;
 import com.kanhaoyi.www.service.ICourseTypeService;
@@ -39,6 +45,7 @@ import com.kanhaoyi.www.service.IPeoplePartService;
 import com.kanhaoyi.www.service.IRoleService;
 import com.kanhaoyi.www.service.IUserRoleService;
 import com.kanhaoyi.www.service.IUserService;
+import com.kanhaoyi.www.service.IVideoService;
 import com.kanhaoyi.www.util.DateUtil;
 import com.kanhaoyi.www.util.FileUtil;
 import com.kanhaoyi.www.util.FreeMarkerUtil;
@@ -75,7 +82,14 @@ public class ManagerIndex {
 	private IIndexNewsService indexNewsService;
 	@Resource
 	private ICustomerService customerService;
-	
+	@Resource
+	private ICourseDetailService courseDetailService;
+	@Resource
+	private ICourseCommentService courseCommentService;
+	@Resource
+	private IVideoService videoService;
+	@Resource
+	private ICourseLinkService courseLinkService;
 	/**
 	 * @desctiption 后台首页
 	 * @author zhuziming
@@ -344,6 +358,7 @@ public class ManagerIndex {
 			}
 			
 			List<Map> courseListMap = courseService.getListLeftCourseType("click_volume","DESC",pageCount,pageIndex);
+			String indexPath = PropertiesUtil.getValue("system.properties", "indexpath");
 			StringBuffer dataList = new StringBuffer(); // 数据集合
 			for (int i = 0; i < courseListMap.size(); i++) {
 				Map  map= courseListMap.get(i);
@@ -353,6 +368,9 @@ public class ManagerIndex {
 				dataList.append("<td>"+map.get("account")+"</td>");
 				dataList.append("<td>"+map.get("name")+"</td>");
 				dataList.append("<td>"+map.get("click_volume")+"</td>");
+				dataList.append("<td>");
+				dataList.append("<a href=\""+indexPath+"/manage/setCustomerPage.action?courseID="+map.get("id")+"\" class=\"btn btn-info btn-sm\" role=\"button\">分配客服</a>");
+				dataList.append("</td>");
 				dataList.append("</tr>");
 			}
 			// DateUtil.formatTimestampToStr(map.get("time"))
@@ -372,6 +390,50 @@ public class ManagerIndex {
 			return JSONUtil.returnJson("3", "服务器异常");
 		}
 	}
+	
+	/**
+	 * @description 重新生成页面 全部
+	 * @author zhuziming
+	 * @time 2018年12月15日 上午11:58:20
+	 * @return
+	 */
+	@RequestMapping("/updateHtmlAll.action")
+	@ResponseBody
+	public String updateHtmlAll(){
+		try{
+			List<Course> courseList = courseService.getAll();
+			for (Course course2 : courseList) {
+				// 生成html页面
+				// 准备数据 课程
+				Course course_ = course2;
+				// 课程商品链接列表
+				List<CourseLink> courseLinkList_ = courseLinkService.getListByCourseID(course_.getId());
+				// 课程类型列表，网页中导航部分用
+				List<CourseType> courseTypeList_ = courseTypeService.getAll();
+				// 当前课程类型，面包屑导航用
+				CourseType courseType_ = courseTypeService.getOneByID(course_.getCourseTypeID());
+				// 课程详情列表，右则课程列表显示用
+				List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course_.getId(), "ASC");
+				// 得到最多的赞评论 5条
+				List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course_.getId()), 5);
+				// 把赞评论转为html
+				StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
+				
+				for(CourseDetail courseDetail_2 : courseDetailList_){
+					Video video_ = videoService.getOneByID(courseDetail_2.getVideoID());
+					// 生成网页
+					FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
+							courseTypeList_, courseType_, course_, list_, GoodPraise_,video_,courseLinkList_);
+				}
+			}
+			return JSONUtil.returnJson("1", "更新完成");
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("3", "异常了");
+		}
+		
+	}
+	
 
 	
 	/**

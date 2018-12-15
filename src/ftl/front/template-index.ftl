@@ -20,7 +20,7 @@
       <div class="bg-dark collapse show img-fluid k-top-of-page" id="navbarHeader" >
         <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
         	<div class="container" >
-	            <div class="btn-group" role="group">
+	            <div class="btn-group d-none d-sm-block d-md-block d-lg-block d-xl-block" role="group">
 				  <a href="${indexpath}" class="btn btn-link text-dark">看好医</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">

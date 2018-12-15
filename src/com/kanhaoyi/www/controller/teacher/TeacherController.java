@@ -82,8 +82,6 @@ public class TeacherController {
 	@Resource
 	private ICourseCommentService courseCommentService;
 	@Resource
-	private IVideoService viceoService;
-	@Resource
 	private IPeoplePartService peoplePartService;
 	@Resource
 	private ICoursePeopleService coursePeopleService;
@@ -236,24 +234,24 @@ public class TeacherController {
 				// 生成html页面
 				// 准备数据 课程
 				Course course_ = courseService.getOneByID(course.getId());
+				// 课程商品链接列表
+				List<CourseLink> courseLinkList_ = courseLinkService.getListByCourseID(course_.getId());
 				// 课程类型列表，网页中导航部分用
 				List<CourseType> courseTypeList_ = courseTypeService.getAll();
 				// 当前课程类型，面包屑导航用
 				CourseType courseType_ = courseTypeService.getOneByID(course_.getCourseTypeID());
 				// 课程详情列表，右则课程列表显示用
-				List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course.getId(), "ASC");
-				// 当前课程，为了对右则课程列表高亮显示
-				//CourseDetail courseDetail_ = courseDetailService.getOneById(courseDetail.getId());
+				List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course_.getId(), "ASC");
 				// 得到最多的赞评论 5条
-				List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course.getId()), 5);
+				List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course_.getId()), 5);
 				// 把赞评论转为html
 				StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
 				
 				for(CourseDetail courseDetail_2 : courseDetailList_){
-					Video video_ = viceoService.getOneByID(courseDetail_2.getVideoID());
+					Video video_ = videoService.getOneByID(courseDetail_2.getVideoID());
 					// 生成网页
 					FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
-							courseTypeList_, courseType_, course_, list_, GoodPraise_,video_,null);
+							courseTypeList_, courseType_, course_, list_, GoodPraise_,video_,courseLinkList_);
 				}
 				String msg = URLEncoder.encode("上传完毕", "UTF-8");
 				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";
@@ -504,7 +502,7 @@ public class TeacherController {
 		StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
 		
 		for(CourseDetail courseDetail_2 : courseDetailList_){
-			Video video_ = viceoService.getOneByID(courseDetail_2.getVideoID());
+			Video video_ = videoService.getOneByID(courseDetail_2.getVideoID());
 			// 生成网页
 			FreeMarkerUtil.createCourseHTML(courseDetail_2, courseDetailList_, 
 					courseTypeList_, courseType_, course_, list_, GoodPraise_,video_,courseLinkList_);

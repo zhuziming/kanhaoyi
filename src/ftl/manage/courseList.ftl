@@ -67,6 +67,7 @@
 	              	
 	              </tbody>
 	            </table>
+	            <button type="button" onclick="updateHtmlAll()" class="btn btn-primary float-right">全部生成</button>
 	          </div>
         </main>
       </div>
@@ -90,6 +91,17 @@
 		   		}else{
 		   			alert("网络异常，请稍后在试");
 		   		}
+		   	}
+		});
+	}
+	
+	function updateHtmlAll(){
+		$.ajax({
+		   	type: "POST",
+		   	url: "${indexpath}/manage/updateHtmlAll.action",
+		   	dataType: "json",
+		   	success: function(msg){
+		   		alert(msg.msg);
 		   	}
 		});
 	}

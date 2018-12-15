@@ -78,7 +78,7 @@
 	 
 	 <div class="row ">
 	 	<div class="col-lg-9">
-	  		<video width="100%" id="my-video" class="video-js" controls preload="auto"  poster="${imgpath}/courseImg${course.picturePath}" data-setup="{}">
+	  		<video  id="my-video" class="video-js col-lg-9" controls preload="auto"  poster="${imgpath}/courseImg${course.picturePath}" data-setup="{}">
 				<source src="${indexpath}/mp4/course/${video.accountID}/${video.letterName}" type="video/mp4">
 				<p class="vjs-no-js">
 				  To view this video please enable JavaScript, and consider upgrading to a web browser that
