@@ -484,7 +484,7 @@ public class TeacherController {
 		
 		String intro2 = course.getIntro();
 		if(intro2!=null && !intro2.equals("")){
-			intro2.replaceAll("\n", "<br/>"); // 把换行换成html <br/>
+			intro2 = intro2.replaceAll("\n", "<br/>"); // 把换行换成html <br/>
 			intro2 = intro2.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
 			intro2 = intro2.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
 		}
