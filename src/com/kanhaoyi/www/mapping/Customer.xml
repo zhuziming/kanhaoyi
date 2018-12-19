@@ -33,7 +33,7 @@
     <select id="getMapListLeftCourseByUserID" parameterType="int" resultType="map">
 		SELECT c.id,c.user_id,c.course_id,c.begin_time,c.end_time,co.course_name,co.picture_path 
 		FROM customer c LEFT JOIN course co ON c.course_id=co.id 
-		WHERE c.user_id=#{userID} AND c.end_time > NOW()
+		WHERE c.user_id=#{userID} AND c.end_time > NOW() AND c.cancel=0
     </select>
     
     <select id="selectByID" parameterType="int" resultType="com.kanhaoyi.www.model.Customer">

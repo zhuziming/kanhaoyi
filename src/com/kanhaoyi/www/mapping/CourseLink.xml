@@ -4,8 +4,8 @@
 <mapper namespace="com.kanhaoyi.www.dao.ICourseLinkDao">
     
     <insert id="insert" parameterType="com.kanhaoyi.www.model.CourseLink" keyProperty="id" useGeneratedKeys="true">
-    	INSERT INTO course_link(id,course_id,intro,web_location,picture,format)
-		VALUE(null,#{courseID},#{intro},#{webLocation},#{picture},#{format})
+    	INSERT INTO course_link(id,course_id,intro,web_location,picture,format,create_time,end_time)
+		VALUE(null,#{courseID},#{intro},#{webLocation},#{picture},#{format},#{createTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP})
     </insert>
     
     <delete id="deleteByID" parameterType="int" >
@@ -18,12 +18,12 @@
     
     
     <select id="getListByCourseID" parameterType="int" resultType="com.kanhaoyi.www.model.CourseLink">
-    	SELECT id,course_id AS courseID,intro,web_location AS webLocation,picture,format 
+    	SELECT id,course_id AS courseID,intro,web_location AS webLocation,picture,format,create_time AS createTime,end_time AS endTime 
     	FROM course_link WHERE course_id=#{courseID}
     </select>
     
     <select id="getListByLinkSort" parameterType="map" resultType="com.kanhaoyi.www.model.CourseLink">
-    	SELECT id,course_id AS courseID,intro,web_location AS webLocation,picture,format 
+    	SELECT id,course_id AS courseID,intro,web_location AS webLocation,picture,format,create_time AS createTime,end_time AS endTime 
     	FROM course_link 
     	ORDER BY ${link} ${sort} 
     	LIMIT ${pageIndex*pageCount},${pageCount}

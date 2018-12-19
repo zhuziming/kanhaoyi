@@ -413,9 +413,7 @@ public class TeacherController {
 		courseService.update(course);
 		
 		
-		String intro2 = course.getIntro().replaceAll("\n", "<br/>"); // 把换行换成html <br/>
-		intro2 = intro2.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
-		intro2 = intro2.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
+		
 		
 		/* 如果有新添加的集数，为其生成网页 */
 		Enumeration<String> enu =request.getParameterNames(); // 取得所有的参数名
@@ -483,7 +481,13 @@ public class TeacherController {
 				courseService.update(course);
 			}
 		}	
-			
+		
+		String intro2 = course.getIntro();
+		if(intro2!=null && !intro2.equals("")){
+			intro2.replaceAll("\n", "<br/>"); // 把换行换成html <br/>
+			intro2 = intro2.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
+			intro2 = intro2.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
+		}
 		// 生成html页面
 		// 准备数据 课程
 		Course course_ = courseService.getOneByID(course.getId());
@@ -539,6 +543,10 @@ public class TeacherController {
 				String msg = URLEncoder.encode("已超过4条，请先删除后在添加", "UTF-8");
 				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
 			}
+			if(courseLink.getEndTime()==null ){
+				String msg = URLEncoder.encode("请填写到期时间", "UTF-8");
+				return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("2", msg)+"')</script>";
+			}
 			// 检查同一个位置是否多次插入
 			for (CourseLink courseLink_f : courseLinkList) {
 				if(courseLink_f.getPicture()==courseLink.getPicture()){
@@ -553,6 +561,7 @@ public class TeacherController {
 			// 创建图片
 			FileUtil.createCourceLinkImage(imgSavePath, user.getId(),courseLink.getCourseID() ,courseLink.getPicture(), imgFormat, pictureFile);
 			courseLink.setFormat(imgFormat);
+			courseLink.setCreateTime(new Timestamp(System.currentTimeMillis()));
 			courseLinkService.insert(courseLink);
 			String msg = URLEncoder.encode("保存成功", "UTF-8");
 			return "<script>window.parent.ajaxFileUpload('"+JSONUtil.returnJson("1", msg)+"')</script>";

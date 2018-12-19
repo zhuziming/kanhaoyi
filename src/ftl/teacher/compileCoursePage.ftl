@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${csspath}/kanhaoyi-index.css">    
     <script src="${jspath}/jquery.min.js"></script>
 	<script src="${jspath}/boots/bootstrap.min.js"></script>
+	<script src="${jspath}/laydate/laydate.js"></script>
   </head>
   
   <body>
@@ -125,13 +126,19 @@
 				      	<div class="form-group row">
 						    <label class="col-sm-2 col-form-label">描述：</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="intro" value="${(courseLink1.intro)!""}" class="form-control" placeholder="链接描述">
+						      <input type="text" name="intro" value="${(courseLink1.intro)!""}" class="form-control" placeholder="链接描述" required>
 						    </div>
 						</div>
 						<div class="form-group row">
 						    <label class="col-sm-2 col-form-label">地址：</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="webLocation" value="${(courseLink1.webLocation)!""}" class="form-control" placeholder="链接地址">
+						      <input type="text" name="webLocation" value="${(courseLink1.webLocation)!""}" class="form-control" placeholder="链接地址" required>
+						    </div>
+						</div>
+						<div class="form-group row">
+						    <label class="col-sm-3 col-form-label">过期时间：</label>
+						    <div class="col-sm-9">
+						      <input type="text" name="endTime" value="${(courseLink1.endTime)!''}" readonly class="form-control" placeholder="请选择日期" id="endTime1" required>
 						    </div>
 						</div>
 					</form>
@@ -151,13 +158,19 @@
 				      	<div class="form-group row">
 						    <label class="col-sm-2 col-form-label">描述：</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="intro" value="${(courseLink2.intro)!""}" class="form-control" placeholder="链接描述">
+						      <input type="text" name="intro" value="${(courseLink2.intro)!""}" class="form-control" placeholder="链接描述" required>
 						    </div>
 						</div>
 						<div class="form-group row">
 						    <label class="col-sm-2 col-form-label">地址：</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="webLocation" value="${(courseLink2.webLocation)!""}" class="form-control" placeholder="链接地址">
+						      <input type="text" name="webLocation" value="${(courseLink2.webLocation)!""}" class="form-control" placeholder="链接地址" required>
+						    </div>
+						</div>
+						<div class="form-group row">
+						    <label class="col-sm-3 col-form-label">过期时间：</label>
+						    <div class="col-sm-9">
+						      <input type="text" name="endTime" value="${(courseLink2.endTime)!''}" readonly class="form-control" placeholder="请选择日期" id="endTime2" required>
 						    </div>
 						</div>
 					</form>
@@ -190,13 +203,19 @@
 				      	<div class="form-group row">
 						    <label class="col-sm-2 col-form-label">描述：</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="intro" value="${(courseLink3.intro)!""}" class="form-control" placeholder="链接描述">
+						      <input type="text" name="intro" value="${(courseLink3.intro)!""}" class="form-control" placeholder="链接描述" required>
 						    </div>
 						</div>
 						<div class="form-group row">
 						    <label class="col-sm-2 col-form-label">地址：</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="webLocation" value="${(courseLink3.webLocation)!""}" class="form-control" placeholder="链接地址">
+						      <input type="text" name="webLocation" value="${(courseLink3.webLocation)!""}" class="form-control" placeholder="链接地址" required>
+						    </div>
+						</div>
+						<div class="form-group row">
+						    <label class="col-sm-3 col-form-label">过期时间：</label>
+						    <div class="col-sm-9">
+						      <input type="text" name="endTime" value="${(courseLink3.endTime)!''}" readonly class="form-control" placeholder="请选择日期" id="endTime3" required>
 						    </div>
 						</div>
 					</form>
@@ -216,13 +235,19 @@
 				      	<div class="form-group row">
 						    <label class="col-sm-2 col-form-label">描述：</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="intro" value="${(courseLink4.intro)!""}" class="form-control" placeholder="链接描述">
+						      <input type="text" name="intro" value="${(courseLink4.intro)!""}" class="form-control" placeholder="链接描述" required>
 						    </div>
 						</div>
 						<div class="form-group row">
 						    <label class="col-sm-2 col-form-label">地址：</label>
 						    <div class="col-sm-10">
-						      <input type="text" name="webLocation" value="${(courseLink4.webLocation)!""}" class="form-control" placeholder="链接地址">
+						      <input type="text" name="webLocation" value="${(courseLink4.webLocation)!""}" class="form-control" placeholder="链接地址" required>
+						    </div>
+						</div>
+						<div class="form-group row">
+						    <label class="col-sm-3 col-form-label">过期时间：</label>
+						    <div class="col-sm-9">
+						      <input type="text" name="endTime" value="${(courseLink4.endTime)!''}" readonly class="form-control" placeholder="请选择日期" id="endTime4" required>
 						    </div>
 						</div>
 					</form>
@@ -420,6 +445,25 @@
     
   </body>
 </html>
+<script>
+//执行一个laydate实例
+laydate.render({
+  elem: '#endTime1' //指定元素
+  ,type: 'datetime'
+});
+laydate.render({
+  elem: '#endTime2' //指定元素
+  ,type: 'datetime'
+});
+laydate.render({
+  elem: '#endTime3' //指定元素
+  ,type: 'datetime'
+});
+laydate.render({
+  elem: '#endTime4' //指定元素
+  ,type: 'datetime'
+});
+</script>
 <script>
 	function compileCourse(){
 		$.ajax({
