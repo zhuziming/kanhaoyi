@@ -103,7 +103,7 @@
 			  		</div>
 			  	<#else>	
 			  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 pb-3">
-			  			<a target="_blank" href="#">
+			  			<a target="_blank" href="${indexpath}/about-server.html">
 				    		<img width="100%;" src="${imgpath}/190-100-placeholder.jpg"></img>
 				    	</a>
 			  		</div>
@@ -117,7 +117,7 @@
 			  		</div>
 			  	<#else>	
 			  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 pb-3">
-			  			<a target="_blank" href="#">
+			  			<a target="_blank" href="${indexpath}/about-server.html">
 				    		<img width="100%;" src="${imgpath}/190-100-placeholder.jpg"></img>
 				    	</a>
 			  		</div>
@@ -131,7 +131,7 @@
 			  		</div>
 			  	<#else>	
 			  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 pb-3">
-			  			<a target="_blank" href="#">
+			  			<a target="_blank" href="${indexpath}/about-server.html">
 				    		<img width="100%;" src="${imgpath}/190-100-placeholder.jpg"></img>
 				    	</a>
 			  		</div>
@@ -145,7 +145,7 @@
 			  		</div>
 			  	<#else>	
 			  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 pb-3">
-			  			<a target="_blank" href="#">
+			  			<a target="_blank" href="${indexpath}/about-server.html">
 				    		<img width="100%;" src="${imgpath}/190-100-placeholder.jpg"></img>
 				    	</a>
 			  		</div>
