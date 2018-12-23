@@ -14,7 +14,7 @@
     <script src="${jspath}/jquery.min.js"></script>
 	<script src="${jspath}/boots/bootstrap.min.js"></script>
 	<script src="${jspath}/video.min.js"></script>
-	<script src="${jspath}/socketClient.js"></script>
+<#--	<script src="${jspath}/socketClient.js"></script> -->
   </head>
   
   <body>
@@ -180,7 +180,7 @@
 	 	</div>
 	 </div>
 	</div>
-	
+<#--	
 	<div class="row">
 		<div id="customer" class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12" style="position: fixed; right: 0; bottom: 0; display:none; z-index:10">
 			<div class="float-right modal-content">
@@ -206,7 +206,7 @@
 			<p>客服</p>
 		</div>
 	</div>
-
+-->
 	<#include "../footer.ftl">
 	
   </body>
@@ -259,9 +259,11 @@
 		});
 	}
 </script>
-<script>
-ws.onopen = function() {       
-	var content = getContent("client","","${course.id}","","signUp");
-	ws.send(JSON.stringify(content));   
-};
-</script>
+<#-- 
+	<script>
+	ws.onopen = function() {       
+		var content = getContent("client","","${course.id}","","signUp");
+		ws.send(JSON.stringify(content));   
+	};
+	</script>
+ -->
