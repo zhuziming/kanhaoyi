@@ -86,12 +86,12 @@ public class CourseServiceImpl implements ICourseService {
 	}
 
 	@Override
-	public List<Course> getListByLinkSort(String link, String sort, Integer begin, Integer end) {
+	public List<Course> getListByLinkSort(String link, String sort,Integer pageCount,Integer pageIndex) {
 		Map<String ,Object> map = new HashMap<String, Object>();
 		map.put("link", link);
 		map.put("sort", sort);
-		map.put("begin", begin);
-		map.put("end", end);
+		map.put("pageCount", pageCount);
+		map.put("pageIndex", pageIndex);
 		List<Course> list = courseDao.getListByLinkSort(map);
 		return list;
 	}

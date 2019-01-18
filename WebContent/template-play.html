@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>看好医-外科</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/boots/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/boots/blog.css">
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/kanhaoyi/css/video-js.css">
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/kanhaoyi-index.css">
+    <script src="http://localhost:8080/kanhaoyi/js/jquery.min.js"></script>
+	<script src="http://localhost:8080/kanhaoyi/js/boots/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/kanhaoyi/js/video.min.js"></script>
+  </head>
+  
+  <body>
+  	<header class="pb-3">
+      <div class="bg-dark collapse show img-fluid k-top-of-page" id="navbarHeader" >
+        <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
+        	<div class="container" >
+	            <div class="btn-group" role="group">
+				  <a class="btn btn-link text-dark">首页</a>
+				</div>
+				<div class="btn-group" role="group" aria-label="Basic example">
+				  <a id="people" href="http://localhost:8080/kanhaoyi/loginPage.action" class="btn btn-link text-dark">
+				  	未登录
+				  </a>
+				  <a id="signUp" href="http://localhost:8080/kanhaoyi/signUpPage.action" class="btn btn-link text-dark">
+				  	注册
+				  </a>
+				  <a id="logout" href="http://localhost:8080/kanhaoyi/logout.action" class="btn btn-link text-dark" style="display: none;">
+				  	退出
+				  </a>
+				  <a class="btn btn-link text-dark" href="http://localhost:8080/kanhaoyi/info-list.html">
+				  	消息<span class="text-danger" id="infoNum"></span>
+				  </a>
+				</div>
+        	</div>
+	    </nav>
+      </div>
+    </header>
+    
+	<div class="container">
+	  
+	  <nav  class="navbar navbar-expand-sm navbar-light breadcrumb mb-3 mt-3">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">分类</a>
+		
+		  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">内科</a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">外科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">耳鼻喉</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">眼科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">口腔科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">泌尿科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">男科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">妇产科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">皮肤科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">中医科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">养生科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">遗传科</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">儿科</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+	  
+	 	<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a class="k-col-black" href="#">首页</a></li>
+		    <li class="breadcrumb-item"><a class="k-col-black" href="#">外科</a></li>
+		    <li class="breadcrumb-item active">腰间盘突出</li>
+		  </ol>
+		</nav>
+	 
+	 <div class="row ">
+	 	<div class="col-lg-9">
+	  		<video width="100%" id="my-video" class="video-js" controls preload="auto"  poster="https://ninghao.net/files/screenshot/ninghao-net-00-00-intro.jpg" data-setup="{}">
+				<source src="http://localhost:8080/kanhaoyi/mp4/1.mp4" type="video/mp4">
+				<p class="vjs-no-js">
+				  To view this video please enable JavaScript, and consider upgrading to a web browser that
+				  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+				</p>
+		  	</video>
+		  	
+			<div class="input-group pt-3 pb-2">
+			  <input type="text" class="form-control" placeholder="想表达一下心情">
+			  <div class="input-group-append">
+			    <button class="btn btn-outline-secondary" type="button">留言</button>
+			  </div>
+			</div>
+		  	
+		  	<div class="card mb-4">
+				<div class="card-header">
+					<img class="mr-3" style="width: 40px;" src="http://localhost:8080/kanhaoyi/image/0.jpg">
+					This text should overflow the parent.
+			   	 	<a class="float-right">
+			   	 		<span  class=" badge badge-primary "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+			   	 			9
+			   	 		</span>
+			   	 	</a>
+			  	</div>
+			  <div class="card-body">
+			    <blockquote class="blockquote mb-0">
+			      <p>相遇的眼神，你是我爱的人</p>
+			      <footer class="blockquote-footer">比心 回复 目义明
+			      	<cite title="Source Title"> 2018-02-15 12:22:55</cite>
+			      </footer>
+			    </blockquote>
+			  </div>
+			</div>
+
+			<div class="row pt-3 pb-3">
+	  			<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+		  			<a target="_blank" href="#">
+			    		<img width="100%;" src="http://localhost:8080/kanhaoyi/image/190-100-placeholder.jpg"></img>
+			      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">男人的幸福</h5>
+			    	</a>
+		  		</div>
+		  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+		  			<a target="_blank" href="#">
+			    		<img width="100%;" src="http://localhost:8080/kanhaoyi/image/190-100-placeholder.jpg"></img>
+			      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">男人的幸福</h5>
+			    	</a>
+		  		</div>
+		  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+		  			<a target="_blank" href="#">
+			    		<img width="100%;" src="http://localhost:8080/kanhaoyi/image/190-100-placeholder.jpg"></img>
+			      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">男人的幸福</h5>
+			    	</a>
+		  		</div>
+		  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+		  			<a target="_blank" href="#">
+			    		<img width="100%;" src="http://localhost:8080/kanhaoyi/image/190-100-placeholder.jpg"></img>
+			      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">男人的幸福</h5>
+			    	</a>
+		  		</div>
+			</div>
+			<div class="card mb-4">
+			  <div class="card-header">
+			    <img class="mr-3" style="width: 40px;" src="http://localhost:8080/kanhaoyi/image/0.jpg">
+			    Quote
+			    <a class="float-right">
+		   	 		<span  class=" badge badge-primary "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+		   	 			0
+		   	 		</span>
+		   	 	</a>
+			  </div>
+			  <div class="card-body">
+			    <blockquote class="blockquote mb-0">
+			      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+			      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+			    </blockquote>
+			  </div>
+			</div>
+
+		  	
+		  	<div class="alert alert-success" role="alert">
+			  	以下是最新评论
+			</div>
+			
+			<div class="card mb-4">
+			  <div class="card-header">
+			    <img class="mr-3" style="width: 40px;" src="http://localhost:8080/kanhaoyi/image/0.jpg">
+			    Quote
+			    <a class="float-right">
+		   	 		<span  class=" badge badge-primary "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+		   	 			0
+		   	 		</span>
+		   	 	</a>
+			  </div>
+			  <div class="card-body">
+			    <blockquote class="blockquote mb-0">
+			      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+			      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+			    </blockquote>
+			  </div>
+			</div>
+			
+			
+			<button type="button" class="btn btn-primary btn-lg btn-block mb-4">
+				加载更多...
+			</button>
+			
+		  	
+	 	</div>
+	
+	 	<div class="col-lg-3 ">
+            
+            <div class="list-group">
+			  <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+			  <a href="#" class="list-group-item list-group-item-action list-group-item-primary">This is a primary list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a secondary list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a success list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a danger list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a warning list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a info list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a light list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a dark list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a dark list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a dark list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a dark list group item</a>
+			  <a href="#" class="list-group-item list-group-item-action">This is a dark list group item</a>
+			</div> 
+	 	</div>
+	 </div>
+	</div>
+	
+	<div class="float-left">Float left on viewports sized SM (small) or wider</div><br>
+	
+	<div class="fixed-bottom  fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<footer class="blog-footer">
+      <p>看好医www.kanhaoyi.com专注于各种病情的讲解，提高全民医疗常识，如有不足的地方请在以下邮箱留言kanhaoyi@sina.cn</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+	
+  </body>
+</html>
+<script type="text/javascript">
+	var myPlayer = videojs('my-video',{ fluid: true }, function () {
+        console.log('Good to go!');
+	});
+</script>
+<script src="http://localhost:8080/kanhaoyi/js/kanhaoyi.js"></script>

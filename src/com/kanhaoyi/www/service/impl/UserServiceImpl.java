@@ -132,5 +132,11 @@ public class UserServiceImpl implements IUserService {
 		return userDao.getCountAll();
 	}
 
+	@Override
+	public int updateMoney(User user) {
+		// TODO Auto-generated method stub
+		return userDao.updateMoney(user);
+	}
+
 
 }

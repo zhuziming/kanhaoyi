@@ -14,6 +14,7 @@ public class User {
 	private String sex;		//  性别 长度1
 	private Integer infoNum;    // 消息数量
 	private Timestamp time; //  时间
+	private Double money; // 金钱
 	
 	
 	public Integer getId() {
@@ -76,4 +77,11 @@ public class User {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
+	public Double getMoney() {
+		return money;
+	}
+	public void setMoney(Double money) {
+		this.money = money;
+	}
+	
 }

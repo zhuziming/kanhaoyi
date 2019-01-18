@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <title>看好医</title>
+	    <title>看好一</title>
 	    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
 	    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
@@ -15,7 +15,7 @@
 		<div class="container">
 	      <div class="py-5 text-center">
 	        <img class="d-block mx-auto mb-4" src="${imgpath}/logo.png" alt="" width="150">
-	        <h2>看好医欢迎您</h2>
+	        <h2>看好一欢迎您</h2>
 	        <p class="lead">
 	        	以下信息为基本信息，请尽量填写完整，注册成功后，可以前往个人中心完善个人信息
 	        </p>
@@ -107,7 +107,7 @@
 	    
 	    </div>
 		<footer class="blog-footer">
-	      <p>看好医www.kanhaoyi.com专注于各种病情的讲解，提高全民医疗常识，如有不足的地方请在以下邮箱留言kanhaoyi@sina.cn</p>
+	      <p>看好一www.kanhaoyi.com专注于各种病情的讲解，提高全民医疗常识，如有不足的地方请在以下邮箱留言kanhaoyi@sina.cn</p>
 	      <p>
 	        <a href="#">返回顶部</a>
 	      </p>

@@ -57,4 +57,13 @@ public interface IUserService extends IServiceFather<User> {
 	 */
 	public User getSessionUser(HttpSession session);
 	
+	/**
+	 * @description 修改用户金额
+	 * @author zhuziming
+	 * @time 2018年12月28日 上午11:30:47
+	 * @param user
+	 * @return
+	 */
+	public int updateMoney(User user);
+	
 }

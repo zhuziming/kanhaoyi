@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.IPushDao">
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.Push" keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO push(id,user_id,ip,time,lottery) 
+    	VALUE(#{id},#{userID},#{ip},#{time,jdbcType=TIMESTAMP},#{lottery})
+    </insert>
+    
+    <delete id="deleteByID"></delete>
+    
+    <update id="update" parameterType="com.kanhaoyi.www.model.Push">
+    	UPDATE push SET id=#{id}
+    	<if test="userID!=null and userID!=''">,user_id=#{userID}</if> 
+    	<if test="ip!=null and ip!=''">,ip=#{ip}</if> 
+    	<if test="time!=null and time!=''">,time=#{time}</if> 
+    	<if test="lottery!=null and lottery!=''">,lottery=#{lottery}</if> 
+    	WHERE id=#{id}
+    </update>
+    
+    <select id="selectByID"></select>
+    
+    <select id="getListByLinkSort" parameterType="map">
+    	SELECT id,user_id AS userID,ip,time,lottery FROM push ORDER BY ${link} ${sort} LIMIT ${begin},${end}
+    </select>
+    
+    <select id="getCountAll" resultType="int">
+    	SELECT count(1) FROM push
+    </select>
+    
+    <select id="getCountByIP" parameterType="string" resultType="int">
+    	SELECT COUNT(0) FROM push WHERE ip=#{ip}
+    </select>
+    
+    <select id="getLotteryCountByUserID" parameterType="int" resultType="int">
+    	SELECT COUNT(0) FROM push WHERE user_id=#{userID} AND lottery=0
+    </select>
+    <select id="getFirstOneByUserID" parameterType="int" resultType="com.kanhaoyi.www.model.Push">
+    	SELECT id,user_id AS userID,ip,time,lottery 
+    	FROM push WHERE user_id=#{userID} AND lottery=0 LIMIT 0,1
+    </select>
+</mapper>

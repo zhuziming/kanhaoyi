@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>看好医</title>
+    <title>看好一</title>
     <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
-    <meta http-equiv="keywords" content="看好医,医学讲解,医学视频">
-	<meta http-equiv="description" content="看好医从事疾病的讲解，让用户了解病情的发生发展过程，从而帮助疾病的预防">
+    <meta http-equiv="keywords" content="看好一,医学讲解,医学视频">
+	<meta http-equiv="description" content="看好一从事疾病的讲解，让用户了解病情的发生发展过程，从而帮助疾病的预防">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">
     <link rel="stylesheet" href="${csspath}/boots/blog.css">
     <link rel="stylesheet" href="${csspath}/kanhaoyi-index.css">
@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
         	<div class="container" >
 	            <div class="btn-group" role="group">
-				  <a href="${indexpath}" class="btn btn-link text-dark">看好医</a>
+				  <a href="${indexpath}" class="btn btn-link text-dark">看好一</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				  <form id="formQueryCourse" action="${indexpath}/frontIndex/indexQueryCourse.action" target="_blank" method="post">

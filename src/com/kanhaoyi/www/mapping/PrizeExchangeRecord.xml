@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kanhaoyi.www.dao.IPrizeExchangeRecordDao">
+    
+    <insert id="insert" parameterType="com.kanhaoyi.www.model.PrizeExchangeRecord" keyProperty="id" useGeneratedKeys="true">
+    	INSERT INTO prize_exchange_record(id,user_id,prize_record_id,prize_record_name,create_time)
+		VALUE(#{id},#{userID},#{prizeRecordID},#{prizeRecordName},#{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    
+    <delete id="deleteByID"></delete>
+    
+    <update id="update"></update>
+    
+    <select id="selectByID"></select>
+    
+    <select id="getListByLinkSort" resultType="com.kanhaoyi.www.model.PrizeExchangeRecord" parameterType="map">
+    	SELECT id,user_id AS userID,prize_record_id AS prizeRecordID,prize_record_name AS prizeRecordName,create_time AS createTime 
+    	FROM prize_exchange_record
+		ORDER BY ${link} ${sort} LIMIT ${begin},${end}
+    </select>
+    
+    <select id="getCountAll" resultType="int">
+    	SELECT count(1) FROM prize_exchange_record
+    </select>
+</mapper>

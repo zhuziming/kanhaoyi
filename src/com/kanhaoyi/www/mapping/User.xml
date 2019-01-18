@@ -3,14 +3,14 @@
 
 <mapper namespace="com.kanhaoyi.www.dao.IUserDao">
     <select id="selectByID" parameterType="int" resultType="com.kanhaoyi.www.model.User">
-    	select id,account,nickname,password,phone,email,picture,sex,info_num AS infoNum,time from user where id=#{id}
+    	select id,account,nickname,password,phone,email,picture,sex,info_num AS infoNum,time,money from user where id=#{id}
     </select>
     <select id="selectAccountCount" parameterType="string" resultType="int">
     	select count(*) from user where account=#{account}
     </select>
     <!-- 是进行登录认证使用的，根据身份信息进行密码认证 -->
     <select id="selectOneByAccount" parameterType="String" resultType="com.kanhaoyi.www.model.User">
-    	SELECT id,account,nickname,password,phone,email,picture,sex,info_num AS infoNum,time FROM user WHERE account=#{account}
+    	SELECT id,account,nickname,password,phone,email,picture,sex,info_num AS infoNum,time,money FROM user WHERE account=#{account}
     </select>
     <!-- shiro 跟据用户名查询出所有角色  不要用中文 -->
     <select id="findAllRoleByAccount" parameterType="String" resultType="String">
@@ -35,17 +35,20 @@
     
     <insert id="insert" parameterType="com.kanhaoyi.www.model.User" keyProperty="id" useGeneratedKeys="true">
     	INSERT INTO user
-    		(id,account,nickname,password,phone,email,picture,sex,info_num,time)
+    		(id,account,nickname,password,phone,email,picture,sex,info_num,time,money)
 		VALUE(
 			#{id},#{account},#{nickname},#{password},
-			#{phone},#{email},#{picture},#{sex},#{infoNum},#{time,jdbcType=TIMESTAMP}
+			#{phone},#{email},#{picture},#{sex},#{infoNum},#{time,jdbcType=TIMESTAMP},#{money}
 		)
     </insert>
     
     
     <select id="getListByLinkSort" parameterType="map" resultType="com.kanhaoyi.www.model.User">
-    	SELECT id,account,nickname,password,phone,email,picture,sex,info_num AS infoNum,time 
+    	SELECT id,account,nickname,password,phone,email,picture,sex,info_num AS infoNum,time,money 
     	FROM user ORDER BY ${link} ${sort} LIMIT ${pageIndex*pageCount},${pageCount}
     </select>
     
+    <update id="updateMoney" parameterType="com.kanhaoyi.www.model.User">
+    	UPDATE user SET money=#{money} WHERE id=#{id}
+    </update>
 </mapper>

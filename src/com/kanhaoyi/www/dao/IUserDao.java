@@ -28,4 +28,6 @@ public interface IUserDao extends IDaoFather<User> {
 	 * @time 2018年4月27日上午11:17:39
 	 */
 	public Set<String> findAllActionByAccount(String account);
+	
+	public int updateMoney(User user);
 }

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="../js/jquery.min.js"></script>
+
+   
+</head>
+
+<body id="bodyOne" style="margin: 0 auto;  text-align: center;">
+
+		<div  id="wrap">
+   
+	    <!--主体-->
+	    <div class="main" >
+	        <h2 class="main-h2">您今日还有 <span id="change"> 1 </span> 次抽奖机会</h2>
+	        <!--游戏区域-->
+	        <div class="box">
+	            <ul class="light clearfix">
+	                <li class="fl">
+	                    <p></p>
+	                    <p class="blin"></p>
+	                    <p></p>
+	                    <p class="blin"></p>
+	                    <p></p>
+	                    <p class="blin"></p>
+	                </li>
+	                <li class="fr">
+	                    <p class="blin"></p>
+	                    <p></p>
+	                    <p class="blin"></p>
+	                    <p></p>
+	                    <p class="blin"></p>
+	                    <p></p>
+	                </li>
+	            </ul>
+	            <ul class="light2 clearfix">
+	                <li class="ft">
+	                    <p></p>
+	                    <p class="blin"></p>
+	                    <p></p>
+	                    <p class="blin"></p>
+	                    <p></p>
+	                    <p class="blin"></p>
+	                </li>
+	                <li class="fb">
+	                    <p class="blin"></p>
+	                    <p></p>
+	                    <p class="blin"></p>
+	                    <p></p>
+	                    <p class="blin"></p>
+	                    <p></p>
+	                </li>
+	            </ul>
+	            <!--九宫格-->
+	            <ul class="play clearfix">
+	                <li class="prize select">
+	                    <div>
+	                        <img src="image/box1.png">
+	                        <p>1金币</p>
+	                    </div>
+	                </li>
+	                <li class="prize">
+	                    <div>
+	                        <img src="image/box2.png">
+	                        <p>2金币</p>
+	                    </div>
+	                </li>
+	                <li class="prize">
+	                    <div>
+	                        <img src="image/box3.png">
+	                        <p>伟哥（金戈）</p>
+	                    </div>
+	                </li>
+	                <li>
+	                    <div>
+	                        <img src="image/box4.png">
+	                        <p>50元优惠券</p>
+	                    </div>
+	                </li>
+	                <!--开始按钮-->
+	                <li id="btn"></li>
+	                <!--开始按钮-->
+	                <li class="prize">
+	                    <div>
+	                        <img src="image/box0.png">
+	                        <p>拿心</p>
+	                    </div>
+	                </li>
+	                <li class="prize">
+	                    <div>
+	                        <img src="image/box5.png">
+	                        <p>1G流量</p>
+	                    </div>
+	                </li>
+	                <li>
+	                    <div>
+	                        <img src="image/box6.png">
+	                        <p>雅诗兰黛口红</p>
+	                    </div>
+	                </li>
+	                <li class="prize">
+	                    <div>
+	                        <img src="image/box0.png">
+	                        <p>拿心</p>
+	                    </div>
+	                </li>
+	            </ul>
+	            
+	        </div>
+	         <div class="main2">
+	         <a href="#" class="a-main a1">活动规则</a>
+	         <a href="#" class="a-main a2">我的奖品</a>
+	         </div>
+	    </div>
+	    
+	    <!--游戏规则弹窗-->
+	    <div id="mask-rule">
+	        <div class="box-rule">
+	            <h2>活动规则</h2>
+	            <span id="close-rule"></span>
+	            <div class="con">
+	                <div class="text">   
+						1.本次活动为看好医专属特权活动，仅针对目标用户参与。<br/>
+						2.活动期间，看好医公司专属客户每天可参与抽奖一次。<br/>
+						3.本次活动奖品为1金币、2金币、伟哥（金戈版）、50元优惠券、1G省内加餐包、雅诗兰黛口红。<br/>
+						4.活动的最终解释权归看好医所有
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	   
+	   <!--我的中奖记录-->
+	    <div id="mask-lottery">
+	        <div class="box-rule">
+	            <h2>中奖记录</h2>
+	            <span id="close-lottery"></span>
+	            <div class="con">
+	                <div class="text" id="lotteryRecord">   
+						
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	   
+	    <!--中奖提示-->
+	    <div id="mask">
+	        <div class="box-rule">
+	            <div class="box-text">
+	              <div id="text1">
+	              
+	              </div>
+	              <a href="#" class="btn">确定</a>
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <!--提示-->
+	    <div id="mask2">
+	        <div class="box-rule">
+	              <p>您剩余抽奖次数为<span>0</span>，不能抽奖~</p>
+	              <a href="#" class="btn">确定</a>
+	        </div>
+	    </div>
+	    
+	    
+	</div>
+</body>
+</html>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+<!-- 移动端适配 -->
+<script>
+    var html = document.querySelector('html');
+    window.onload=changeRem();
+    window.addEventListener('resize', changeRem);
+
+    function changeRem() {
+        var width = html.getBoundingClientRect().width;
+        if(width>500){
+        	html.style.fontSize = 50 + 'px';
+        	$("#bodyOne").css("width","500px");
+        }else{
+        	html.style.fontSize = width / 10 + 'px';
+        	$("#bodyOne").css("width",width+"px");
+        }
+    }
+</script>
+<script>
+$.ajax({
+	type: "POST",
+	url: "http://localhost:8080/kanhaoyi/pushPrize/getLotteryCount.action",
+	dataType: "json",
+	success: function(msg){
+		if(msg.success==1){
+			if(msg.msg==0){
+				$(".main-h2").html("<a href='http://localhost:8080/kanhaoyi/push/addLottery.html'>点击可以获得更多抽奖机会</a>");
+			}else{
+				$("#change").html(msg.msg);
+			}
+			
+		}
+	}
+});
+</script>

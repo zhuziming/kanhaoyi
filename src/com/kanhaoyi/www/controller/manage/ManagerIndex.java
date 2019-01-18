@@ -261,10 +261,10 @@ public class ManagerIndex {
 				indexNewsMapList.add(indexNewsMap);
 			}
 			
-			// 查点击量最高的6个
-			List<Course> maxClickList = courseService.getListByLinkSort("click_volume", "DESC", 0,12);
-			// 查时间最新的6个
-			List<Course> newTimeList  = courseService.getListByLinkSort("time", "DESC", 0,12);
+			// 查点击量最高的24个
+			List<Course> maxClickList = courseService.getListByLinkSort("click_volume", "DESC", 24,0);
+			// 查时间最新的24个
+			List<Course> newTimeList  = courseService.getListByLinkSort("time", "DESC", 24,0);
 
 			FreeMarkerUtil.createIndexHTML(maxClickList,newTimeList,indexNewsMapList);
 			return JSONUtil.returnJson("1", "生成完毕");

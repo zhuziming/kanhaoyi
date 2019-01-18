@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>产品</title>
+	    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+	    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/boots/bootstrap.min.css">
+	    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/kanhaoyi-index.css">
+	    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/boots/blog.css">
+	    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/album.css">
+	    <script src="http://localhost:8080/kanhaoyi/js/jquery.min.js"></script>
+		<script src="http://localhost:8080/kanhaoyi/js/boots/bootstrap.min.js"></script>
+  	</head>
+  	<body>
+
+    <header>
+      <div class="container navbar navbar-expand-lg navbar-light bg-light">
+        <button type="button" class="btn btn-info">产品列表</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="请输入课程名" aria-label="Search">
+      	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+      </div>
+    </header>
+
+    <main role="main">
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row" >
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="http://localhost:8080/kanhaoyi/image/190-100-placeholder.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card .</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="http://localhost:8080/kanhaoyi/productDetail.html" class="btn btn-sm btn-outline-secondary">立即购买</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    
+    </body>
+</html>
+<script>
+function getProduct(pageIndex){
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:8080/kanhaoyi/product/getProductLinkList.action",
+		data:{pageIndex:pageIndex},
+		dataType: "json",
+		success: function(msg){
+			console.log(msg);
+			$(".row").html(msg.msg);
+		}
+	});
+}
+
+//window.onload=getProduct(0);
+</script>

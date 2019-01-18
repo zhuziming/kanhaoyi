@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>${course.courseName}</title>
     <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
-    <meta http-equiv="keywords" content="看好医,${courseType.name},${course.courseName}">
+    <meta http-equiv="keywords" content="看好一,${courseType.name},${course.courseName}">
 	<meta http-equiv="description" content="${course.courseName}">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">
     <link rel="stylesheet" href="${csspath}/boots/blog.css">
@@ -14,7 +14,7 @@
     <script src="${jspath}/jquery.min.js"></script>
 	<script src="${jspath}/boots/bootstrap.min.js"></script>
 	<script src="${jspath}/video.min.js"></script>
-<#--	<script src="${jspath}/socketClient.js"></script> -->
+	<script src="${jspath}/socketClient.js"></script>
   </head>
   
   <body>
@@ -180,12 +180,12 @@
 	 	</div>
 	 </div>
 	</div>
-<#--	
+	
 	<div class="row">
 		<div id="customer" class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12" style="position: fixed; right: 0; bottom: 0; display:none; z-index:10">
 			<div class="float-right modal-content">
 			  <div class="modal-header alert alert-primary">
-				<h5 class="modal-title">看好医客服<span id="customerTitleStatus" class="badge badge-primary">此窗口出售</span></h5>
+				<h5 class="modal-title">看好一客服<span id="customerTitleStatus" class="badge badge-primary">此窗口出售</span></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				  <span  onclick="showCustomer()">×</span>
 				</button>
@@ -206,7 +206,7 @@
 			<p>客服</p>
 		</div>
 	</div>
--->
+
 	<#include "../footer.ftl">
 	
   </body>
@@ -259,11 +259,10 @@
 		});
 	}
 </script>
-<#-- 
-	<script>
-	ws.onopen = function() {       
-		var content = getContent("client","","${course.id}","","signUp");
-		ws.send(JSON.stringify(content));   
-	};
-	</script>
- -->
+
+<script>
+ws.onopen = function() {       
+	var content = getContent("client","","${course.id}","","signUp");
+	ws.send(JSON.stringify(content));   
+};
+</script>

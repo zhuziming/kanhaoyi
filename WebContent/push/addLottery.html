@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="../js/jquery.min.js"></script>
+
+   
+</head>
+
+<body id="bodyOne" style="margin: 0 auto;  text-align: center;">
+
+		<div  id="wrap">
+   
+	    <!--主体-->
+	    <div class="main" >
+	        <h2 class="main-h2">分享链接，抽大奖</h2>
+	        <!--游戏区域-->
+	        <div class="box">
+	            <h1>
+	            	复制以下链接到其他平台，比如QQ群，微信群，贴吧，论坛等；如果有人点击此链接，您就可以获得一次抽奖机会，
+	            	同一IP只能生效一次
+	            </h1>
+	            <h1 style="text-align: left;">
+	            	http://localhost:8080/kanhaoyi/pushPrize/addLottery.action?userID=<span id="userID"></span>
+	            </h1>
+	        </div>
+	         <div class="main2">
+	         <a href="#" class="a-main a1">活动规则</a>
+	         <a href="#" class="a-main a2">我的奖品</a>
+	         </div>
+	    </div>
+	    
+	    <!--游戏规则弹窗-->
+	    <div id="mask-rule">
+	        <div class="box-rule">
+	            <h2>活动规则</h2>
+	            <span id="close-rule"></span>
+	            <div class="con">
+	                <div class="text">   
+						1.本次活动为看好医专属特权活动，仅针对目标用户参与。<br/>
+						2.活动期间，看好医公司专属客户每天可参与抽奖一次。<br/>
+						3.本次活动奖品为1金币、2金币、伟哥（金戈版）、50元优惠券、1G省内加餐包、雅诗兰黛口红。<br/>
+						4.活动的最终解释权归看好医所有
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	   
+	   	<!--我的中奖记录-->
+	    <div id="mask-lottery">
+	        <div class="box-rule">
+	            <h2>中奖记录</h2>
+	            <span id="close-lottery"></span>
+	            <div class="con">
+	                <div class="text" id="lotteryRecord">   
+						
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	   
+	    <!--中奖提示-->
+	    <div id="mask">
+	        <div class="box-rule">
+	            <div class="box-text">
+	              <div id="text1">
+	              
+	              </div>
+	              <a href="#" class="btn">确定</a>
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <!--提示-->
+	    <div id="mask2">
+	        <div class="box-rule">
+	              <p>您剩余抽奖次数为<span>0</span>，不能抽奖~</p>
+	              <a href="#" class="btn">确定</a>
+	        </div>
+	    </div>
+	    
+	    
+	</div>
+</body>
+</html>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+<!-- 移动端适配 -->
+<script>
+    var html = document.querySelector('html');
+    window.onload=changeRem();
+    window.addEventListener('resize', changeRem);
+
+    function changeRem() {
+        var width = html.getBoundingClientRect().width;
+        if(width>500){
+        	html.style.fontSize = 50 + 'px';
+        	$("#bodyOne").css("width","500px");
+        }else{
+        	html.style.fontSize = width / 10 + 'px';
+        	$("#bodyOne").css("width",width+"px");
+        }
+    }
+</script>
+<script>
+$.ajax({
+	type: "POST",
+	url: "http://localhost:8080/kanhaoyi/pushPrize/getUserID.action",
+	dataType: "json",
+	success: function(msg){
+		if(msg.success==1){
+			$("#userID").html(msg.msg);
+		}else{
+			alert(msg.msg);
+		}
+	}
+});
+</script>

@@ -26,7 +26,8 @@
 					  <img width="150px;" src="${imgpath}/${user.picture}" class="figure-img img-fluid rounded-circle mr-3">
 					  <div class="media-body">
 					    <h5 class="mt-0">${user.account}</h5>
-					   	<span> ${user.nickname}</span>
+					   	<span> ${user.nickname}</span><br/>
+					   	<span>金币：${user.money}</span>
 					  </div>
 					</div>
 				</div>
