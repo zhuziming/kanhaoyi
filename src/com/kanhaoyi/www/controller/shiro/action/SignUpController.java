@@ -98,6 +98,7 @@ public class SignUpController {
 		user.setTime(new Timestamp(System.currentTimeMillis()));
 		user.setPicture("/userDefault.jpg");
 		user.setMoney(0.00);
+		user.setSource("acc");
 		userService.insert(user);
 		
 		UserRole ur = new UserRole(); // 为用户加上访问个人中心的权限

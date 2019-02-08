@@ -11,11 +11,12 @@ public class User {
 	private String phone;    //手机号 长度11
 	private String email;  //email 长度255
 	private String picture;//   照片 长度255
-	private String sex;		//  性别 长度1
+	private String sex;		//  性别 长度1[男][女]
 	private Integer infoNum;    // 消息数量
 	private Timestamp time; //  时间
 	private Double money; // 金钱
-	
+	private String source; // 用户来源 长度5[账户登录：acc][微信登录：wx]
+	private String onlyID; // 唯一值 长度255，如果是微信登录则插入微信的唯一标识。账户登录则为空
 	
 	public Integer getId() {
 		return id;
@@ -82,6 +83,18 @@ public class User {
 	}
 	public void setMoney(Double money) {
 		this.money = money;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	public String getOnlyID() {
+		return onlyID;
+	}
+	public void setOnlyID(String onlyID) {
+		this.onlyID = onlyID;
 	}
 	
 }

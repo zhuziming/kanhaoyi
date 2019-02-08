@@ -21,6 +21,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Component;
 
 import com.kanhaoyi.www.model.User;
+import com.kanhaoyi.www.model.WeiXinToken;
 import com.kanhaoyi.www.service.IUserService;
 import com.kanhaoyi.www.util.MyPasswordEncrypt;
 
@@ -58,6 +59,14 @@ public class UserRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		
+		// 如果是微信登录的，则不验证
+		if(token instanceof WeiXinToken){
+			String password = MyPasswordEncrypt.encryptPassword(new String((char[])token.getCredentials()));
+			AuthenticationInfo auth = new SimpleAuthenticationInfo(token.getPrincipal(),password,"userRealm");
+			return auth;
+		}
+
 		// 登录认证 得到用户名
 		String account = (String) token.getPrincipal();  
 		// 取得用户完整信息 自定义业务实现
@@ -77,7 +86,7 @@ public class UserRealm extends AuthorizingRealm {
 			// 比较密码是否正确
 			if(um.getPassword().equals(password)){
 				// 返回用户对象
-				AuthenticationInfo auth = new SimpleAuthenticationInfo(account,password,"member");
+				AuthenticationInfo auth = new SimpleAuthenticationInfo(account,password,"userRealm");
 				return auth;
 			}else{
 				

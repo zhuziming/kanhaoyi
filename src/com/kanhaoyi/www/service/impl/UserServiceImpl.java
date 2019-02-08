@@ -138,5 +138,17 @@ public class UserServiceImpl implements IUserService {
 		return userDao.updateMoney(user);
 	}
 
+	@Override
+	public User getUserByOnlyID(String onlyID) {
+		// TODO Auto-generated method stub
+		return userDao.getUserByOnlyID(onlyID);
+	}
+
+	@Override
+	public int updateNicknameAndSex(User user) {
+		// TODO Auto-generated method stub
+		return userDao.updateNicknameAndSex(user);
+	}
+
 
 }

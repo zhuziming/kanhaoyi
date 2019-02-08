@@ -40,8 +40,20 @@
 	      </#if>
 	      
 	      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-	      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+	      <input  class="btn btn-lg btn-success btn-block" value="微信登录" onclick="wx_login()"></input>
+	      <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
 	    </form>	
 		
 	</body>
 </html>
+<script>
+	function wx_login(){
+		var wx_url = "https://open.weixin.qq.com/connect/qrconnect";
+		var appid = "wxf46eb8128a00b10d";
+		var redirect_uri = "http%3A%2F%2Fwww.kanhaoyi.com%2FweixinRedirect.action";
+		var response_type = "code";
+		var scope = "snsapi_login";
+		var state = "STATE#wechat_redirect";
+		window.location.href=wx_url + "?appid=" + appid + "&redirect_uri=" + redirect_uri + "&response_type=" + response_type + "&scope=" + scope + "&state=" + state;
+	}
+</script>

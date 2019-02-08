@@ -30,4 +30,8 @@ public interface IUserDao extends IDaoFather<User> {
 	public Set<String> findAllActionByAccount(String account);
 	
 	public int updateMoney(User user);
+	
+	public User getUserByOnlyID(String onlyID);
+	
+	public int updateNicknameAndSex(User user);
 }

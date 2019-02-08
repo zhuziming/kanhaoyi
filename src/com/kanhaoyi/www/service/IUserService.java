@@ -66,4 +66,22 @@ public interface IUserService extends IServiceFather<User> {
 	 */
 	public int updateMoney(User user);
 	
+	/**
+	 * @description 取一个用户
+	 * @author zhuziming
+	 * @time 2019年2月8日 下午4:27:29
+	 * @param onlyID ： 第三方认证登录用户（微信）的唯一值
+	 * @return
+	 */
+	public User getUserByOnlyID(String onlyID);
+	
+	/**
+	 * @description 第三方登录时（微信），如果用户名性别与之前不一致，修改本地数据
+	 * @author zhuziming
+	 * @time 2019年2月8日 下午5:03:19
+	 * @param user
+	 * @return
+	 */
+	public int updateNicknameAndSex(User user);
+	
 }
