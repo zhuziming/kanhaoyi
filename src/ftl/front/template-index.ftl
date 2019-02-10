@@ -46,7 +46,7 @@
 				  <a class="btn btn-link text-dark d-none" href="${indexpath}/info-list.html">
 				  	消息<span class="text-danger" id="infoNum"></span>
 				  </a>
-				  <a class="btn btn-link text-dark" href="${indexpath}/push/lottery.html">
+				  <a class="btn btn-link text-dark" href="${indexpath}/push/lottery.html" target="_blank">
 				  	抽奖
 				  </a>
 				</div>
