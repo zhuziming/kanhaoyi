@@ -14,7 +14,6 @@
     <script src="${jspath}/jquery.min.js"></script>
 	<script src="${jspath}/boots/bootstrap.min.js"></script>
 	<script src="${jspath}/video.min.js"></script>
-	<script src="${jspath}/socketClient.js"></script>
   </head>
   
   <body>
@@ -85,6 +84,24 @@
 				  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 				</p>
 		  	</video>
+		  	
+		  	<#if (courseDetailList?size) gt 1 >
+			  	<#list courseDetailList as courseDetail_>
+	        		<#if courseDetail_.id = courseDetail.id>
+	        			<#if courseDetail__index=0><#-- 如果是第一个 -->
+	        				<a  href="${indexpath}${courseDetailList[courseDetail__index+1].coursePath}" class="btn btn-success">下一讲</a>
+	        			<#elseif !courseDetail__has_next><#-- 如果是最后一个 -->
+	        				<a  href="${indexpath}${courseDetailList[courseDetail__index-1].coursePath}" class="btn btn-primary">上一讲</a>
+	        			<#else>
+	        				<a  href="${indexpath}${courseDetailList[courseDetail__index-1].coursePath}" class="btn btn-primary">上一讲</a>
+	        				<a  href="${indexpath}${courseDetailList[courseDetail__index+1].coursePath}" class="btn btn-success">下一讲</a>
+	        			</#if>
+	        		</#if>
+	        	</#list>
+		  	</#if>
+
+		  	
+		  	
 		  	
 			<div class="input-group pt-3 pb-2">
 			  <input type="text" id="comment" class="form-control" placeholder="想表达一下心情">
@@ -181,32 +198,6 @@
 	 </div>
 	</div>
 	
-	<div class="row">
-		<div id="customer" class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12" style="position: fixed; right: 0; bottom: 0; display:none; z-index:10">
-			<div class="float-right modal-content">
-			  <div class="modal-header alert alert-primary">
-				<h5 class="modal-title">看好一客服<span id="customerTitleStatus" class="badge badge-primary">此窗口出售</span></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				  <span  onclick="showCustomer()">×</span>
-				</button>
-			  </div>
-			  <div id="sayContent" class="modal-body" style="height:200px;  overflow-y: auto;">
-				<div id="sayBottom"></div>
-			  </div>
-			  <div class="modal-footer">
-				<input class="form-control" type="text" id="say"/>
-				<button type="button" id="sayButton" class="btn btn-primary"  onclick="sendSay()">发送</button>
-			  </div>
-			</div>
-	    </div>
-	</div>
-	<div class="align-middle" style="position: fixed; top: 50%; right: 10px;">
-		<div class="text-center" onclick="showCustomer()">
-			<img src="${imgpath}/webLibrary/customerServer60x60.jpg">
-			<p>客服</p>
-		</div>
-	</div>
-
 	<#include "../footer.ftl">
 	
   </body>
@@ -258,11 +249,4 @@
 			}
 		});
 	}
-</script>
-
-<script>
-ws.onopen = function() {       
-	var content = getContent("client","","${course.id}","","signUp");
-	ws.send(JSON.stringify(content));   
-};
 </script>

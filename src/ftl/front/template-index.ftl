@@ -252,24 +252,6 @@
 		    </#list>
 		  </div>
 	  </#if>
-	  
-	  <#if (newTimeList?size > 0)>
-		  <div class="row">
-		  	<div class="col">
-		  		<h3>最新发布</h3>
-		  	</div>
-		  </div>
-		  <div class="row">
-		  	<#list newTimeList as course>
-			    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
-			    	<a href="${indexpath}${course.coursePath}" target="_blank">
-			    		<img width="100%;" src="${imgpath}/courseImg${course.picturePath}"></img>
-			      		<p class="k-course-sort">${course.courseName}</p>
-			    	</a>
-			    </div>
-		    </#list>
-		  </div>
-	  </#if>
 	</div>
 
 	<#include "../footer.ftl">
