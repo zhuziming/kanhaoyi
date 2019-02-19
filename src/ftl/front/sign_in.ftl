@@ -28,7 +28,7 @@
 		
 	      <div class="checkbox mb-3">
 	        <label>
-	          <input type="checkbox" name="rememberMe" value="true">下次免登录
+	          <input type="checkbox" checked="checked" name="rememberMe" value="true">下次免登录
 	        </label>
 	      </div>
 	      <#if bugMsg??>

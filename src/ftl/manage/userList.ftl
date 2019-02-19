@@ -50,11 +50,11 @@
 	              <tbody  id="contentList">
 	              	<#list userList as user>
 	              		<tr>
-		                  <td>${user.id}</td>
-		                  <td>${user.account}</td>
-		                  <td>${user.nickname}</td>
-		                  <td>${user.phone}</td>
-		                  <td>${user.sex}</td>
+		                  <td>${(user.id)!""}</td>
+		                  <td>${(user.account)!""}</td>
+		                  <td>${(user.nickname)!""}</td>
+		                  <td>${(user.phone)!""}</td>
+		                  <td>${(user.sex)!""}</td>
 		                  <td>
 		                  	<a href="${indexpath}/manage/allocationRolePage.action?userid=${user.id}" class="btn btn-info btn-sm" role="button">
 		                  		分配角色
