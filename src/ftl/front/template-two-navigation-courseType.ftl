@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>${courseType.name}</title>
     <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
-    <meta http-equiv="keywords" content="看好一,${courseType.name}">
+    <meta http-equiv="keywords" content="看好医,${courseType.name}">
 	<meta http-equiv="description" content="">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">
     <link rel="stylesheet" href="${csspath}/boots/blog.css">
