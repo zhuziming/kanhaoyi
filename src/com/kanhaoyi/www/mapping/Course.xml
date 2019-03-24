@@ -98,4 +98,8 @@
     	UPDATE course SET click_volume=click_volume+1 WHERE id=#{courseID}
     </update>
     
+    <delete id="delete" parameterType="int">
+    	DELETE FROM course WHERE id=#{id}
+    </delete>
+    
 </mapper>

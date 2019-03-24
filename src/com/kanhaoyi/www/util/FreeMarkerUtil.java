@@ -285,7 +285,7 @@ public class FreeMarkerUtil {
 		// 得到ftl模版
 		Template tmp = FreeMarkerUtil.getTemplate(freeMarkerFtlpath,"front/template-webmap.ftl");
 		// 得到生成对象
-		Writer writer = FreeMarkerUtil.getWriter(projectPath+"/web-map.html");	
+		Writer writer = FreeMarkerUtil.getWriter(projectPath+"/sitemap.html");	
 		try {
 			// 生成网页
 			tmp.process(data, writer);

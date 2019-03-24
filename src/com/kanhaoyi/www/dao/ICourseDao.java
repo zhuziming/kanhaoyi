@@ -11,6 +11,8 @@ public interface ICourseDao {
 	
 	public int update(Course course);
 	
+	public int delete(Integer id);
+	
 	public Course getOneByID(Integer id);
 	
 	public Integer getCountByUserID(Integer userID);

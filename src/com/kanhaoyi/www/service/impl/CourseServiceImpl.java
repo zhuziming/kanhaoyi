@@ -108,8 +108,7 @@ public class CourseServiceImpl implements ICourseService {
 
 	@Override
 	public int deleteByID(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return courseDao.delete(id);
 	}
 
 	@Override

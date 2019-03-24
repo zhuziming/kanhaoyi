@@ -370,6 +370,7 @@ public class ManagerIndex {
 				dataList.append("<td>"+map.get("click_volume")+"</td>");
 				dataList.append("<td>");
 				dataList.append("<a href=\""+indexPath+"/manage/setCustomerPage.action?courseID="+map.get("id")+"\" class=\"btn btn-info btn-sm\" role=\"button\">分配客服</a>");
+				dataList.append("<a href=\"javascript:delCourse("+map.get("id")+")\" class=\"btn btn-danger btn-sm\" role=\"button\">删除</a>");
 				dataList.append("</td>");
 				dataList.append("</tr>");
 			}
@@ -648,6 +649,26 @@ public class ManagerIndex {
 		customer.setRemoveTime(new Timestamp(System.currentTimeMillis()));
 		customerService.update(customer);
 		return JSONUtil.returnJson("1", "删除成功");
+	}
+	
+	/**
+	 * @description 删除课程
+	 * @author zhuziming
+	 * @time 2019年3月24日 下午5:52:13
+	 * @return
+	 */
+	@RequestMapping("/delCourse.action")
+	@ResponseBody
+	public String delCourse(Integer courseID){
+		try{
+			courseService.deleteByID(courseID);
+			
+			return JSONUtil.returnJson("1", "删除成功");
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("3", "异常了");
+		}
+		
 	}
 	
 }

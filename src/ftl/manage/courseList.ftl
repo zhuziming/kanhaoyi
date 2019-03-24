@@ -60,6 +60,7 @@
 			                  <td>${courseMap.click_volume}</td>
 			                  <td>
 			                  	<a href="${indexpath}/manage/setCustomerPage.action?courseID=${courseMap.id}" class="btn btn-info btn-sm" role="button">分配客服</a>
+			                  	<a href="javascript:delCourse(${courseMap.id})" class="btn btn-danger btn-sm" role="button">删除</a>
 			                  </td>
 			                </tr>
 		                </#list>
@@ -99,6 +100,23 @@
 		$.ajax({
 		   	type: "POST",
 		   	url: "${indexpath}/manage/updateHtmlAll.action",
+		   	dataType: "json",
+		   	success: function(msg){
+		   		alert(msg.msg);
+		   	}
+		});
+	}
+	
+	function delCourse(courseID){
+		var msg = "确定删除该条数据？";  
+        if (!confirm(msg)==true){  
+            return;  
+        } 
+	
+		$.ajax({
+		   	type: "POST",
+		   	url: "${indexpath}/manage/delCourse.action",
+		   	data: {"courseID":courseID},
 		   	dataType: "json",
 		   	success: function(msg){
 		   		alert(msg.msg);
