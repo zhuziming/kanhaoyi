@@ -64,4 +64,9 @@ public class CoursePeopleServiceImpl implements ICoursePeopleService {
 		return null;
 	}
 
+	@Override
+	public int deleteByCourseID(Integer courseID) {
+		return coursePeopleDao.deleteByCourseID(courseID);
+	}
+
 }

@@ -10,4 +10,6 @@ public interface ICoursePeopleService extends IServiceFather<CoursePeople> {
 
 	public List<Course> getCourseListByPeoplePartID(Integer peoplePartID);
 	
+	public int deleteByCourseID(Integer courseID);
+	
 }

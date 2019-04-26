@@ -8,6 +8,9 @@
     </insert>
     
     <delete id="deleteByID"></delete>
+    <delete id="deleteByCourseID" parameterType="int">
+    	DELETE FROM course_people WHERE course_id=#{courseID}
+    </delete>
     
     <update id="update"></update>
     

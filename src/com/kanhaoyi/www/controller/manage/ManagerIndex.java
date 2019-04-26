@@ -661,8 +661,8 @@ public class ManagerIndex {
 	@ResponseBody
 	public String delCourse(Integer courseID){
 		try{
-			courseService.deleteByID(courseID);
-			
+			courseService.deleteByID(courseID); // 删除课程表
+			coursePeopleService.deleteByCourseID(courseID); // 删除人体部位表中的课程
 			return JSONUtil.returnJson("1", "删除成功");
 		}catch(Exception e){
 			e.printStackTrace();
