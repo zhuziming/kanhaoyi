@@ -103,7 +103,15 @@
 	        	</#list>
 		  	</#if>
 
-		  	
+		  	<div class="list-group d-lg-none pt-3">
+            	<#list courseDetailList as courseDetail_>
+            		<#if courseDetail_.id = courseDetail.id>
+            			<a href="${indexpath}${courseDetail_.coursePath}" class="list-group-item list-group-item-action list-group-item-primary">${courseDetail_.courseDetailName}</a>
+            		<#else>
+            			<a href="${indexpath}${courseDetail_.coursePath}" class="list-group-item list-group-item-action">${courseDetail_.courseDetailName}</a>
+            		</#if>
+            	</#list>
+			</div> 
 		  	
 		  	
 			<div class="input-group pt-3 pb-2">
