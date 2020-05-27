@@ -1,0 +1,258 @@
+<html><head><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style><style class="vjs-styles-dimensions">
+      .my-video-dimensions {
+        width: 300px;
+        height: 168.75px;
+      }
+
+      .my-video-dimensions.vjs-fluid {
+        padding-top: 56.25%;
+      }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>射精慢，也很烦</title>
+    <link rel="icon" href="http://localhost:8080/kanhaoyi/image/favicon.ico" type="image/x-icon">
+    <meta http-equiv="keywords" content="看好医,男科,男性“性”功能">
+	<meta http-equiv="description" content="男性“性”功能">
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/boots/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/boots/blog.css">
+	<link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/video-js.css">
+    <link rel="stylesheet" href="http://localhost:8080/kanhaoyi/css/kanhaoyi-index.css">
+    <script src="http://localhost:8080/kanhaoyi/js/jquery.min.js"></script>
+	<script src="http://localhost:8080/kanhaoyi/js/boots/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/kanhaoyi/js/video.min.js"></script>
+  </head>
+  
+  <body>
+  	<header class="pb-3">
+      <div class="bg-dark collapse show img-fluid k-top-of-page" id="navbarHeader">
+        <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
+        	<div class="container">
+	            <div class="btn-group" role="group">
+				  <a href="http://localhost:8080/kanhaoyi" class="btn btn-link text-dark">首页</a>
+				</div>
+				<div class="btn-group" role="group" aria-label="Basic example">
+				  <a id="people" href="http://localhost:8080/kanhaoyi/loginPage.action" class="btn btn-link text-dark">
+				  	未登录
+				  </a>
+				  <a id="signUp" href="http://localhost:8080/kanhaoyi/signUpPage.action" class="btn btn-link text-dark">
+				  	注册
+				  </a>
+				  <a id="logout" href="http://localhost:8080/kanhaoyi/logout.action" class="btn btn-link text-dark" style="display: none;">
+				  	退出
+				  </a>
+				  <a class="btn btn-link text-dark d-none" href="http://localhost:8080/kanhaoyi/info-list.html">
+				  	消息<span class="text-danger" id="infoNum"></span>
+				  </a>
+				  <a class="btn btn-link text-dark" href="http://localhost:8080/kanhaoyi/push/lottery.html" target="_blank">
+				  	抽奖
+				  </a>
+				</div>
+        	</div>
+	    </nav>
+      </div>
+    </header>
+    
+	<div class="container">
+	  
+	  <nav class="navbar navbar-expand-sm navbar-light breadcrumb mb-3 mt-3">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">分类</a>
+		
+		  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/internal.html">内科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/surgery.html">外科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/ENT.html">耳鼻喉科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/urinary.html">泌尿科</a>
+		      	</li>
+		      		<li class="nav-item active">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/andrology.html">男科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/proctology.html">肛肠科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/dermatology.html">皮肤科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/heredity.html">遗传科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/gynaecology.html">妇产科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/TCM.html">中医科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/ophthalmology.html">眼科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/stomatology.html">口腔科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/beautify.html">养生科</a>
+		      	</li>
+		      		<li class="nav-item">
+		        	<a class="nav-link" href="http://localhost:8080/kanhaoyi/pediatric.html">儿科</a>
+		      	</li>
+		    </ul>
+		  </div>
+		</nav>
+	  
+	 	<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a class="k-col-black" href="http://localhost:8080/kanhaoyi">首页</a></li>
+		    <li class="breadcrumb-item"><a class="k-col-black" href="http://localhost:8080/kanhaoyi/andrology.html">男科</a></li>
+		    <li class="breadcrumb-item active">男性“性”功能</li>
+		    <li class="d-none" id="courseID">51</li>
+		  </ol>
+		</nav>
+	 
+	 <div class="row ">
+	 	<div class="col-lg-9">
+	  		<div tabindex="-1" data-setup="{}" poster="http://localhost:8080/kanhaoyi/image/courseImg/28/e32f581e-e8ad-4ff2-843a-e16a5e7bef35.jpg" preload="auto" class="video-js col-lg-9 vjs-paused vjs-fluid my-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" id="my-video" lang="zh-cn" role="region" aria-label="Video Player"><video id="my-video_html5_api" class="vjs-tech" preload="auto" poster="http://localhost:8080/kanhaoyi/image/courseImg/28/e32f581e-e8ad-4ff2-843a-e16a5e7bef35.jpg" data-setup="{}" tabindex="-1">
+				<source src="http://localhost:8080/kanhaoyi/mp4/course/28/c74ab036-775a-4e15-98a5-29dd6db6b4ca.mp4" type="video/mp4">
+				<p class="vjs-no-js">
+				  To view this video please enable JavaScript, and consider upgrading to a web browser that
+				  <a href="http://videojs.com/html5-video-support/" target="_blank" class="vjs-hidden" hidden="hidden">supports HTML5 video</a>
+				</p>
+		  	</video><div class="vjs-poster" tabindex="-1" aria-disabled="false" style="background-image: url(&quot;http://localhost:8080/kanhaoyi/image/courseImg/28/e32f581e-e8ad-4ff2-843a-e16a5e7bef35.jpg&quot;);"></div><div class="vjs-text-track-display" aria-live="off" aria-atomic="true"></div><div class="vjs-loading-spinner" dir="ltr"></div><button class="vjs-big-play-button" type="button" aria-live="polite" title="Play Video" aria-disabled="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Play Video</span></button><div class="vjs-control-bar" dir="ltr" role="group"><button class="vjs-play-control vjs-control vjs-button" type="button" aria-live="polite" title="Play" aria-disabled="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Play</span></button><div class="vjs-volume-panel vjs-control vjs-volume-panel-horizontal"><button class="vjs-mute-control vjs-control vjs-button vjs-vol-3" type="button" aria-live="polite" title="Mute" aria-disabled="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Mute</span></button><div class="vjs-volume-control vjs-control vjs-volume-horizontal"><div tabindex="0" class="vjs-volume-bar vjs-slider-bar vjs-slider vjs-slider-horizontal" role="slider" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Volume Level" aria-live="polite" aria-valuetext="100%"><div class="vjs-volume-level"><span class="vjs-control-text"></span></div></div></div></div><div class="vjs-current-time vjs-time-control vjs-control"><div class="vjs-current-time-display" aria-live="off"><span class="vjs-control-text">Current Time</span> 0:00</div></div><div class="vjs-time-control vjs-time-divider"><div><span>/</span></div></div><div class="vjs-duration vjs-time-control vjs-control"><div class="vjs-duration-display" aria-live="off"><span class="vjs-control-text">Duration Time</span> 0:00</div></div><div class="vjs-progress-control vjs-control"><div tabindex="0" class="vjs-progress-holder vjs-slider vjs-slider-horizontal" role="slider" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progress Bar"><div class="vjs-load-progress"><span class="vjs-control-text"><span>Loaded</span>: 0%</span></div><div class="vjs-mouse-display"><div class="vjs-time-tooltip"></div></div><div class="vjs-play-progress vjs-slider-bar"><div class="vjs-time-tooltip"></div><span class="vjs-control-text"><span>Progress</span>: 0%</span></div></div></div><div class="vjs-live-control vjs-control vjs-hidden"><div class="vjs-live-display" aria-live="off"><span class="vjs-control-text">Stream Type</span>LIVE</div></div><div class="vjs-remaining-time vjs-time-control vjs-control"><div class="vjs-remaining-time-display" aria-live="off"><span class="vjs-control-text">Remaining Time</span> -0:00</div></div><div class="vjs-custom-control-spacer vjs-spacer ">&nbsp;</div><div class="vjs-playback-rate vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden"><button class="vjs-playback-rate vjs-menu-button vjs-menu-button-popup vjs-button" type="button" aria-live="polite" aria-disabled="false" title="Playback Rate" aria-haspopup="true" aria-expanded="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Playback Rate</span></button><div class="vjs-menu"><ul class="vjs-menu-content" role="menu"></ul></div><div class="vjs-playback-rate-value">1x</div></div><div class="vjs-chapters-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden"><button class="vjs-chapters-button vjs-menu-button vjs-menu-button-popup vjs-button" type="button" aria-live="polite" aria-disabled="false" title="Chapters" aria-haspopup="true" aria-expanded="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Chapters</span></button><div class="vjs-menu"><ul class="vjs-menu-content" role="menu"><li class="vjs-menu-title" tabindex="-1">Chapters</li></ul></div></div><div class="vjs-descriptions-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden"><button class="vjs-descriptions-button vjs-menu-button vjs-menu-button-popup vjs-button" type="button" aria-live="polite" aria-disabled="false" title="Descriptions" aria-haspopup="true" aria-expanded="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Descriptions</span></button><div class="vjs-menu"><ul class="vjs-menu-content" role="menu"><li class="vjs-menu-item vjs-selected" tabindex="-1" role="menuitemcheckbox" aria-live="polite" aria-disabled="false" aria-checked="true"><span class="vjs-menu-item-text">descriptions off</span><span class="vjs-control-text">, selected</span></li></ul></div></div><div class="vjs-subs-caps-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden"><button class="vjs-subs-caps-button vjs-menu-button vjs-menu-button-popup vjs-button" type="button" aria-live="polite" aria-disabled="false" title="Subtitles" aria-haspopup="true" aria-expanded="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Subtitles</span></button><div class="vjs-menu"><ul class="vjs-menu-content" role="menu"><li class="vjs-menu-item vjs-texttrack-settings" tabindex="-1" role="menuitem" aria-live="polite" aria-disabled="false"><span class="vjs-menu-item-text">subtitles settings</span><span class="vjs-control-text">, opens subtitles settings dialog</span></li><li class="vjs-menu-item vjs-selected" tabindex="-1" role="menuitemcheckbox" aria-live="polite" aria-disabled="false" aria-checked="true"><span class="vjs-menu-item-text">subtitles off</span><span class="vjs-control-text">, selected</span></li></ul></div></div><div class="vjs-audio-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden"><button class="vjs-audio-button vjs-menu-button vjs-menu-button-popup vjs-button" type="button" aria-live="polite" aria-disabled="false" title="Audio Track" aria-haspopup="true" aria-expanded="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Audio Track</span></button><div class="vjs-menu"><ul class="vjs-menu-content" role="menu"></ul></div></div><button class="vjs-fullscreen-control vjs-control vjs-button" type="button" aria-live="polite" title="Fullscreen" aria-disabled="false"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Fullscreen</span></button></div><div class="vjs-error-display vjs-modal-dialog vjs-hidden " tabindex="-1" aria-describedby="my-video_component_367_description" aria-hidden="true" aria-label="Modal Window" role="dialog"><p class="vjs-modal-dialog-description vjs-control-text" id="my-video_component_367_description">This is a modal window.</p><div class="vjs-modal-dialog-content" role="document"></div></div><div class="vjs-modal-dialog vjs-hidden  vjs-text-track-settings" tabindex="-1" aria-describedby="my-video_component_373_description" aria-hidden="true" aria-label="Caption Settings Dialog" role="dialog"><p class="vjs-modal-dialog-description vjs-control-text" id="my-video_component_373_description">Beginning of dialog window. Escape will cancel and close the window.</p><div class="vjs-modal-dialog-content" role="document"><div class="vjs-track-settings-colors"><fieldset class="vjs-fg-color vjs-track-setting"><legend id="captions-text-legend-my-video_component_373">Text</legend><label id="captions-foreground-color-my-video_component_373" class="vjs-label">Color</label><select aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373"><option id="captions-foreground-color-my-video_component_373-White" value="#FFF" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373 captions-foreground-color-my-video_component_373-White">White</option><option id="captions-foreground-color-my-video_component_373-Black" value="#000" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373 captions-foreground-color-my-video_component_373-Black">Black</option><option id="captions-foreground-color-my-video_component_373-Red" value="#F00" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373 captions-foreground-color-my-video_component_373-Red">Red</option><option id="captions-foreground-color-my-video_component_373-Green" value="#0F0" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373 captions-foreground-color-my-video_component_373-Green">Green</option><option id="captions-foreground-color-my-video_component_373-Blue" value="#00F" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373 captions-foreground-color-my-video_component_373-Blue">Blue</option><option id="captions-foreground-color-my-video_component_373-Yellow" value="#FF0" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373 captions-foreground-color-my-video_component_373-Yellow">Yellow</option><option id="captions-foreground-color-my-video_component_373-Magenta" value="#F0F" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373 captions-foreground-color-my-video_component_373-Magenta">Magenta</option><option id="captions-foreground-color-my-video_component_373-Cyan" value="#0FF" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-color-my-video_component_373 captions-foreground-color-my-video_component_373-Cyan">Cyan</option></select><span class="vjs-text-opacity vjs-opacity"><label id="captions-foreground-opacity-my-video_component_373" class="vjs-label">Transparency</label><select aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-opacity-my-video_component_373"><option id="captions-foreground-opacity-my-video_component_373-Opaque" value="1" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-opacity-my-video_component_373 captions-foreground-opacity-my-video_component_373-Opaque">Opaque</option><option id="captions-foreground-opacity-my-video_component_373-Semi-Transparent" value="0.5" aria-labelledby="captions-text-legend-my-video_component_373 captions-foreground-opacity-my-video_component_373 captions-foreground-opacity-my-video_component_373-Semi-Transparent">Semi-Transparent</option></select></span></fieldset><fieldset class="vjs-bg-color vjs-track-setting"><legend id="captions-background-my-video_component_373">Background</legend><label id="captions-background-color-my-video_component_373" class="vjs-label">Color</label><select aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373"><option id="captions-background-color-my-video_component_373-Black" value="#000" aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373 captions-background-color-my-video_component_373-Black">Black</option><option id="captions-background-color-my-video_component_373-White" value="#FFF" aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373 captions-background-color-my-video_component_373-White">White</option><option id="captions-background-color-my-video_component_373-Red" value="#F00" aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373 captions-background-color-my-video_component_373-Red">Red</option><option id="captions-background-color-my-video_component_373-Green" value="#0F0" aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373 captions-background-color-my-video_component_373-Green">Green</option><option id="captions-background-color-my-video_component_373-Blue" value="#00F" aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373 captions-background-color-my-video_component_373-Blue">Blue</option><option id="captions-background-color-my-video_component_373-Yellow" value="#FF0" aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373 captions-background-color-my-video_component_373-Yellow">Yellow</option><option id="captions-background-color-my-video_component_373-Magenta" value="#F0F" aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373 captions-background-color-my-video_component_373-Magenta">Magenta</option><option id="captions-background-color-my-video_component_373-Cyan" value="#0FF" aria-labelledby="captions-background-my-video_component_373 captions-background-color-my-video_component_373 captions-background-color-my-video_component_373-Cyan">Cyan</option></select><span class="vjs-bg-opacity vjs-opacity"><label id="captions-background-opacity-my-video_component_373" class="vjs-label">Transparency</label><select aria-labelledby="captions-background-my-video_component_373 captions-background-opacity-my-video_component_373"><option id="captions-background-opacity-my-video_component_373-Opaque" value="1" aria-labelledby="captions-background-my-video_component_373 captions-background-opacity-my-video_component_373 captions-background-opacity-my-video_component_373-Opaque">Opaque</option><option id="captions-background-opacity-my-video_component_373-Semi-Transparent" value="0.5" aria-labelledby="captions-background-my-video_component_373 captions-background-opacity-my-video_component_373 captions-background-opacity-my-video_component_373-Semi-Transparent">Semi-Transparent</option><option id="captions-background-opacity-my-video_component_373-Transparent" value="0" aria-labelledby="captions-background-my-video_component_373 captions-background-opacity-my-video_component_373 captions-background-opacity-my-video_component_373-Transparent">Transparent</option></select></span></fieldset><fieldset class="vjs-window-color vjs-track-setting"><legend id="captions-window-my-video_component_373">Window</legend><label id="captions-window-color-my-video_component_373" class="vjs-label">Color</label><select aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373"><option id="captions-window-color-my-video_component_373-Black" value="#000" aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373 captions-window-color-my-video_component_373-Black">Black</option><option id="captions-window-color-my-video_component_373-White" value="#FFF" aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373 captions-window-color-my-video_component_373-White">White</option><option id="captions-window-color-my-video_component_373-Red" value="#F00" aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373 captions-window-color-my-video_component_373-Red">Red</option><option id="captions-window-color-my-video_component_373-Green" value="#0F0" aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373 captions-window-color-my-video_component_373-Green">Green</option><option id="captions-window-color-my-video_component_373-Blue" value="#00F" aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373 captions-window-color-my-video_component_373-Blue">Blue</option><option id="captions-window-color-my-video_component_373-Yellow" value="#FF0" aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373 captions-window-color-my-video_component_373-Yellow">Yellow</option><option id="captions-window-color-my-video_component_373-Magenta" value="#F0F" aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373 captions-window-color-my-video_component_373-Magenta">Magenta</option><option id="captions-window-color-my-video_component_373-Cyan" value="#0FF" aria-labelledby="captions-window-my-video_component_373 captions-window-color-my-video_component_373 captions-window-color-my-video_component_373-Cyan">Cyan</option></select><span class="vjs-window-opacity vjs-opacity"><label id="captions-window-opacity-my-video_component_373" class="vjs-label">Transparency</label><select aria-labelledby="captions-window-my-video_component_373 captions-window-opacity-my-video_component_373"><option id="captions-window-opacity-my-video_component_373-Transparent" value="0" aria-labelledby="captions-window-my-video_component_373 captions-window-opacity-my-video_component_373 captions-window-opacity-my-video_component_373-Transparent">Transparent</option><option id="captions-window-opacity-my-video_component_373-Semi-Transparent" value="0.5" aria-labelledby="captions-window-my-video_component_373 captions-window-opacity-my-video_component_373 captions-window-opacity-my-video_component_373-Semi-Transparent">Semi-Transparent</option><option id="captions-window-opacity-my-video_component_373-Opaque" value="1" aria-labelledby="captions-window-my-video_component_373 captions-window-opacity-my-video_component_373 captions-window-opacity-my-video_component_373-Opaque">Opaque</option></select></span></fieldset></div><div class="vjs-track-settings-font&quot;>"><fieldset class="vjs-font-percent vjs-track-setting"><legend id="captions-font-size-my-video_component_373" class="">Font Size</legend><select aria-labelledby=" captions-font-size-my-video_component_373"><option id="captions-font-size-my-video_component_373-50%" value="0.50" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-50%">50%</option><option id="captions-font-size-my-video_component_373-75%" value="0.75" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-75%">75%</option><option id="captions-font-size-my-video_component_373-100%" value="1.00" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-100%">100%</option><option id="captions-font-size-my-video_component_373-125%" value="1.25" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-125%">125%</option><option id="captions-font-size-my-video_component_373-150%" value="1.50" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-150%">150%</option><option id="captions-font-size-my-video_component_373-175%" value="1.75" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-175%">175%</option><option id="captions-font-size-my-video_component_373-200%" value="2.00" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-200%">200%</option><option id="captions-font-size-my-video_component_373-300%" value="3.00" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-300%">300%</option><option id="captions-font-size-my-video_component_373-400%" value="4.00" aria-labelledby=" captions-font-size-my-video_component_373 captions-font-size-my-video_component_373-400%">400%</option></select></fieldset><fieldset class="vjs-edge-style vjs-track-setting"><legend id="my-video_component_373" class="">Text Edge Style</legend><select aria-labelledby=" my-video_component_373"><option id="my-video_component_373-None" value="none" aria-labelledby=" my-video_component_373 my-video_component_373-None">None</option><option id="my-video_component_373-Raised" value="raised" aria-labelledby=" my-video_component_373 my-video_component_373-Raised">Raised</option><option id="my-video_component_373-Depressed" value="depressed" aria-labelledby=" my-video_component_373 my-video_component_373-Depressed">Depressed</option><option id="my-video_component_373-Uniform" value="uniform" aria-labelledby=" my-video_component_373 my-video_component_373-Uniform">Uniform</option><option id="my-video_component_373-Dropshadow" value="dropshadow" aria-labelledby=" my-video_component_373 my-video_component_373-Dropshadow">Dropshadow</option></select></fieldset><fieldset class="vjs-font-family vjs-track-setting"><legend id="captions-font-family-my-video_component_373" class="">Font Family</legend><select aria-labelledby=" captions-font-family-my-video_component_373"><option id="captions-font-family-my-video_component_373-Proportional Sans-Serif" value="proportionalSansSerif" aria-labelledby=" captions-font-family-my-video_component_373 captions-font-family-my-video_component_373-Proportional Sans-Serif">Proportional Sans-Serif</option><option id="captions-font-family-my-video_component_373-Monospace Sans-Serif" value="monospaceSansSerif" aria-labelledby=" captions-font-family-my-video_component_373 captions-font-family-my-video_component_373-Monospace Sans-Serif">Monospace Sans-Serif</option><option id="captions-font-family-my-video_component_373-Proportional Serif" value="proportionalSerif" aria-labelledby=" captions-font-family-my-video_component_373 captions-font-family-my-video_component_373-Proportional Serif">Proportional Serif</option><option id="captions-font-family-my-video_component_373-Monospace Serif" value="monospaceSerif" aria-labelledby=" captions-font-family-my-video_component_373 captions-font-family-my-video_component_373-Monospace Serif">Monospace Serif</option><option id="captions-font-family-my-video_component_373-Casual" value="casual" aria-labelledby=" captions-font-family-my-video_component_373 captions-font-family-my-video_component_373-Casual">Casual</option><option id="captions-font-family-my-video_component_373-Script" value="script" aria-labelledby=" captions-font-family-my-video_component_373 captions-font-family-my-video_component_373-Script">Script</option><option id="captions-font-family-my-video_component_373-Small Caps" value="small-caps" aria-labelledby=" captions-font-family-my-video_component_373 captions-font-family-my-video_component_373-Small Caps">Small Caps</option></select></fieldset></div><div class="vjs-track-settings-controls"><button class="vjs-default-button" title="restore all settings to the default values">Reset<span class="vjs-control-text"> restore all settings to the default values</span></button><button class="vjs-done-button">Done</button></div></div><button class="vjs-close-button vjs-control vjs-button" type="button" aria-live="polite" aria-disabled="false" title="Close Modal Dialog"><span aria-hidden="true" class="vjs-icon-placeholder"></span><span class="vjs-control-text">Close Modal Dialog</span></button><p class="vjs-control-text">End of dialog window.</p></div></div>
+		  	
+	        				<a href="http://localhost:8080/kanhaoyi/andrology/28/68.html" class="btn btn-primary">上一讲</a>
+	        				<a href="http://localhost:8080/kanhaoyi/andrology/28/70.html" class="btn btn-success">下一讲</a>
+
+		  	<div class="list-group d-lg-none pt-3">
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/62.html" class="list-group-item list-group-item-action">性生理总论</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/63.html" class="list-group-item list-group-item-action">早泄的怎么办</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/64.html" class="list-group-item list-group-item-action">阳痿怎么办</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/65.html" class="list-group-item list-group-item-action">伟哥是如何发挥作用的</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/66.html" class="list-group-item list-group-item-action">那方面太强是病吗</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/67.html" class="list-group-item list-group-item-action">阴茎持续坚举不变软，吃不消</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/68.html" class="list-group-item list-group-item-action">性交不射精，咋回事</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/69.html" class="list-group-item list-group-item-action list-group-item-primary">射精慢，也很烦</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/70.html" class="list-group-item list-group-item-action">年纪轻轻，没了性欲</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/71.html" class="list-group-item list-group-item-action">血精让我猝不及防</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/72.html" class="list-group-item list-group-item-action">影响性的药物</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/75.html" class="list-group-item list-group-item-action">国产伟哥</a>
+			</div> 
+		  	
+		  	
+			<div class="input-group pt-3 pb-2">
+			  <input type="text" id="comment" class="form-control" placeholder="想表达一下心情">
+			  <div class="input-group-append">
+			    <button class="btn btn-outline-secondary" onclick="say(51,$('#comment').val())" type="button">留言</button>
+			  </div>
+			</div>
+		  	
+		  	<div class="row pt-3 pb-3">
+		  	</div>
+
+		  	
+
+		  	<div id="newComment" class="alert alert-success" role="alert">
+			  	以下是最新评论
+			</div>
+			
+			<button type="button" onclick="loadNewComment()" id="moreLoad" class="btn btn-primary btn-lg btn-block mb-4 disabled">没有数据了</button>
+			
+			<div>加群领取“性功能指南”及小礼品&nbsp;QQ群：923865814<br><br>男性性生理<br>青春期：是儿童到成人的转变期，是生殖器官，内分泌，体格逐渐发育到成熟的阶段，世界卫生组织规定青春期为10~19岁，青春期前，生殖器官发育缓慢，青春期发动通常始于8~10岁，男性比女性稍晚1~2岁，此时中枢性负反馈抑制状态解除，GnRH（促性腺激素释放激素）开始脉冲式释放，继而促性腺素和性激素水平升高，生殖器官发育加速，第二性征出现直至成熟，青春期的发动时间主要取决于遗传因素，但受地理环境，体质，饮食营养，心理精神等因素的影响，青春期大约历经4~5年。<br><br>阴茎的勃起<br>阴茎的勃起是一个复杂的心理-生理过程，本质是一系列的神经血管活动。大脑或阴茎局部接受性刺激后，从下丘脑或骶髓低级中枢发出冲动，神经冲动传至阴茎海绵体，副交感神经末梢及血管内皮细胞，在一氧化氮合酶（NOS）的催动下合成释放一氧化氮（NO）增多，NO进入平滑肌细胞内，激活鸟苷酸环化酶（GC），使平滑肌细胞内的cGMP（环磷酸鸟苷：是一种具有细胞内信息传递作用的第二信使）增多，后者激活蛋白酶K，作用于钙离子通道，使细胞内钙离子浓度降低，平滑肌细胞舒张，阴茎海绵体内小动脉及血管窦平滑肌细胞舒张，海绵体血管窦扩张，动脉血流量增加，阴茎海绵体充血胀大，胀大的阴茎海绵体压迫白膜下的小静脉，使静脉流出道关闭，盆底肌的收缩也可压迫海绵体，使之进一步胀大，坚硬而产生勃起。因此，平滑肌舒张，动脉血流量血流速度及静脉流出阻力是阴茎勃起的三个要素。交感神经兴奋，小动脉及血管窦的平滑肌细胞收缩，海绵体压力下降，静脉开放，阴茎开始疲软，阴茎海绵体平滑肌的cGMP由磷酸二酯酶5（PDE5）降解成GMP而失去活性。<br><br>除NO外，与平滑肌舒张，阴茎勃起相关的物质还包括乙酰胆碱，血管活性肠肽，降钙素基因相关肽，PGE2，cAMP等；<br><br>与平滑肌收缩，阴茎疲软相关的物质有去甲肾上腺素，内皮素，PGF2α等。<br><br>雄激素的来源<br>男性的主性器官是睾丸，主要功能是产生精子和分泌雄性激素。睾丸位于阴囊内，左右各一，由200~300个睾丸小叶组成，睾丸小叶由众多的曲细精管和间质细胞组成，分别占睾丸总体积的80%和20%。曲细精管是生成精子的部位，间质细胞合成和分泌雄激素。<br><br>雄激素的合成和代谢<br>雄激素的合成原料都来自胆固醇，间质细胞首先将胆固醇经羟化作用转化为孕烯醇酮，后者可经孕酮或脱氢表雄酮两条途径形成雄烯二酮，最后雄烯二酮转化为睾酮。在部分靶细胞，睾酮可转化为双氢睾酮发挥作用。20~50岁的正常男性每天分泌4~9mg睾酮，血浆中睾酮浓度为（22.7&nbsp;±4.2）nmol/L，50岁以后逐渐减少。血浆中的睾酮98%与血浆中的ABP（雄激素结合蛋白）和白蛋白结合，只有2%呈游离状态，但是只有游离状态的才具有生物活性。大部分睾酮在肝脏中降解灭活，最终转化为17-酮类固醇随尿排出，少量睾酮在芳香化酶的作用下转化为雌激素。<br><br>雄激素的生物学作用<br>1.促进精子生成<br>2.影响胚胎发育<br>3.影响附属性器官和第二性征<br>4.维持正常性欲<br>5.促进代谢<br>6.刺激红细胞生长<br><br>雄激素的调节<br>睾丸的发育，生精作用和内分泌功能主要受到下丘脑-腺垂体-睾丸轴的调节，睾丸分泌的激素又对下丘脑-腺垂体的活动进行反馈调节，形成下丘脑-腺垂体-睾丸轴，此外睾丸内各细胞还存在着局部调节。<br>1.下丘脑-腺垂体-睾丸轴：下丘脑分泌的GnRH&nbsp;（促性腺激素释放激素）可以促进腺垂体合成和分泌FSH（卵泡刺激素）和LH（黄体生成素），合称促性腺激素。FSH主要作用于曲细精管，促进精子生成。但是曲细精管的生精细胞膜上并没有FSH的受体，只有支持细胞膜上有FSH受体，因此FSH的作用是促进支持细胞分泌ABP（雄激素结合蛋白）。ABP与睾酮结合，转运到曲细精管内，提高了微环境中睾酮的局部浓度，有利于精子的生成。LH主要刺激睾丸间质细胞合成和分泌睾酮。因此FSH对生精过程具有始动作用，睾酮则参与生精过程的维持。<br><br>睾丸分泌的睾酮和抑制素也可以反馈抑制下丘脑和腺垂体的活动，当血液中的睾酮水平升高时，睾酮反馈抑制下丘脑和腺垂体的活性，使GnRH&nbsp;（促性腺激素释放激素）和LH（黄体生成素）的分泌减少，因此睾酮分泌下降，从而维持睾酮含量的相对恒定，抑制素则抑制腺垂体合成和分泌FSH&nbsp;（卵泡刺激素），对LH（黄体生成素）无影响。支持细胞分泌的激活素作用于腺垂体，可促进FSH的分泌。<br><br>早泄的诊断标准<br>目前临床上诊断早泄尚无统一的标准，常见的观点为在夫妻共同生活一段时间后，持续存在性爱时间低于2分钟者为早泄。<br><br>早泄的病因非常复杂，一般认为多数患者的早泄是与精神心理因素有关，是由于大脑的性中枢兴奋增强所致，部分患者是由于某些疾病引起。<br>1.精神心理因素：主要是在于男人对于自已配偶的过于强烈的感情，使得射精中枢对射精反射的随意控制能力减退或丧失。如对自已的妻子十分在意，总希望能够在性生活中尽量来体现自已的男子汉形象，让妻子获得最大的满足，但由于紧张，焦虑等过度集中精神而事与愿违。<br>2.性无知和性经验缺乏：这种情况多见于新婚夫妻，尤其是在度蜜月的夫妻，早泄已经是最常见的现象了。这是由于新婚夫妻缺乏性知识，性经验不足；有些男人可能由于一次或几次的性生活失败，造成了沉重的思想压力。<br>3.性生活的环境条件不佳：在一个不利的时间和不利的地点，选择一个不合适性伙伴进行性生活，常常会因为担心被别人发现影响到心情等。<br>4.缺乏生育知识：对于暂时不计划要孩子的夫妻来说，因为担心性生活中妻子会怀孕，可以让男人十分紧张焦虑，而在选择避孕措施时又很茫然，有些男人甚至选择体外排精等措施避孕，使得男人在性生活中难以尽性。<br>5.性生活不规律：主要是指性生活频度比较少的男人，如长期禁欲后的解放者。<br>6.各种疾病：器质性早泄可由于阴茎的感觉过于敏感，感觉神经的兴奋度增高，射精中枢的域值降低所致，主要包括疾病有泌尿生殖系统的炎症，如慢性前列腺炎，慢性精囊炎，慢性睾丸附睾炎，精阜炎，后尿道炎，包皮过长或包茎者；精神系统疾病，如躁狂型精神病，抑郁症等；糖尿病；神经系统疾病，如神经多发性疾病，脊髓肿瘤，脊髓外伤，脑血管外伤，酒精和吗啡中毒者等。<br>7.过度劳累和身体的过度虚弱：婚后的房事过度，工作负担和压力过于沉重，繁重的体力劳动后，疾病刚刚恢复后不久的虚弱状态等。<br><br>早泄怎么办<br>1.带避孕套来减少龟头部位的摩擦。<br>2.龟头麻醉：可以使用麻醉类药物来减少性信号的传导。如利多卡因乳膏，利多卡因气雾剂等。使用时请配带避孕套，避免与女方接触从而麻醉女伴。<br>3.精神分散法：通过转移注意力来减少性信号的接收。如在性爱时观察周围的环境。<br>4.抗抑郁药：抗抑郁药可以提高射精的“阈值”，让男人不容易射精，有效率高达80%以上，常用的抗抑郁药包括阿米替林，氯丙米嗪，盐酸曲唑酮，盐酸氟西汀。此方法必须到医院接受医生的治疗，患者不可自行其是，盲目用药，否则会适得其反。<br>5.二次射精法：在性爱前通过其它方式先射精一次，通常第二次性爱的时间要比第一次长。<br><br>阳痿（勃起功能障碍：ED）怎么办<br>确认自己是否阳痿首先要注意性生活过程中是否曾经或偶尔（6个月以内）有过比较满意的阴茎勃起，阳痿患者往往从来不会有满意的阴茎勃起，可以通过自体观察来初步判断是否阳痿。<br><br>临床上评估阳痿的方法有：阴茎/上臂指数，多普勒脉搏波频谱分析，阴茎体积描计，同位素技术等；这些技术可以观察阴茎在勃起过程中那一个环节出现了问题（平滑肌舒张，动脉血流量血流速度，静脉流出阻力）。<br><br>1.方便易行的口服药物：枸橼酸西地那非（商品名：万艾可，俗称“伟哥”）以其服用方便，效果肯定，安全性好等优点受到医生的青睐和ED患者的欢迎，是目前治疗ED理想的首选口服药物，有效率高达70%~80%。由于其外观呈现蓝色，故有人称为“蓝精灵”。甲磺酸酚妥拉明散片（俗称“俏哥”）是α肾上腺素能受体阻断剂，可以让平滑肌松弛而使阴茎勃起，口服后15~30分钟达到最大血药浓度，副作用轻微且短暂，但必须专科医生指导使用。<br>2.经尿道给药和外用药物：经尿道给药可以使局部药物浓度较高，同时又不需要注射，出现了很多药物剂型，如前列地尔（前列腺素E1乳膏）具有快速，安全及简便的特点，临床平均有效率达75%。<br>3.阴茎海绵体血管活性药物（ICI）的成功应用和不断完善：需要每次房事前向阴茎内注射活性药物，它具有起效快，效果确实等优点，因局部给药的特性所以只能暂时使阴茎勃起。<br>4.血管重建术和静脉阻断术：包括阴茎血管重建术和阴茎静脉阻断术<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⑴阴茎血管重建术：治疗目的是将阴茎动脉血供异常造成的血流量和灌流压减少提高到较高水平，以保证阴茎完全勃起的需要。血管外伤后的患者手术治疗成功率较高。腹壁下动脉-阴茎背深动脉血管重建术是目前治疗成功率最高的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⑵阴茎静脉阻断术：治疗目的是要在阴茎勃起状态时减少静脉回流量，但因效果不理想，且面对的情况较复杂，故很少采用。<br>5.阴茎海绵体内假体值入是治疗严重ED的最后手段：适用于海绵体器质性病变对其他疗无效的患者，近年来该技术已经有很大的改进，可选择的假体种类繁多，主要取决于患者的意愿和经济情况，几乎可以使所有的严重ED患者获得满意的性交。<br>7.心理治疗和综合治疗在ED患者康复中具有重要作用：由于ED的发展往往是渐进性的，患者常不愿意主动就医或得不到及时有效的治疗，或者面对着如此众多的治疗方法而无从选择，长久的ED使绝大数患者都合并精神心理因素，害怕性交失败，有些人的精神心理因素可能十分严重，所以心理治疗占有绝对重要的地位。<br><br>伟哥是如何发挥作用的<br>枸橼酸西地那非（商品名：万艾可，俗称“伟哥”，化学名：5型磷酸二酯酶抑制剂）最初是用来治疗心血管系统疾病的药物，但是在进行分组临床观察中，没有观察到医生需要的理想效果（改善心血管功能），却意外地发现了它的新作用：可以促进阴茎勃起。许多参与用药观察的男人明显地觉得自己的性能力强劲了，“床上”的表现大为改观了，即使在研究结束后的这些男人仍然不断地向医生索取药物，因此引起了医生的“警觉”，发现了万艾可的“性用途”，并获得了众所周知的名字“伟哥”。伟哥的发现可以说是男性学治疗领域的一次重大革命，也是美国食品药物管理局批准的第一个治疗男人阳痿的口服药物，给全球数以亿计的痿男们带来了希望的光芒。<br><br>万艾可（伟哥）是美国辉瑞公司在1998年3月向世界推出的治疗阳痿药物，并于2000年6月底获得在中国上市的批准，伟哥一经出现就引起了医学界的格外关注，并被新闻媒体炒的热火朝天，可见该药用于阳痿的治疗确实名副其实，获得了有口皆碑的效果。<br><br>许多商家看中了这其中的巨大商机，纷纷炮制了“牛哥”“虎哥”等。上海药监局对139个批次的保健药品和保健食品的抽查结果令人担忧，其中有103个批次，60多种保健食品中非法添加了枸橼酸西地那非；类似的壮阳药广泛分布在全国各地，并以各种不同的面目如祖传秘方存在。<br><br>值得提出的是，人类的性欲和性反应是受到多种因素综合控制的，伟哥毕竟不是包治所有阳痿的万能药，还无法直接起到催欲和改变心理体验的作用。<br><br>5型磷酸二酯酶抑制剂有：万艾可，艾力达，希爱力等（处方药）。<br><br>那方面太强是病吗<br>性欲亢进的原因有多种，主要的原因是性中枢兴奋过程增强所致，但大多数属生理性改变，或对性知识不足。青少年时代的环境在发病中有一定作用，如患者双亲或朋友的性放纵，患者自身过早的性活动或涉猎过多的淫秽读物等。<br><br>造成性欲亢进的最常见的器质性原因是内分泌失调，特别是性激素水平失常。现代人的竞争压力大，生活节奏快，出现内分泌失调的情况也不少见，由此也可引发多种性亢奋行为。对男子来说，性欲亢进多由雄激素（睾酮）水平过高造成，脑垂体促性腺激素反馈性地分泌过多也会引起性欲亢进。甲状腺功能亢进患者也会表现出形式各异的性功能和性行为紊乱。<br><br>此外性欲亢进更可能是某种精神疾病或器质性疾病的一种症状，如躁狂症，精神分裂症，癫痫，某些颅内肿瘤，或前列腺炎等某些慢性疾病。<br><br>性欲亢进怎么办<br>对性欲亢进者应首先查明引起性欲亢进的原因，除去器质性的病变外，多数是精神心理因素所致，宜进行心理治疗，正确引导，普及性知识，合理安排性生活。必要时可在医生的指导下适当辅助镇静类或雌激素的药物，以解除患者的性冲动，如地西泮，己烯雌酚等对抗数日，但是切忌盲目长期大量使用药物，以免物极必反。对器质性的病变引起的性欲亢进，可针对原发病进行治疗。<br><br>阴茎持续坚举不变软，吃不消<br>许多男人因为自己阴茎坚挺时间不那么长，在性生活中难以有出色的表现而痛苦，但是也有个别男人，阴茎长时间的坚挺也给他们带来了难以想象的麻烦，阴茎持续坚举不变软超过4个小时，在医学上称为“阴茎异常勃起”，并常伴有胀痛及排尿困难，主要是由于阴茎静脉闭塞或动脉的过度充血而造成，可发生于任何年龄段，患者没有性欲要求（与性欲亢进完全不同）。<br><br>造成阴茎异常勃起的病因比较复杂，但都比较少见，包括：<br>1.全身性的疾病，主要是血液病，如慢性粒细胞性白血病患者的骨髓异常增殖，使得白细胞数量极度增多，当白细胞增多到一定程度上以后（超过20万/μl，而正常人0.4万~1万/&nbsp;μl&nbsp;），就会发生白细胞淤滞，使得阴茎海绵体内的局部静脉回流的血流速度十分缓慢，而动脉仍然可以源源不断的充血，导致阴茎持续勃起而不变软。心肌梗死，流行性出血热，镰状细胞性贫血，红细胞增多症，血小板减少症，泌尿生殖系肿瘤或转移性肿瘤等也可偶尔引起阴茎异常勃起。<br>2.服用某些药物：雄激素制剂，α受体阻断剂，抗抑郁药，降压药，治疗阳痿的万艾可，或局部涂抹的扩张血管乳剂过量等。<br>3.中枢和外周神经损伤或其他病变，例如脊髓损伤或炎症以及脑干病变可能导致脊髓中枢过度兴奋。<br>4.会阴，阴茎血管损伤或炎症造成的动脉瘘或静脉回流受阻，如血栓性静脉炎。<br>5.个别男人的阴茎异常勃起可由激烈性交或延长性交后诱发，如新婚时的色欲过度。<br><br>阴茎的异常勃起属于一种急症，必须尽快处理，最好不要让阴茎持续时间超过4小时，千万不要超过24小时，缺血时间过长可导致局部组织的损伤，纤维化，甚至缺血坏死，使治疗措施无效，并永远地丧失了性功能，造成终生遗憾。如发现异常勃起须尽早求助医生。<br><br>性交不射精，咋回事<br>不射精是指男人在性生活过程中不能达到高潮而不能将精液排出到体外，其形成的原因是多种多样的，每个人的情况都不完全相同。而在临床上治疗不射精症的一切办法都是围绕加强性刺激和增强男人的生殖器官的直接性感受。<br>1.让性交的场所充满诗情画意和温馨舒适情调，不要让任何人打扰，让自己的心理状态可以达到完全放松的程度。<br>2.将性生活的时间安排在晨起或充分睡眠恢复体力之后，让精力和体力都达到最佳状态。<br>3.减少性交频度或在一定的时间内节制性交有利于射精，性生活减少后，可以让性中枢得到必要的休整，精液的储备也可相应地增加，男人的射精出现就快速且强烈。<br>4.加强性交前的诱导和前戏。<br>5.加强性交的动作和抽动的频率，这也是射精所进行的最后冲刺。<br>6.适当服用药物：小量的雄激素可以增强性欲望，增加精液量，使得男人有可射之精，或者使得精液量增加，以期望能够达到溢出的目的。左旋多巴可以降低射精阈值，让射精变的容易些。<br>7.寻求专科医生的帮助。<br><br>射精慢也很烦<br>射精快带给男人的是巨大灾难，并用早泄来表示，但是如果累得筋疲力尽也不能射精，受到折磨的将不仅是男人。对于一部分男人，尤其是中老年男人，可能表现出阴茎勃起太久才能勉强射精，这不但会令夫妻难以享受到性的欢愉，还会产生不愉快的感觉。<br><br>性交中长时间抽插而难以射精，在医学上称之为射精延迟或射精迟缓，一般以持续性交超过1小时或以上，高潮仍然没有出现或姗姗来迟，造成射精延迟的原因很多，首先就是年龄老化。老龄化可以使体力和精力下降，包括男人的性器官萎缩和雄激素分泌降低。老年男子感觉阴茎不能保持坚硬且反应不再灵敏，感觉和接受性刺激的能力也有所降低。此外饮食和性心理因素也会引起射精慢，酗酒可以抑制射精的神经反射，并让男人的勃起强度减弱；心理压力和精神负担可以让男人不能充分享受性受；某些药物如抗抑郁药物，抗生素也会阻碍射精；某些疾病如糖尿病，腹部手术等也可以造成射精延迟。必要时可以求得医学专家的诊治。<br><br>年纪轻轻，没了性欲<br>一位青年患者向我们求救，我今年还没到30岁，对性生活就没了兴趣，以后的日子还怎么过，夫妻还怎么在一起生活，都是我将面对的难题，常常面对妻子无言的谴责，心里真的不是滋味，像我这种情况是怎么回事，需要吃药吗？<br><br>通常人们对老年男性的性趣丧失并不以为奇，但是对于不到30岁的青年男性就对性生活失去兴趣，确实有点早，其中一些男人可以使用一些所谓的“壮阳”或“催欲”药物来提振自己的性能力。但从专业的角度来看却不建议这样做，应该首先找到没有性趣的原因。<br><br>首先应确认自己有没有在相当长的一段时间内过度疲劳，透支健康等不利情况存在。30来岁正是男人精力和体力都很强盛的阶段，也是为事业奋斗的黄金时光，因为工作紧张，疲劳，熬夜和精神压力较大的现象普遍存在，并不令人感到意外，长期如此，会给男人的身心带来极大的负担，从而影响性欲。调整工作状态，做到劳逸结合，缓解工作压力，将让男人受益良多。<br><br>其次反省和妻子的感情，是否因为家庭生活的琐事所烦恼，因为了无生气的生活或时光流逝而趋于情感平淡，缺少了内在激情。如果对妻子的感情已经平静如水，当然难以燃起性爱的火花，此时最好冷静下来，仔细思考问题的症结，并和妻子一起努力调整。经营爱情是美满性生活的前提。<br><br>此外，偏食，饮食过分清淡，可能影响内分泌系统和免疫系统，导致性欲衰减。酗酒，大量吸烟等不良嗜好也会耗竭男人的青春活力，影响内分泌激素水平。<br><br>“血精”让我猝不及防<br>男人的精液一般是灰白，浅黄或淡黄色的，排精间隔过久则导致精液浓缩，颜色可能要深一些。所以，精液的颜色浅意义不大。但是精液呈现红色，则是血精的杰作，即精液内含有大量的血液。血精的出血量很少，最多不过几毫升，与女人月经都要来的月经量相比简直是微乎其微，对男人的健康没有任何明显的不利影响。然而，血精带给男人的身心伤害是巨大的，患者多半会有强烈的恐惧感，甚至觉得是世界的末日来临了，必须给予高度重现，尤其是血精背后的潜在原因还是要认真检查和治疗的。<br><br>是不是血液中有血就一定是病呢？这也不一定。因为男子在性兴奋时，所有的性器官都会发生充血，在射精的瞬间，为了帮助精液射出，包括精囊在内的许多性器官都会发生有节律的强烈收缩。而非疾病因素引起的血精，恰恰与性器官强烈收缩有关。临床上把不是疾病因素引起的血精，称之为“功能性血精”。<br><br>以下情况引起的血精多半属于功能性血精，可以不必过于但心：<br>1.长期没有性生活，一旦性生活即莫名其妙地出现血精；当性生活恢复一定的频率后，血精也就销声匿迹。<br>2.除精液里有血以外，不伴有其他全身或局部的临床症状。<br>3.各项相关血精的检查都没有发现任何泌尿生殖器官的疾病或全身性疾病。<br>4.每一次血精，持续时间一般不会超过1~2周。<br><br>若不是上述情况引起的血精，则应去医院及时治疗。<br><br>什么药物会影响性<br>每个进入中年的男士都希望自己活力依旧，然而由于各种因素，性功能减退成了无法回避的问题，而疾病和药物也会趁火打劫地影响性功能。一些男士可能患上影响性能力的疾病，如高血压，冠心病，动脉硬化，糖尿病，精神神经系统疾病等，而治疗这些疾病的药物又可能不同程度的进一步削弱了男人的性能力。部分男子为了追求性能力的完美，甚至不惜以性命为代价，主动放弃治疗这些原发病的药物，转而服用大量壮阳保健品和其他一些治疗阳痿的药物，给自己的身体健康带来了极大的威胁和隐患。实际上，这种做法是不值得提倡的，也是不明智的。<br><br>降低性功能的药物可以通过以下几个方面来影响男性的性功能：对中枢神经系统起镇静抑制作用，促使血液中泌乳素含量的增多，拮抗雄激素，影响脑内儿茶酚胺系统（射精激活系统），5-羟色胺系统（射精抑制系统），抗胆碱作用，抗交感神经作用等。<br>能引起阳痿的药物主要有6类：<br>1.作用于心血管的药物：如抗高血压病的胍乙啶，利血平等；强心或调节心脏功能的地高辛，洋地黄等。长期服用该类药物可以提高睾酮在肝脏的清除率，引起性欲减退。<br>2.镇静，麻醉，镇痛药物：如抗精神病的苯巴比妥，氯普噻吨；镇静催眠的地西泮等；麻醉镇痛的吗啡，美沙酮等；这些药物的长期使用会抑制性兴奋，干扰大脑的性分辨能力，抑制促激素的分泌。<br>3.激素类药物：主要是雌激素，对抗了雄激素的生理作用，可致性欲减退；各种雄激素的大量长期使用也可以造成睾丸萎缩，睾丸合成与分泌雄激素水平降低。<br>4.精神病用病：氯丙嗪，异丙嗪等。可以引射精困难，睾丸萎缩，内分泌激素分泌紊乱。<br>5.一般药物：可卡因（镇咳药），西米替丁（H2受体阻断药），吗啡（镇痛药）等。<br>6.其他药物：阿托品，东莨菪碱等。<br>值得注意的是以上药物并不是使用一次即影响男人的性功能，通常在长期大剂量使用时才会<br><br></div>
+		  	
+	 	</div>
+	
+	 	<div class="col-lg-3 ">
+            
+            <div class="list-group">
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/62.html" class="list-group-item list-group-item-action">性生理总论</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/63.html" class="list-group-item list-group-item-action">早泄的怎么办</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/64.html" class="list-group-item list-group-item-action">阳痿怎么办</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/65.html" class="list-group-item list-group-item-action">伟哥是如何发挥作用的</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/66.html" class="list-group-item list-group-item-action">那方面太强是病吗</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/67.html" class="list-group-item list-group-item-action">阴茎持续坚举不变软，吃不消</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/68.html" class="list-group-item list-group-item-action">性交不射精，咋回事</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/69.html" class="list-group-item list-group-item-action list-group-item-primary">射精慢，也很烦</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/70.html" class="list-group-item list-group-item-action">年纪轻轻，没了性欲</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/71.html" class="list-group-item list-group-item-action">血精让我猝不及防</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/72.html" class="list-group-item list-group-item-action">影响性的药物</a>
+            			<a href="http://localhost:8080/kanhaoyi/andrology/28/75.html" class="list-group-item list-group-item-action">国产伟哥</a>
+			</div> 
+	 	</div>
+	 </div>
+	</div>
+	
+<footer class="blog-footer">
+	  <p>
+	    <a class="alert alert-light" target="_blank" href="http://localhost:8080/kanhaoyi/about-us.html">关于我们</a>
+	    <a class="alert alert-light" target="_blank" href="http://localhost:8080/kanhaoyi/sitemap.html">网站地图</a>
+	  </p>
+	  <p>郑州汐点文化传播有限公司 版权所有 <a class="alert alert-light" target="_blank" href="http://www.miitbeian.gov.cn">豫ICP备16022866号-1</a></p>
+</footer>	
+  
+
+<script type="text/javascript">
+	var myPlayer = videojs('my-video',{ fluid: true }, function () { });
+</script>
+<script src="http://localhost:8080/kanhaoyi/js/kanhaoyi.js"></script>
+<script src="http://localhost:8080/kanhaoyi/js/kanhaoyi.play.js"></script>
+<script>
+	window.onload=loadNewComment();
+
+	/* 当前评论信息的id，每一次加载评论都更新这个值 */
+	var commentID=0;
+	/* 加载最新评论 */
+	function loadNewComment(){
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:8080/kanhaoyi/front/loadNewComment.action",
+			data:{courseID:51,commentID:commentID},
+			success: function(msg){
+				var info = eval("("+msg+")");
+				if(info.success==1){
+					$("#moreLoad").before(info.msg);
+					commentID = info.param.commentID;
+				}else if(info.success==2){
+					$("#moreLoad").addClass("disabled")
+					$("#moreLoad").html(info.msg);
+				}
+			}
+		});
+	}
+	/* 赞 */
+	function praise(commentID){
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:8080/kanhaoyi/front/praise.action",
+			data:{commentID:commentID},
+			success: function(msg){
+				var info = eval("("+msg+")");
+				var pNum = $("#praiseNum"+commentID).html();
+				if(info.success==1){
+					pNum = parseInt(pNum)+1;
+					$("span[name='praiseNum"+commentID+"']").html(pNum);
+				}else if(info.success==2){
+					pNum = parseInt(pNum)-1;
+					$("span[name='praiseNum"+commentID+"']").html(pNum);
+				}
+			}
+		});
+	}
+</script>
+</body></html>
