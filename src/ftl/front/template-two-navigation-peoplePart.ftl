@@ -32,9 +32,7 @@
 				  <a id="logout" href="${indexpath}/logout.action" class="btn btn-link text-dark" style="display: none;">
 				  	退出
 				  </a>
-				  <a class="btn btn-link text-dark" href="${indexpath}/info-list.html">
-				  	消息<span class="text-danger" id="infoNum"></span>
-				  </a>
+
 				</div>
         	</div>
 	    </nav>

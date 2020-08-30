@@ -126,5 +126,8 @@ public class CourseServiceImpl implements ICourseService {
 		return courseDao.vagueQueryByIntro(keyword);
 	}
 
-	
+	@Override
+	public List<Course> vagueQueryByCourseName(String keyword) {
+		return courseDao.vagueQueryByCourseName(keyword);
+	}
 }

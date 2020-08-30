@@ -34,7 +34,7 @@ public class IndexController {
 	@RequestMapping("/indexQueryCourse.action")
 	public String indexQueryCourse(Model model,String keyword){
 		keyword = keyword.replace("", "%");
-		List<Course> courseList = courseService.vagueQueryByIntro(keyword);
+		List<Course> courseList = courseService.vagueQueryByCourseName(keyword);
 		
 		InitUtil.iniSystem(model);
 		model.addAttribute("courseList",courseList);

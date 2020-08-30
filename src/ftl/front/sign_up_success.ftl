@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <title>看好一</title>
+	    <title>看好医</title>
 	    <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
 	    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
@@ -43,7 +43,7 @@
 		
 		
 		<footer class="blog-footer">
-	      <p>看好一www.kanhaoyi.com专注于各种病情的讲解，提高全民医疗常识，如有不足的地方请在以下邮箱留言kanhaoyi@sina.cn</p>
+	      <p>看好医www.kanhaoyi.com专注于各种病情的讲解，提高全民医疗常识，如有不足的地方请在以下邮箱留言kanhaoyi@sina.cn</p>
 	      <p>
 	        <a href="#">返回顶部</a>
 	      </p>

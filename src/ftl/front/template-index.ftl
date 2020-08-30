@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
         	<div class="container" >
 	            <div class="btn-group d-none d-sm-block d-md-block d-lg-block d-xl-block" role="group">
-				  <a href="${indexpath}" class="btn btn-link text-dark">看好一</a>
+				  <a href="${indexpath}" class="btn btn-link text-dark">看好医</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				  <form id="formQueryCourse" action="${indexpath}/frontIndex/indexQueryCourse.action" target="_blank" method="post">
@@ -42,9 +42,6 @@
 				  </a>
 				  <a id="logout" href="${indexpath}/logout.action" class="btn btn-link text-dark" style="display: none;">
 				  	退出
-				  </a>
-				  <a class="btn btn-link text-dark d-none" href="${indexpath}/info-list.html">
-				  	消息<span class="text-danger" id="infoNum"></span>
 				  </a>
 				  <a class="btn btn-link text-dark" href="${indexpath}/push/lottery.html" target="_blank">
 				  	抽奖

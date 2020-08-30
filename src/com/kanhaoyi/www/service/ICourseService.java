@@ -95,4 +95,13 @@ public interface ICourseService extends IServiceFather<Course> {
 	 */
 	public List<Course> vagueQueryByIntro(String keyword);
 	
+	/**
+	 * @description 模糊查询通过courseName字段
+	 * @author zhuziming
+	 * @time 2018年11月4日 下午12:11:53
+	 * @param keyword
+	 * @return
+	 */
+	public List<Course> vagueQueryByCourseName(String keyword);
+	
 }
