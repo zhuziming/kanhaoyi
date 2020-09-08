@@ -261,12 +261,13 @@ public class ManagerIndex {
 				indexNewsMapList.add(indexNewsMap);
 			}
 			
-			// 查点击量最高的24个
-			List<Course> maxClickList = courseService.getListByLinkSort("click_volume", "DESC", 100,0);
-			// 查时间最新的24个
-			List<Course> newTimeList  = null;
-
-			FreeMarkerUtil.createIndexHTML(maxClickList,newTimeList,indexNewsMapList);
+			// 得到所有的科室，并在首页把每一个科室的课程列出
+			List<CourseType> courseTypeList = courseTypeService.getAll();// 科室列表
+			Map<String,List<Course>> map = new HashMap<String,List<Course>>();
+			for(CourseType courseType:courseTypeList){
+				map.put(courseType.getName(), courseService.getListByCourseTypeID(courseType.getId(), "id", "DESC"));
+			}
+			FreeMarkerUtil.createIndexHTML(courseTypeList,map,indexNewsMapList);
 			return JSONUtil.returnJson("1", "生成完毕");
 		}catch(Exception e){
 			e.printStackTrace();

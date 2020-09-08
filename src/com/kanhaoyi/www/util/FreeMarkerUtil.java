@@ -217,7 +217,7 @@ public class FreeMarkerUtil {
 	 * @param indexNewsMapList : 首页轮播图
 	 * @time 2018年8月7日下午2:56:25
 	 */
-	public static boolean createIndexHTML(List<Course> maxClickList,List<Course> newTimeList,List<Map<String,String>> indexNewsMapList){
+	public static boolean createIndexHTML(List<CourseType> courseTypeList,Map<String,List<Course>> map,List<Map<String,String>> indexNewsMapList){
 		
 		// 准备数据
 		Map<String ,Object> data = new HashMap<String, Object>();
@@ -232,8 +232,8 @@ public class FreeMarkerUtil {
 		data.put("imgpath", imgpath);
 		data.put("csspath", csspath);
 		data.put("jspath", jspath);
-		data.put("maxClickList", maxClickList);
-		data.put("newTimeList", newTimeList);
+		data.put("courseTypeList", courseTypeList);
+		data.put("map", map);
 		data.put("indexNewsMapList", indexNewsMapList);
 		
 		// 得到ftl模版
