@@ -82,8 +82,8 @@ public class FileUtil {
 				deskFile.mkdir();
 			}
 		}
-		int width = 190; // 图片宽度
-		int height= 100; // 图片长度
+		int width = 200; // 图片宽度
+		int height= 200; // 图片长度
 		
 		//拿到输出流，同时重命名上传的文件  
         FileOutputStream outfile = new FileOutputStream( deskpath+dataName+format);  

@@ -105,8 +105,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-			      <th scope="col">第一个链接 190 x 100</th>
-			      <th scope="col">第二个链接 190 x 100</th>
+			      <th scope="col">第一个链接 200 x 200</th>
+			      <th scope="col">第二个链接 200 x 200</th>
 			    </tr>
 			</thead>
     		<tbody>
@@ -182,8 +182,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-			      <th scope="col">第三个链接 190 x 100</th>
-			      <th scope="col">第四个链接 190 x 100</th>
+			      <th scope="col">第三个链接 200 x 200</th>
+			      <th scope="col">第四个链接 200 x 200</th>
 			    </tr>
 			</thead>
     		<tbody>
