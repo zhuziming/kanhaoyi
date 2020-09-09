@@ -139,7 +139,7 @@
 			  		<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 pb-3">
 			  			<a target="_blank" href="${(courseLinkList[1].webLocation)!""}">
 				    		<img width="100%;" src="${imgpath}/courseLinkImg/${course.userID}/${course.id}/${courseLinkList[1].picture}${courseLinkList[1].format}"></img>
-				      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${(courseLinkList[0].intro)!""}</h5>
+				      		<h5 style="word-wrap:keep-all;white-space:nowrap;overflow: hidden;">${(courseLinkList[1].intro)!""}</h5>
 				    	</a>
 			  		</div>
 			  	<#else>	
@@ -219,7 +219,7 @@
   </body>
 </html>
 <script type="text/javascript">
-	var myPlayer = videojs('my-video',{ fluid: true }, function () { });
+	var myPlayer = videojs('my-video',{ autoplay: true,fluid: true }, function () { });
 </script>
 <script src="${jspath}/kanhaoyi.js"></script>
 <script src="${jspath}/kanhaoyi.play.js"></script>
