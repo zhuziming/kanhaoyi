@@ -214,6 +214,20 @@
 	 </div>
 	</div>
 	
+	<!-- 播放页微信的小图标 固定在低部 -->
+	<div id="WeiXinLogo" class="weixinLogo_s">
+		<div class="d-flex align-items-end flex-column">
+			<img style="margin-bottom: 50px; width: 40px; height:40px;" src="${indexpath}/image/weixinLogo.jpg">
+		</div>
+	</div>
+	<!-- 播放页的添加客服微信图片  固定在低部 右边-->
+	<div id="WeiXinQR" class="weixinQR_s d-none d-sm-none d-md-none d-lg-block d-xl-block">
+		<div class="d-flex align-items-end flex-column">
+			<svg id="WeiXinQR_X" viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+			<img src="${indexpath}/image/WeiXin200x400.gif">
+		</div>
+	</div>
+	
 	<#include "../footer.ftl">
 	
   </body>
@@ -223,6 +237,18 @@
 </script>
 <script src="${jspath}/kanhaoyi.js"></script>
 <script src="${jspath}/kanhaoyi.play.js"></script>
+<script>
+    /* 点击微信logo时 显示二维码图片 */
+	$("#WeiXinLogo").click(function(){
+		var cssText = $("#WeiXinQR").attr("style") + ";display:block !important;";
+	  	$("#WeiXinQR").css("cssText",cssText);
+	});
+	/* 点击二维码上的>> 符号时，隐藏二维码 */
+	$("#WeiXinQR_X").click(function(){
+		var cssText = $("#WeiXinQR").attr("style") + ";display:none !important;";
+	  	$("#WeiXinQR").css("cssText",cssText);
+	});
+</script>
 <script>
 	window.onload=loadNewComment();
 
