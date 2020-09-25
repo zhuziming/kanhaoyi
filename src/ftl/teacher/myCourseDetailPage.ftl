@@ -66,18 +66,18 @@
 			<div class="alert alert-primary" role="alert">
 				编缉课程头标签meta
 			</div>
-			<textarea id="detailMeta" class="form-control mb-3" style="height:100px;"></textarea>
+			<textarea id="detailMeta" class="form-control mb-3" style="height:100px;">${(courseDetail.meta)!""}</textarea>
 			
 			<div class="alert alert-danger" role="alert">
 				编缉课程title
 			</div>
-			<textarea id="detailTitle" class="form-control mb-3" style="height:40px;"></textarea>
+			<textarea id="detailTitle" class="form-control mb-3" style="height:40px;">${(courseDetail.title)!""}</textarea>
 			
 			<div class="alert alert-success" role="alert">
 				编缉课程文本html格式
 			</div>
 			
-			<textarea id="detailText" class="form-control mb-3" style="height:500px;"></textarea>
+			<textarea id="detailText" class="form-control mb-3" style="height:500px;">${(courseDetail.intro)!""}</textarea>
 			
 		</div>
 	    
