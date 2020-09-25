@@ -20,29 +20,23 @@
       <div class="bg-dark collapse show img-fluid k-top-of-page" id="navbarHeader" >
         <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
         	<div class="container" >
-	            <div class="btn-group" role="group">
-				  <a href="${indexpath}" class="btn btn-link text-dark">看好医</a>
+	            <div class="btn-group d-none d-sm-block d-md-block d-lg-block d-xl-block" role="group">
+				  	<a href="${indexpath}" class="btn btn-link text-dark">看好医</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				  <form id="formQueryCourse" action="${indexpath}/frontIndex/indexQueryCourse.action" target="_blank" method="post">
-				    <div class="input-group align-items-center">
-					  <input type="text" name="keyword" id="query" class="form-control" placeholder="输入要查询的内容">
-					  <div class="input-group-append">
-					    <a class="text-muted" href="javascript:$('#formQueryCourse').submit()">
-					       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-					    </a>
-					  </div>
-				    </div>
-				  </form>
-				  <a id="people" href="${indexpath}/loginPage.action" target="_blank" class="btn btn-link text-dark">
-				  	未登录
-				  </a>
-				  <a id="signUp" href="${indexpath}/signUpPage.action" class="btn btn-link text-dark">
-				  	注册
-				  </a>
-				  <a id="logout" href="${indexpath}/logout.action" class="btn btn-link text-dark" style="display: none;">
-				  	退出
-				  </a>
+				  	<form id="formQueryCourse" action="${indexpath}/frontIndex/indexQueryCourse.action" target="_blank" method="post">
+				    	<div class="input-group align-items-center">
+					  		<input type="text" name="keyword" id="query" class="form-control" placeholder="输入要查询的内容">
+					  		<div class="input-group-append">
+					    		<a class="text-muted" href="javascript:$('#formQueryCourse').submit()">
+					       			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+					    		</a>
+					  		</div>
+				    	</div>
+				  	</form>
+				  	<a class="btn btn-link text-dark" href="${indexpath}/push/lottery.html" target="_blank">
+				  		抽奖
+				  	</a>
 				</div>
         	</div>
 	    </nav>

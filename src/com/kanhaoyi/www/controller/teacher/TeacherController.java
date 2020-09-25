@@ -364,6 +364,7 @@ public class TeacherController {
 	public String compileCoursePage(HttpSession session,Model model,Integer courseID){
 		User user = userService.getSessionUser(session);
 		Course course = courseService.getOneByID(courseID); // 当前课程
+		List<CourseDetail> courseDetailList = courseDetailService.getListByCourseIdAndSequence(courseID, "ASC"); // 当前课程的全部子集数
 		List<CourseType> courseTypeList = courseTypeService.getAll(); // 全部科室
 		List<CourseLink> courseLinkList = courseLinkService.getListByCourseID(courseID); // 商品链接
 		List<VideoGroup> videoGroupList = videoGroupService.selectListByUserID(user.getId()); // 用户自定义视频组名称
@@ -371,10 +372,11 @@ public class TeacherController {
 		for (CourseLink courseLink : courseLinkList) {
 			model.addAttribute("courseLink"+courseLink.getPicture(),courseLink);
 		}
-		model.addAttribute("course",course);
-		model.addAttribute("user",user);
-		model.addAttribute("courseTypeList",courseTypeList);
-		model.addAttribute("videoGroupList",videoGroupList);
+		model.addAttribute("course",course); // 课程
+		model.addAttribute("user",user); // 当前用户
+		model.addAttribute("courseDetailList",courseDetailList); // 课程全部子集数
+		model.addAttribute("courseTypeList",courseTypeList); // 科室列表
+		model.addAttribute("videoGroupList",videoGroupList); // 视频组列表
 		
 		InitUtil.iniSystem(model);
 		return "teacher/compileCoursePage";
@@ -595,6 +597,74 @@ public class TeacherController {
 		}
 	}
 	
+	/**
+	 * @description 课程  子集  页面
+	 * @author zhuziming
+	 * @time 2020年9月24日 下午15:48:05
+	 * */
+	@RequestMapping("/myCourseDetailPage.action")
+	public String myCourseDetailPage(HttpSession session,Model model,Integer courseDetailID){
+		User user = userService.getSessionUser(session);
+		CourseDetail courseDetail = courseDetailService.getOneById(courseDetailID); // 当前子课程
+		Course course = courseService.getOneByID(courseDetail.getCourseID()); // 当前课程
+		
+		model.addAttribute("user",user); // 当前用户
+		model.addAttribute("course",course);
+		model.addAttribute("courseDetail",courseDetail);
+		InitUtil.iniSystem(model);
+		return "teacher/myCourseDetailPage";
+	}
+	
+	/**
+	 * @description 修改课程详情，包括meta，title，文本内容
+	 * @author zhuziming
+	 * @time 2020年9月24日 下午17:48:05
+	 */
+	@RequestMapping("/modifyCourseDetail.action")
+	@ResponseBody
+	public String modifyCourseDetail(HttpServletRequest request){
+		try{
+			Integer detailID = Integer.valueOf(request.getParameter("detailID"));// 详情ID
+			String meta = request.getParameter("detailMeta"); // 头标签meta
+			String title= request.getParameter("detailTitle");// 头title
+			String text = request.getParameter("detailText"); // 文本内容
+			// 修改详情页数据，包括meta,intro,title
+			CourseDetail courseDetail = courseDetailService.getOneById(detailID);
+			courseDetail.setMeta(meta);
+			courseDetail.setTitle(title);
+			courseDetail.setIntro(text);
+			courseDetailService.update(courseDetail);
+			
+			
+			// 生成html页面
+			// 准备数据 课程
+			Course course_ = courseService.getOneByID(courseDetail.getCourseID());
+			// 课程商品链接列表
+			List<CourseLink> courseLinkList_ = courseLinkService.getListByCourseID(course_.getId());
+			// 课程类型列表，网页中导航部分用
+			List<CourseType> courseTypeList_ = courseTypeService.getAll();
+			// 当前课程类型，面包屑导航用
+			CourseType courseType_ = courseTypeService.getOneByID(course_.getCourseTypeID());
+			// 课程详情列表，右则课程列表显示用
+			List<CourseDetail> courseDetailList_ = courseDetailService.getListByCourseIdAndSequence(course_.getId(), "ASC");
+			// 得到最多的赞评论 5条
+			List<Map<String,Object>> list_ = courseCommentService.getListByCourseIDPraise(Integer.valueOf(course_.getId()), 5);
+			// 把赞评论转为html
+			StringBuffer GoodPraise_ = courseCommentService.getHtml(list_); // 赞最多的评论
+			// 视频的名字
+			Video video_ = videoService.getOneByID(courseDetail.getVideoID());
+			// 生成页面
+			FreeMarkerUtil.createCourseHTML(courseDetail, courseDetailList_, 
+					courseTypeList_, courseType_, course_, list_, GoodPraise_,video_,courseLinkList_);
+			
+			return JSONUtil.returnJson("1", "修改完成");
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("3", "异常了");
+		}
+		
+		
+	}
 	
 	/**
 	 * @description 新建视频组

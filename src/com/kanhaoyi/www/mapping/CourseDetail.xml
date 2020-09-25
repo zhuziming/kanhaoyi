@@ -5,27 +5,29 @@
     
     <select id="getOneById" parameterType="int" resultType="com.kanhaoyi.www.model.CourseDetail">
     	SELECT id,course_id AS courseID,course_detail_name AS courseDetailName,course_path AS coursePath 
-    		,video_id AS videoID,sequence ,click_volume AS clickVolume,create_time AS createTime 
+    		,video_id AS videoID,sequence ,click_volume AS clickVolume,create_time AS createTime
+    		,intro,meta,title  
     	FROM course_detail WHERE id=#{id}
     </select>
     
     <select id="getListByCourseIdAndSequence" parameterType="map" resultType="com.kanhaoyi.www.model.CourseDetail">
     	SELECT id,course_id AS courseID,course_detail_name AS courseDetailName,course_path AS coursePath 
-    		,video_id AS videoID,sequence ,click_volume AS clickVolume,create_time AS createTime 
+    		,video_id AS videoID,sequence ,click_volume AS clickVolume,create_time AS createTime,intro,meta,title  
     	FROM course_detail WHERE course_id=#{courseID} ORDER BY sequence ${orderBy}
     </select>
     
     <select id="getOneOrderBy" parameterType="map" resultType="com.kanhaoyi.www.model.CourseDetail">
     	SELECT id,course_id AS courseID,course_detail_name AS courseDetailName,course_path AS coursePath 
-    	,video_id AS videoID,sequence ,click_volume AS clickVolume,create_time AS createTime 
+    	,video_id AS videoID,sequence ,click_volume AS clickVolume,create_time AS createTime,intro,meta,title  
     	FROM course_detail WHERE course_id=#{courseID} ORDER BY ${colums} ${orderBy} LIMIT 0,1
     </select>
     
     <insert id="insert" parameterType="com.kanhaoyi.www.model.CourseDetail" keyProperty="id" useGeneratedKeys="true">
     	INSERT INTO course_detail
-    		(id,course_id,course_detail_name,course_path,video_id,sequence,click_volume,create_time) 
+    		(id,course_id,course_detail_name,course_path,video_id,sequence,click_volume,create_time,intro,meta,title) 
 		VALUE
-			(null,#{courseID},#{courseDetailName},#{coursePath},#{videoID},#{sequence},#{clickVolume},#{createTime,jdbcType=TIMESTAMP})
+			(null,#{courseID},#{courseDetailName},#{coursePath},#{videoID},#{sequence},#{clickVolume},#{createTime,jdbcType=TIMESTAMP},
+			#{intro},#{meta},#{title})
     </insert>
     
     <update id="update" parameterType="com.kanhaoyi.www.model.CourseDetail">
@@ -37,6 +39,9 @@
     	<if test="sequence!=null and sequence!=''">,sequence=#{sequence}</if>
     	<if test="clickVolume!=null">,click_volume=#{clickVolume}</if>
     	<if test="createTime!=null and createTime!=''">,create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+    	<if test="intro!=null and intro!=''">,intro=#{intro}</if>
+    	<if test="meta!=null and meta!=''">,meta=#{meta}</if>
+    	<if test="title!=null and title!=''">,title=#{title}</if>
     	WHERE id=#{id}
     </update>
     

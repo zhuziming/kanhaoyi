@@ -28,7 +28,18 @@ public class XSSFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		chain.doFilter(new OnRequestWrap((HttpServletRequest)request), response);
+		try{
+			String requestURI = ((HttpServletRequest)request).getServletPath();
+			// 老师在修改详情页数据时，因为要插入html文本，所以这里不再过滤
+			if("/teacher/modifyCourseDetail.action".hashCode() == requestURI.hashCode()
+					&& "/teacher/modifyCourseDetail.action".equals(requestURI)){
+				chain.doFilter(request, response);
+			}else{
+				chain.doFilter(new OnRequestWrap((HttpServletRequest)request), response);
+			}
+		}catch(Exception e){
+			chain.doFilter(new OnRequestWrap((HttpServletRequest)request), response);
+		}
 	}
 
 	/**

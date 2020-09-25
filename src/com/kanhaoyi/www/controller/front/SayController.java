@@ -116,7 +116,7 @@ public class SayController {
 	}
 	
 	/**
-	 * @description 评论赞
+	 * @description 评论赞，只能增加赞，不能减少，点赞的人不用登陆
 	 * @author zhuziming
 	 * @time 2018年7月28日 下午5:38:09
 	 * @return
@@ -126,24 +126,10 @@ public class SayController {
 	public String praise(HttpServletRequest request,HttpSession session){
 		try{
 			String commentID = request.getParameter("commentID"); // 评论id
-			User user = userService.getSessionUser(session);
-			CourseCommentPraise courseCommentPraise = new CourseCommentPraise();
-			courseCommentPraise.setUserID(user.getId());
-			courseCommentPraise.setCommentID(Integer.valueOf(commentID));
-			
-			List<CourseCommentPraise> list = courseCommentPraiseService.selectListByUserIdAndCommentId(courseCommentPraise);
-			if(list==null || list.size()==0){
-				courseCommentPraise.setTime(new Timestamp(new Date().getTime()));
-				courseCommentPraiseService.insert(courseCommentPraise);
-				courseCommentService.praiseAdd(Integer.valueOf(commentID));
-				return JSONUtil.returnJson("1", "赞美成功");
-			}else{
-				for(CourseCommentPraise courseCommentPraise_ : list){
-					courseCommentService.praiseMinus(Integer.valueOf(commentID));
-					courseCommentPraiseService.deleteById(courseCommentPraise_.getId());
-				}
-				return JSONUtil.returnJson("2", "取消赞美成功");
-			}
+
+			courseCommentService.praiseAdd(Integer.valueOf(commentID));
+			return JSONUtil.returnJson("1", "赞美成功");
+
 		}catch(Exception e){
 			return JSONUtil.returnJson("3", "异常了");
 		}

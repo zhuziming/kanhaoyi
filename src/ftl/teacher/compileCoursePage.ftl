@@ -86,7 +86,26 @@
 			</tbody>
 		</table>
 		<input class="d-none" id="courseID" value="${course.id}"/>
-
+		
+		<table class="table">
+			<thead>
+				<tr>
+			      <th scope="col">子课程</th>
+			    </tr>
+			</thead>
+    		<tbody>
+    			<#list courseDetailList as courseDetail>
+					<tr>
+			      		<td>
+			      			<a target="_Blank" href="${indexpath}/teacher/myCourseDetailPage.action?courseDetailID=${courseDetail.id}">
+								${courseDetail.courseDetailName}
+							</a>
+			      		</td>
+					</tr>
+				</#list>  	
+			</tbody>
+		</table>
+		
 		<table class="table">
 			<thead>
 				<tr>

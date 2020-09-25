@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>${courseDetail.courseDetailName}</title>
+    ${(courseDetail.meta)!""}
+    ${(courseDetail.title)!""}
     <link rel="icon" href="${imgpath}/favicon.ico" type="image/x-icon"/>
-    <meta http-equiv="keywords" content="看好医,${courseType.name},${course.courseName}">
-	<meta http-equiv="description" content="${course.courseName}">
     <link rel="stylesheet" href="${csspath}/boots/bootstrap.min.css">
     <link rel="stylesheet" href="${csspath}/boots/blog.css">
 	<link rel="stylesheet" href="${csspath}/video-js.css">
@@ -21,22 +20,23 @@
       <div class="bg-dark collapse show img-fluid k-top-of-page" id="navbarHeader" >
         <nav class="navbar navbar-expand-md navbar-dark absolute-top k-nav-back">
         	<div class="container" >
-	            <div class="btn-group" role="group">
-				  <a href="${indexpath}" class="btn btn-link text-dark">首页</a>
+	            <div class="btn-group d-none d-sm-block d-md-block d-lg-block d-xl-block" role="group">
+				  	<a href="${indexpath}" class="btn btn-link text-dark">看好医</a>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				  <a id="people" href="${indexpath}/loginPage.action" class="btn btn-link text-dark">
-				  	未登录
-				  </a>
-				  <a id="signUp" href="${indexpath}/signUpPage.action" class="btn btn-link text-dark">
-				  	注册
-				  </a>
-				  <a id="logout" href="${indexpath}/logout.action" class="btn btn-link text-dark" style="display: none;">
-				  	退出
-				  </a>
-				  <a class="btn btn-link text-dark" href="${indexpath}/push/lottery.html" target="_blank">
-				  	抽奖
-				  </a>
+				  	<form id="formQueryCourse" action="${indexpath}/frontIndex/indexQueryCourse.action" target="_blank" method="post">
+				    	<div class="input-group align-items-center">
+					  		<input type="text" name="keyword" id="query" class="form-control" placeholder="输入要查询的内容">
+					  		<div class="input-group-append">
+					    		<a class="text-muted" href="javascript:$('#formQueryCourse').submit()">
+					       			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+					    		</a>
+					  		</div>
+				    	</div>
+				  	</form>
+				  	<a class="btn btn-link text-dark" href="${indexpath}/push/lottery.html" target="_blank">
+				  		抽奖
+				  	</a>
 				</div>
         	</div>
 	    </nav>
@@ -195,7 +195,7 @@
 				加载更多...
 			</button>
 			
-			<div>${(course.intro)!""}</div>
+			<div>${(courseDetail.intro)!""}</div>
 		  	
 	 	</div>
 	
@@ -250,8 +250,6 @@
 	});
 </script>
 <script>
-	window.onload=loadNewComment();
-
 	/* 当前评论信息的id，每一次加载评论都更新这个值 */
 	var commentID=0;
 	/* 加载最新评论 */
@@ -283,9 +281,6 @@
 				var pNum = $("#praiseNum"+commentID).html();
 				if(info.success==1){
 					pNum = parseInt(pNum)+1;
-					$("span[name='praiseNum"+commentID+"']").html(pNum);
-				}else if(info.success==2){
-					pNum = parseInt(pNum)-1;
 					$("span[name='praiseNum"+commentID+"']").html(pNum);
 				}
 			}
