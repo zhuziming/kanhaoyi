@@ -77,29 +77,34 @@
 	 
 	 <div class="row ">
 	 	<div class="col-lg-9">
-	  		<video  id="my-video" class="video-js col-lg-9" controls preload="auto"  poster="${imgpath}/courseImg${course.picturePath}">
-				<source src="${indexpath}/mp4/course/${video.accountID}/${video.letterName}" type="video/mp4">
-				<p class="vjs-no-js">
-				  To view this video please enable JavaScript, and consider upgrading to a web browser that
-				  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-				</p>
-		  	</video>
+	  		<#if (courseDetail.videoID)??>
+	  			<video  id="my-video" class="video-js col-lg-9" controls preload="auto"  poster="${imgpath}/courseImg${course.picturePath}">
+					<source src="${indexpath}/mp4/course/${video.accountID}/${video.letterName}" type="video/mp4">
+					<p class="vjs-no-js">
+					  To view this video please enable JavaScript, and consider upgrading to a web browser that
+					  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+					</p>
+			  	</video>
+			  	
+			  	<#if (courseDetailList?size) gt 1 >
+				  	<#list courseDetailList as courseDetail_>
+		        		<#if courseDetail_.id = courseDetail.id>
+		        			<#if courseDetail__index=0><#-- 如果是第一个 -->
+		        				<a  href="${indexpath}${courseDetailList[courseDetail__index+1].coursePath}" class="btn btn-success">下一讲</a>
+		        			<#elseif !courseDetail__has_next><#-- 如果是最后一个 -->
+		        				<a  href="${indexpath}${courseDetailList[courseDetail__index-1].coursePath}" class="btn btn-primary">上一讲</a>
+		        			<#else>
+		        				<a  href="${indexpath}${courseDetailList[courseDetail__index-1].coursePath}" class="btn btn-primary">上一讲</a>
+		        				<a  href="${indexpath}${courseDetailList[courseDetail__index+1].coursePath}" class="btn btn-success">下一讲</a>
+		        			</#if>
+		        		</#if>
+		        	</#list>
+			  	</#if>
+	  		</#if>
+	  		
 		  	
-		  	<#if (courseDetailList?size) gt 1 >
-			  	<#list courseDetailList as courseDetail_>
-	        		<#if courseDetail_.id = courseDetail.id>
-	        			<#if courseDetail__index=0><#-- 如果是第一个 -->
-	        				<a  href="${indexpath}${courseDetailList[courseDetail__index+1].coursePath}" class="btn btn-success">下一讲</a>
-	        			<#elseif !courseDetail__has_next><#-- 如果是最后一个 -->
-	        				<a  href="${indexpath}${courseDetailList[courseDetail__index-1].coursePath}" class="btn btn-primary">上一讲</a>
-	        			<#else>
-	        				<a  href="${indexpath}${courseDetailList[courseDetail__index-1].coursePath}" class="btn btn-primary">上一讲</a>
-	        				<a  href="${indexpath}${courseDetailList[courseDetail__index+1].coursePath}" class="btn btn-success">下一讲</a>
-	        			</#if>
-	        		</#if>
-	        	</#list>
-		  	</#if>
-
+		  	
+			<!-- 只有大屏幕时显示，是右侧的集数展示 -->
 		  	<div class="list-group d-lg-none pt-3">
             	<#list courseDetailList as courseDetail_>
             		<#if courseDetail_.id = courseDetail.id>
@@ -110,6 +115,8 @@
             	</#list>
 			</div> 
 		  	
+		  	<!-- 课程详情文本展示 -->
+		  	<div>${(courseDetail.intro)!""}</div>
 		  	
 			<div class="input-group pt-3 pb-2">
 			  <input type="text" id="comment" class="form-control" placeholder="想表达一下心情">
@@ -185,6 +192,7 @@
 		  		</#if>
 		  	</div>
 
+			<!-- 展示点赞最多的5条评论 -->
 		  	${GoodPraise}
 
 		  	<div id="newComment" class="alert alert-success" role="alert">
@@ -195,7 +203,7 @@
 				加载更多...
 			</button>
 			
-			<div>${(courseDetail.intro)!""}</div>
+			
 		  	
 	 	</div>
 	
@@ -232,9 +240,11 @@
 	
   </body>
 </html>
+<#if (courseDetail.videoID)??>
 <script type="text/javascript">
 	var myPlayer = videojs('my-video',{ autoplay: true,fluid: true }, function () { });
 </script>
+</#if>
 <script src="${jspath}/kanhaoyi.js"></script>
 <script src="${jspath}/kanhaoyi.play.js"></script>
 <script>

@@ -108,14 +108,14 @@
 			    	<div class="form-row">
 			    		<div class="col-md-6">
 			    			<label for="validationTooltip03">选择视频</label>
-						      	<select id="1_video" name="videoName1" class="custom-select" required>
+						      	<select id="1_video" name="videoName1" class="custom-select" ><!--必填要加 required -->
 							      	
 							    </select>
 			    		</div>
 			    		<div class="col-md-6">
 			    			<label for="validationTooltip01">课程所属类别</label>
 						      	<div class="input-group">
-							        <select id="1_videoGroup" class="custom-select" onchange="getVideo(1)" required>
+							        <select id="1_videoGroup" class="custom-select" onchange="getVideo(1)" >
 							        	<option></option>
 								      	<#list videoGroupList as videoGroup>
 								    		<option value="${videoGroup.id}">${(videoGroup.groupName)!''}</option>
@@ -162,14 +162,14 @@
 		eleHTML+='	    	<div class="form-row">';
 		eleHTML+='	    		<div class="col-md-6">';
 		eleHTML+='	    			<label for="validationTooltip03">选择视频</label>';
-		eleHTML+='				      	<select name="videoName'+groupID+'" id="'+groupID+'_video" class="custom-select" required>';
+		eleHTML+='				      	<select name="videoName'+groupID+'" id="'+groupID+'_video" class="custom-select" >';
 		eleHTML+='					      	';
 		eleHTML+='					    </select>';
 		eleHTML+='	    		</div>';
 		eleHTML+='	    		<div class="col-md-6">';
 		eleHTML+='	    			<label for="validationTooltip01">课程所属类别</label>';
 		eleHTML+='				      	<div class="input-group">';
-		eleHTML+='					        <select  id="'+groupID+'_videoGroup" class="custom-select" onchange="getVideo('+groupID+')" required>';
+		eleHTML+='					        <select  id="'+groupID+'_videoGroup" class="custom-select" onchange="getVideo('+groupID+')" >';
 		eleHTML+='						      	<option></option>';
 												<#list videoGroupList as videoGroup>
 		eleHTML+='						    		<option value="${videoGroup.id}">${(videoGroup.groupName)!''}</option>';

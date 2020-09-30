@@ -67,9 +67,15 @@ public class SayController {
 			if(say==null || say.length()==0){
 				return JSONUtil.returnJson("2", "请输入留言内容");
 			}
-			if(say.length()>255){
+			if(say.length()>2000){
 				return JSONUtil.returnJson("2", "己超出最大字符数");
 			}
+			
+			say = say.replaceAll("\n", "<br/>"); // 把换行换成html <br/>
+			say = say.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
+			say = say.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
+			
+			
 			CourseComment courseComment = new CourseComment();
 			courseComment.setCourseID(Integer.valueOf(courseID));
 			courseComment.setContent(say);

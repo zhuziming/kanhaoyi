@@ -24,7 +24,7 @@ function getusernmae(){
  * courseID 课程的id
  *  */
 function say(courseID,say){
-	if(say.length>255){
+	if(say.length>2000){
 		alert("已超出最大字符数");
 	}else{
 		$.ajax({

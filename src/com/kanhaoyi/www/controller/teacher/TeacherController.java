@@ -125,7 +125,7 @@ public class TeacherController {
 	
 	
 	/**
-	 * @description 发布课程
+	 * @description 发布课程，参数 videoName 视频可以为空，只展示文字和图片
 	 * @author zhuziming
 	 * @time 2018年7月8日 下午5:07:29
 	 * @param request
@@ -220,7 +220,9 @@ public class TeacherController {
 					courseDetail.setCourseDetailName(courseDetailName);
 					courseDetail.setCreateTime(new Timestamp(new Date().getTime()));
 					courseDetail.setSequence(sequence);
-					courseDetail.setVideoID(Integer.valueOf(videoName));
+					if(videoName!=null && !videoName.isEmpty()){ // 课程详情页面中，视频可以为空，只展示文字
+						courseDetail.setVideoID(Integer.valueOf(videoName));
+					}
 					courseDetail.setClickVolume(0);
 					courseDetailService.update(courseDetail); 
 				}
