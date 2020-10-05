@@ -62,7 +62,7 @@ public class CourseCommentServiceImpl implements ICourseCommentService {
 			   	sb.append("</div>"); 	
 				sb.append("<div class=\"card-body\">");  
 				sb.append("<blockquote class=\"blockquote mb-0\">");  
-				sb.append("<p>"+ comment.get("content") +"</p>");   // 评论 
+				sb.append("<div>"+ comment.get("content") +"</div>");   // 评论 
 				sb.append("<footer class=\"blockquote-footer\">"+ comment.get("nickname") +" <cite title=\"Source Title\">"+ comment.get("time") +"</cite></footer>");      
 				sb.append("</blockquote>");      
 				sb.append("</div>");    
@@ -93,6 +93,12 @@ public class CourseCommentServiceImpl implements ICourseCommentService {
 	@Override
 	public int praiseMinus(Integer commentID) {
 		return courseCommentDao.praiseMinus(commentID);
+	}
+
+	@Override
+	public int updateOne(CourseComment courseComment) {
+		// TODO Auto-generated method stub
+		return courseCommentDao.updateOne(courseComment);
 	}
 	
 	

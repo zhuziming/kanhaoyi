@@ -30,6 +30,7 @@ import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kanhaoyi.www.model.Course;
+import com.kanhaoyi.www.model.CourseComment;
 import com.kanhaoyi.www.model.CourseDetail;
 import com.kanhaoyi.www.model.CourseLink;
 import com.kanhaoyi.www.model.CoursePeople;
@@ -370,6 +371,12 @@ public class TeacherController {
 		List<CourseType> courseTypeList = courseTypeService.getAll(); // 全部科室
 		List<CourseLink> courseLinkList = courseLinkService.getListByCourseID(courseID); // 商品链接
 		List<VideoGroup> videoGroupList = videoGroupService.selectListByUserID(user.getId()); // 用户自定义视频组名称
+		List<Map<String, Object>> courseCommentList = courseCommentService.getListByCourseID(courseID, null, 5);// 课程评论
+		
+		for(Map<String, Object> map:courseCommentList){ // 去除评论中的空格，因为要在页面中显示文字
+			String content = map.get("content").toString().replace("&nbsp", "").replace("<br>", "");
+			map.put("content", content);
+		}
 		
 		for (CourseLink courseLink : courseLinkList) {
 			model.addAttribute("courseLink"+courseLink.getPicture(),courseLink);
@@ -379,6 +386,7 @@ public class TeacherController {
 		model.addAttribute("courseDetailList",courseDetailList); // 课程全部子集数
 		model.addAttribute("courseTypeList",courseTypeList); // 科室列表
 		model.addAttribute("videoGroupList",videoGroupList); // 视频组列表
+		model.addAttribute("courseCommentList",courseCommentList); // 课程评论
 		
 		InitUtil.iniSystem(model);
 		return "teacher/compileCoursePage";
@@ -516,6 +524,57 @@ public class TeacherController {
 					courseTypeList_, courseType_, course_, list_, GoodPraise_,video_,courseLinkList_);
 		}
 		return JSONUtil.returnJson("1", "修改成功");
+	}
+	
+	/***
+	 * @description 编缉评论页面
+	 * @author zhuziming
+	 * @time 2020年10月5日 下午4:30:04
+	 * @return
+	 */
+	@RequestMapping("/editCommentPage.action")
+	public String editCommentPage(HttpSession session,Model model,Integer commentID){
+		User user = userService.getSessionUser(session);
+		Map<String, Object> commentMap = courseCommentService.getOneByCourseCommentId(commentID);
+		Integer courseID = Integer.valueOf(commentMap.get("course_id").toString());
+		
+		Course course = courseService.getOneByID(courseID); // 当前课程
+		
+		model.addAttribute("user",user); // 当前用户
+		model.addAttribute("course",course);
+		model.addAttribute("commentMap",commentMap);
+		InitUtil.iniSystem(model);
+
+		return "teacher/editCommentPage";
+	}
+	
+	/**
+	 * @description 修改评论
+	 * @author zhuziming
+	 * @time 2020年10月5日 下午4:58:16
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/modifyComment.action")
+	public String modifyComment(HttpServletRequest request){
+		try{
+			String commentID = request.getParameter("commentID");
+			if(commentID.isEmpty()){
+				return JSONUtil.returnJson("2", "缺少id");
+			}
+			Integer id = Integer.valueOf(commentID);
+			String content   = request.getParameter("content");
+			CourseComment cc = new CourseComment();
+			cc.setId(id);
+			cc.setContent(content);
+			courseCommentService.updateOne(cc);
+			
+			return JSONUtil.returnJson("1", "修改成功");
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("3", "异常了");
+		}
+		
 	}
 	
 	/**

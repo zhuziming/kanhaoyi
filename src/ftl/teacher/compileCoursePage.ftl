@@ -109,6 +109,27 @@
 		<table class="table">
 			<thead>
 				<tr>
+			      <th scope="col">课程评论</th>
+			    </tr>
+			</thead>
+    		<tbody>
+    		<#if courseCommentList??>
+	    		<#list courseCommentList as courseComment>
+	      			<tr>
+				      	<td>
+				      		<#if courseComment.content?length gt 40>
+				      			<a href="${indexpath}/teacher/editCommentPage.action?commentID=${courseComment.id}" target="_Blank">${courseComment.content?substring(0,40)}</a>
+							</#if>
+				      	</td>
+					</tr>  
+				</#list>
+			</#if>
+			</tbody>
+		</table>
+		
+		<table class="table">
+			<thead>
+				<tr>
 			      <th scope="col">课程介绍</th>
 			    </tr>
 			</thead>

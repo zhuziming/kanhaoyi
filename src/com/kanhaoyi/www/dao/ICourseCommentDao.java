@@ -65,4 +65,6 @@ public interface ICourseCommentDao {
 	 */
 	public int praiseMinus(Integer commentID);
 	
+	public int updateOne(CourseComment courseComment);
+	
 }

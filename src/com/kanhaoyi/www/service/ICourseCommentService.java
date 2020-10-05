@@ -64,4 +64,12 @@ public interface ICourseCommentService {
 	 */
 	public int praiseMinus(Integer commentID);
 	
+	/**
+	 * @description 更新一个对象
+	 * @author zhuziming
+	 * @time 2020年10月5日 下午6:05:53
+	 * @param courseComment
+	 * @return
+	 */
+	public int updateOne(CourseComment courseComment);
 }

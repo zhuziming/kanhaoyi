@@ -34,6 +34,11 @@ public class XSSFilter implements Filter {
 			if("/teacher/modifyCourseDetail.action".hashCode() == requestURI.hashCode()
 					&& "/teacher/modifyCourseDetail.action".equals(requestURI)){
 				chain.doFilter(request, response);
+			
+			// 老师在修改评论时，因为要加入图片，所以这里不再过滤
+			}else if("/teacher/modifyComment.action".hashCode() == requestURI.hashCode()
+					&& "/teacher/modifyComment.action".equals(requestURI)){
+				chain.doFilter(request, response);
 			}else{
 				chain.doFilter(new OnRequestWrap((HttpServletRequest)request), response);
 			}

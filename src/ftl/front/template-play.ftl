@@ -118,11 +118,12 @@
 		  	<!-- 课程详情文本展示 -->
 		  	<div>${(courseDetail.intro)!""}</div>
 		  	
-			<div class="input-group pt-3 pb-2">
-			  <input type="text" id="comment" class="form-control" placeholder="想表达一下心情">
-			  <div class="input-group-append">
-			    <button class="btn btn-outline-secondary" onclick="say(${course.id},$('#comment').val())" type="button">留言</button>
-			  </div>
+
+			<div class=" pt-3 pb-2">
+			    <textarea id="comment" class="form-control mb-3" style="height:100px;" placeholder="想表达一下心情"></textarea>
+			    <div class="d-flex flex-row-reverse bd-highlight">
+			    	<a class="btn btn-primary" href="javascript:say(${course.id},$('#comment').val())" role="button">留下你的故事...</a>
+			    </div>
 			</div>
 		  	
 		  	<div class="row pt-3 pb-3">

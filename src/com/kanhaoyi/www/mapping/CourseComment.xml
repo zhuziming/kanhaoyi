@@ -35,6 +35,15 @@
     	VALUE(null,#{courseID},#{userID},#{content},#{praise},#{time,jdbcType=TIMESTAMP});
     </insert>
     
+    <update id="updateOne" parameterType="com.kanhaoyi.www.model.CourseComment">
+    	UPDATE course_comment SET id=#{id}  
+    	<if test="courseID != null and courseID !=''">, course_id=#{courseID}</if>
+    	<if test="userID != null and userID !=''">, user_id=#{userID}</if>
+    	<if test="content != null and content !=''">, content=#{content}</if>
+    	<if test="praise != null and praise !=''">, praise=#{praise}</if>
+    	<if test="time!=null and time!=''">,time=#{time,jdbcType=TIMESTAMP}</if>
+    	WHERE id=#{id};
+    </update>
     
     <update id="praiseAdd" parameterType="int">
     	UPDATE course_comment SET praise=praise+1 WHERE id=#{commentID}
