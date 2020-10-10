@@ -438,10 +438,12 @@ public class TeacherController {
 				String CN = request.getParameter(param).replace(" ", "");
 				if(CN != null && !CN.equals("")){ // 检查课程名是否为空
 					String index = param.replace("courseName", ""); // 取参数后边的下标
-					String VN = request.getParameter("videoName"+index);
-					if(VN != null && !VN.equals("")){
+					
+					// 本次注销：如果新增加的页面中没有视频只有文字，也通过
+					//String VN = request.getParameter("videoName"+index);
+					//if(VN != null && !VN.equals("")){
 						numList.add(Integer.valueOf(index));
-					}
+					//}
 				}
 			}
 		}
@@ -481,7 +483,9 @@ public class TeacherController {
 				courseDetail.setCourseDetailName(courseDetailName);
 				courseDetail.setCreateTime(new Timestamp(new Date().getTime()));
 				courseDetail.setSequence(sequence);
-				courseDetail.setVideoID(Integer.valueOf(videoName));
+				if(videoName!=null && !videoName.isEmpty()){ // 课程详情页面中，视频可以为空，只展示文字
+					courseDetail.setVideoID(Integer.valueOf(videoName));
+				}
 				courseDetail.setClickVolume(0);
 				courseDetailService.update(courseDetail); 
 			}
