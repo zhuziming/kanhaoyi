@@ -50,4 +50,11 @@ public class CourseDetailServiceImpl implements ICourseDetailService {
 		return courseDetailDao.getOneById(id);
 	}
 
+	@Override
+	public List<CourseDetail> getListByLimit(String limit) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("limit", limit);
+		return courseDetailDao.getListByLimit(map);
+	}
+
 }

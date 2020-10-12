@@ -16,4 +16,6 @@ public interface ICourseDetailDao {
 	public CourseDetail getOneOrderBy(Map<String,String> map);
 	
 	public CourseDetail getOneById(Integer id);
+	
+	public List<CourseDetail> getListByLimit(Map<String,Object> map);
 }

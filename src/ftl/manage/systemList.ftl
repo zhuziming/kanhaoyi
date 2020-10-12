@@ -72,6 +72,13 @@
 	                  	<button type="button" onclick="createWebMap()" class="btn btn-info btn-sm">生成页面</button>
 	                  </td>
 	                </tr>
+	                <tr>
+	                  <td>二级</td>
+	                  <td>百度xml推送文件</td>
+	                  <td >
+	                  	<button type="button" onclick="createBaiduWebXML()" class="btn btn-info btn-sm">生成XML</button>
+	                  </td>
+	                </tr>
 	              </tbody>
 	            </table>
 	          </div>
@@ -128,6 +135,19 @@
 		$.ajax({
 			type: "POST",
 			url: "${indexpath}/manage/createWebMap.action",
+			data:{},
+			success: function(msg){
+				var info = eval("("+msg+")");
+				alert(info.msg);
+			}
+		});
+	}
+	
+	/* 创建网站地图  */
+	function createBaiduWebXML(){
+		$.ajax({
+			type: "POST",
+			url: "${indexpath}/manage/createBaiduMapXml.action",
 			data:{},
 			success: function(msg){
 				var info = eval("("+msg+")");

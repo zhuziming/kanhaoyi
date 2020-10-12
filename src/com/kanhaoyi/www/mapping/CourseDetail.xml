@@ -16,6 +16,12 @@
     	FROM course_detail WHERE course_id=#{courseID} ORDER BY sequence ${orderBy}
     </select>
     
+    <select id="getListByLimit" parameterType="map" resultType="com.kanhaoyi.www.model.CourseDetail">
+    	SELECT id,course_id AS courseID,course_detail_name AS courseDetailName,course_path AS coursePath 
+    		,video_id AS videoID,sequence ,click_volume AS clickVolume,create_time AS createTime   
+    	FROM course_detail LIMIT 0,${limit}
+    </select>
+    
     <select id="getOneOrderBy" parameterType="map" resultType="com.kanhaoyi.www.model.CourseDetail">
     	SELECT id,course_id AS courseID,course_detail_name AS courseDetailName,course_path AS coursePath 
     	,video_id AS videoID,sequence ,click_volume AS clickVolume,create_time AS createTime,intro,meta,title  

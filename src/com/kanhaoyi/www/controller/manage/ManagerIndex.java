@@ -301,6 +301,24 @@ public class ManagerIndex {
 			return JSONUtil.returnJson("3", "异常了");
 		}
 	}
+	/**
+	 * @description 创建百度推送链接xml文件
+	 * @author zhuziming
+	 * @time 2020年10月12日 下午3:36:01
+	 * @return
+	 */
+	@RequestMapping("/createBaiduMapXml.action")
+	@ResponseBody
+	public String createBaiduMapXml(){
+		try{
+			List<CourseDetail> list = courseDetailService.getListByLimit("10000");
+			FreeMarkerUtil.createWebMapXML(list);
+			return JSONUtil.returnJson("1", "生成完毕");
+		}catch(Exception e){
+			e.printStackTrace();
+			return JSONUtil.returnJson("3", "异常了");
+		}
+	}
 	
 	/**
 	 * @desctiption 课程页列表

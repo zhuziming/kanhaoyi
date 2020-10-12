@@ -38,4 +38,13 @@ public interface ICourseDetailService {
 	 */
 	public CourseDetail getOneById(Integer id);
 	
+	/**
+	 * @description 得到列表 
+	 * @author zhuziming
+	 * @time 2020年10月12日 下午3:41:57
+	 * @param limit 得到几条
+	 * @return
+	 */
+	public List<CourseDetail> getListByLimit(String limit);
+	
 }

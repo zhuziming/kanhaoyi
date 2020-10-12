@@ -300,6 +300,51 @@ public class FreeMarkerUtil {
 		return true;
 	}
 	
+	/**
+	 * @desctiption 创建百度推送文件xml sitemap_example.xml
+	 * @author zhuziming
+	 * @param courseTypeList 课程类型列表
+	 * @param peoplePartList 课程部位列表
+	 * @param map 列表的值{"key":"list"}
+	 * @time 2020年10月12日下午2:56:25
+	 */
+	public static boolean createWebMapXML(List<CourseDetail> list){
+		
+		// 准备数据
+		Map<String ,Object> data = new HashMap<String, Object>();
+		String indexpath = PropertiesUtil.getValue("system.properties", "indexpath");
+		String imgpath = PropertiesUtil.getValue("system.properties", "imgpath");
+		String csspath = PropertiesUtil.getValue("system.properties", "csspath");
+		String jspath = PropertiesUtil.getValue("system.properties", "jspath");
+		String projectPath = PropertiesUtil.getValue("system.properties", "projectPath");
+		String freeMarkerFtlpath = PropertiesUtil.getValue("system.properties", "freeMarkerFtlpath");
+		
+		data.put("indexpath", indexpath);
+		data.put("imgpath", imgpath);
+		data.put("csspath", csspath);
+		data.put("jspath", jspath);
+		data.put("CourseDetailList", list);
+
+		
+		// 得到ftl模版
+		Template tmp = FreeMarkerUtil.getTemplate(freeMarkerFtlpath,"front/sitemap_example_xml.ftl");
+		// 得到生成对象
+		Writer writer = FreeMarkerUtil.getWriter(projectPath+"/sitemap_example.xml");	
+		try {
+			// 生成网页
+			tmp.process(data, writer);
+			// 清空缓存
+			writer.flush();
+			writer.close();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	
 	public static void main(String[] args) {
 		String freeMarkerFtlpath = PropertiesUtil.getValue("system.properties", "freeMarkerFtlpath");
 		// 准备数据
