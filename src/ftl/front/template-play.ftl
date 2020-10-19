@@ -102,18 +102,7 @@
 			  	</#if>
 	  		</#if>
 	  		
-		  	
-		  	
-			<!-- 只有大屏幕时显示，是右侧的集数展示 -->
-		  	<div class="list-group d-lg-none pt-3">
-            	<#list courseDetailList as courseDetail_>
-            		<#if courseDetail_.id = courseDetail.id>
-            			<a href="${indexpath}${courseDetail_.coursePath}" class="list-group-item list-group-item-action list-group-item-primary">${courseDetail_.courseDetailName}</a>
-            		<#else>
-            			<a href="${indexpath}${courseDetail_.coursePath}" class="list-group-item list-group-item-action">${courseDetail_.courseDetailName}</a>
-            		</#if>
-            	</#list>
-			</div> 
+
 		  	
 		  	<!-- 课程详情文本展示 -->
 		  	<div>${(courseDetail.intro)!""}</div>
