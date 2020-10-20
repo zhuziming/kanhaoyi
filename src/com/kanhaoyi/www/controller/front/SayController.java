@@ -56,9 +56,9 @@ public class SayController {
 	public String courseSay(HttpServletRequest request,HttpSession session){
 		try{
 			User user = userService.getSessionUser(session);
-			if(user==null){
+		/*	if(user==null){
 				return JSONUtil.returnJson("2", "请登录后留言");
-			}
+			}*/
 			String courseID = request.getParameter("courseID"); // 课程id
 			String say =  request.getParameter("say"); // 要说的话
 			if(courseID==null){
@@ -72,16 +72,21 @@ public class SayController {
 			}
 			
 			say = say.replaceAll("\n", "<br/>"); // 把换行换成html <br/>
-			say = say.replaceAll(" ", "&nbsp"); // 把空格换成html &nbsp
-			say = say.replaceAll("\t", "&nbsp"); // 把制表符换成8个空格
+			say = say.replaceAll(" ", "&nbsp;"); // 把空格换成html &nbsp
+			say = say.replaceAll("\t", "&nbsp;"); // 把制表符换成8个空格
 			
 			
 			CourseComment courseComment = new CourseComment();
 			courseComment.setCourseID(Integer.valueOf(courseID));
 			courseComment.setContent(say);
-			courseComment.setUserID(user.getId());
 			courseComment.setPraise(0);
 			courseComment.setTime(new Timestamp(new Date().getTime()));
+			if(user==null){
+				courseComment.setUserID(1); // 如果用户没有登陆，则放入1。  1是游客
+			}else{
+				courseComment.setUserID(user.getId());
+			}
+
 			courseCommentService.insert(courseComment);
 			Map<String, Object> map = courseCommentService.getOneByCourseCommentId(courseComment.getId());
 			List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
