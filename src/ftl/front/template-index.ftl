@@ -65,6 +65,7 @@
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a class="k-col-black" href="${indexpath}/urinary.html" target="_blank">泌尿科</a></li>
 			    <li class="breadcrumb-item"><a class="k-col-black" href="${indexpath}/andrology.html" target="_blank">男科</a></li>
+			    <li class="breadcrumb-item"><a class="k-col-black" href="${indexpath}/proctology.html" target="_blank">肛肠科</a></li>
 			  </ol>
 			</nav>
 			
@@ -77,7 +78,7 @@
 			
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a class="k-col-black" href="${indexpath}/TCM.html" target="_blank">中医科</a></li>
+		<#comment>	    <li class="breadcrumb-item"><a class="k-col-black" href="${indexpath}/TCM.html" target="_blank">中医科</a></li> </#comment>
 			    <li class="breadcrumb-item"><a class="k-col-black" href="${indexpath}/beautify.html" target="_blank">养生科</a></li>
 			  </ol>
 			</nav>
