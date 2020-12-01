@@ -66,18 +66,45 @@
 			<div class="alert alert-primary" role="alert">
 				编缉课程头标签meta
 			</div>
-			<textarea id="detailMeta" class="form-control mb-3" style="height:100px;">${(courseDetail.meta)!""}</textarea>
+			<textarea id="detailMeta" class="form-control mb-3" style="height:100px;">
+				<#if (courseDetail.meta)??>
+${(courseDetail.meta)!""}
+				<#else>
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+				</#if>
+			</textarea>
 			
 			<div class="alert alert-danger" role="alert">
 				编缉课程title
 			</div>
-			<textarea id="detailTitle" class="form-control mb-3" style="height:40px;">${(courseDetail.title)!""}</textarea>
+			<textarea id="detailTitle" class="form-control mb-3" style="height:40px;">
+				<#if (courseDetail.title)??>
+${(courseDetail.title)!""}
+				<#else>
+<title></title>
+				</#if>
+			</textarea>
 			
 			<div class="alert alert-success" role="alert">
 				编缉课程文本html格式
 			</div>
 			
-			<textarea id="detailText" class="form-control mb-3" style="height:500px;">${(courseDetail.intro)!""}</textarea>
+			<textarea id="detailText" class="form-control mb-3" style="height:500px;">
+				<#if (courseDetail.intro)??>
+${(courseDetail.intro)!""}
+				<#else>
+<h1>标题</h1>
+<br>
+<p class="line-180"></p>
+<div class="row justify-content-center">
+	<div class="col-sm-12 col-lg-8">
+		<img alt="描述"  class="img-fluid" src="http://www.kanhaoyi.com/image/courseDetailImg/67/125/20201026_1.jpg" />
+	</div>
+</div>
+				</#if>
+			</textarea>
 			
 		</div>
 	    
